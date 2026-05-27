@@ -322,7 +322,7 @@ window.SITE = {
                zh: "让全球的思想跨越语言与文化的边界。" },
     stats: [
       { num: "~30K", lab: { en: "Followers", zh: "粉丝" } },
-      { num: "760K+", lab: { en: "Views", zh: "播放量" } },
+      { num: "810K+", lab: { en: "Views", zh: "播放量" } },
       { num: "200+", lab: { en: "Episodes", zh: "期节目" } }
     ],
     topics: { en: "A bilingual media initiative translating global insights for Chinese audiences — across technology, finance, culture, and psychology.",
