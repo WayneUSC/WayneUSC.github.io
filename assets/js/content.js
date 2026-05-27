@@ -52,7 +52,7 @@ window.SITE = {
       { label: { en: "Google Scholar", zh: "谷歌学术" }, url: "https://scholar.google.com/citations?user=8KDUC5oAAAAJ&hl=en" },
       { label: { en: "GitHub", zh: "GitHub" }, url: "https://github.com/WayneUSC" },
       { label: { en: "Lab", zh: "实验室主页" }, url: "https://thfl.tsinghua.edu.cn" },
-      { label: { en: "Bilibili", zh: "哔哩哔哩" }, url: "https://search.bilibili.com/all?keyword=%E8%85%93%E5%B0%BC%E5%9F%BA%E5%9F%8E%E9%82%A623%E5%8F%B7" }
+      { label: { en: "Bilibili", zh: "哔哩哔哩" }, url: "https://space.bilibili.com/3546599376554433?spm_id_from=333.337.0.0" }
     ]
   },
 
