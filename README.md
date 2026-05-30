@@ -1,4 +1,4 @@
-# Wen Chen (陈稳) — Personal Academic Homepage
+# Wen Chen — Personal Academic Homepage
 
 A bilingual (English / 中文) academic homepage in a clean two-column style,
 built as a static site — just HTML, CSS, and vanilla JavaScript. No build step,
