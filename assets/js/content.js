@@ -79,6 +79,7 @@ window.SITE = {
 
   news: [
     { when: "2026.03", en: "<b>POIROT</b> accepted to ACM/IEEE HRI 2026 (Edinburgh).", zh: "<b>POIROT</b> 论文被 ACM/IEEE HRI 2026（爱丁堡）录用。" },
+    { when: "2026.03", en: "<b>AIoT Smart Home Automation Architecture</b> published in ACM IUI Companion 2026.", zh: "<b>AIoT 智能家居自动化架构</b> 论文发表于 ACM IUI Companion 2026。" },
     { when: "2025.11", en: "“Urban Fire Risk Evaluation” published in <i>Applied Spatial Analysis and Policy</i>.", zh: "《城市火灾风险评估》发表于 <i>Applied Spatial Analysis and Policy</i>。" },
     { when: "2025.07", en: "Digital cultural-heritage review accepted in <i>IEEE T-CSS</i>.", zh: "文化遗产数字化综述被 <i>IEEE T-CSS</i> 录用。" },
     { when: "2024.11", en: "Two urban-resilience papers published (<i>IJGI</i>; <i>Tropical Geography</i>).", zh: "两篇城市韧性论文发表（<i>IJGI</i>；《热带地理》）。" },
@@ -131,6 +132,19 @@ window.SITE = {
 
   /* most recent first; selected:true → shown in "Selected" tab */
   publications: [
+    {
+      year: "2026", venueShort: "IUI Companion 2026", selected: true,
+      img: "assets/img/proj-aiot.jpg",
+      tag: { en: "AIoT", zh: "智能家居" },
+      title: {
+        en: "AIoT Smart Home Automation Architecture: Autonomous Decision-Making Powered by Multimodal Large Language Models (MLLMs)",
+        zh: "AIoT 智能家居自动化架构：由多模态大语言模型驱动的自主决策"
+      },
+      authors: "He Zhang, Yuewen Zhang, Bochen Li, Wen Chen, Yueyan Liu, Qianyao Xu, Xinyi Fu*",
+      venue: { en: "Companion Proceedings of the 31st International Conference on Intelligent User Interfaces (IUI Companion ’26), Paphos, Cyprus.",
+               zh: "第 31 届智能用户界面国际会议伴随论文集（IUI Companion ’26），塞浦路斯帕福斯。" },
+      links: [{ label: { en: "DOI", zh: "DOI" }, url: "https://doi.org/10.1145/3742414.3794710" }]
+    },
     {
       year: "2026", venueShort: "HRI 2026", selected: true,
       img: "assets/img/pub-poirot.jpg",
