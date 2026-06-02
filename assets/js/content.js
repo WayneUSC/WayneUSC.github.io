@@ -228,6 +228,17 @@ window.SITE = {
       tech: ["ESP32", "ROS2", "Rhino", "Python", "Swift", "Android Studio"]
     },
     {
+      img: "assets/img/proj-smart-surface.jpg",
+      flag: { en: "Collaborative UX", zh: "合作项目" },
+      title: { en: "Smart Surface", zh: "车载智能表面系统" },
+      sub: { en: "In-vehicle multimodal haptic interaction", zh: "面向智能座舱的多模态触觉交互" },
+      desc: {
+        en: "A collaborative project among Tsinghua Future Laboratory, CityU, and HKPC, developing and evaluating an in-vehicle smart-surface interaction system with visual, audio, surface-haptic, mid-air haptic, and gesture modalities. I contributed to evaluation planning, user-study design, and data analysis; professional-operation tests met the 75% technical requirement with 81.1% adjusted accuracy.",
+        zh: "清华大学未来实验室、香港城市大学与香港生产力促进局（HKPC）的合作项目，围绕智能座舱中的视觉、音频、表面触觉、空中触觉与手势等多模态交互进行系统搭建与评估。我参与评估方案、用户实验设计与数据分析；专业操作测试达到 81.1% 调整准确率，满足 75% 技术指标要求。"
+      },
+      tech: ["Haptic UX", "User Study", "Data Analysis", "Python", "Smart Cockpit"]
+    },
+    {
       img: "assets/img/proj-habitat.jpg",
       flag: { en: "Platform", zh: "实验平台" },
       title: { en: "Smart Habitat Platform", zh: "人居环境多模态实验平台" },
