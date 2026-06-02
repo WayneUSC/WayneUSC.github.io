@@ -228,7 +228,7 @@ window.SITE = {
       tech: ["ESP32", "ROS2", "Rhino", "Python", "Swift", "Android Studio"]
     },
     {
-      img: "assets/img/proj-smart-surface.jpg",
+      img: "assets/img/proj-smart-surface.jpg?v=20260602-cover",
       flag: { en: "Collaborative UX", zh: "合作项目" },
       title: { en: "Smart Surface", zh: "车载智能表面系统" },
       sub: { en: "In-vehicle multimodal haptic interaction", zh: "面向智能座舱的多模态触觉交互" },
