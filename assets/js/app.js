@@ -135,6 +135,9 @@
   // ---------- projects ----------
   function renderProjects() {
     var cards = S.projects.map(function (p) {
+      var projectLinks = (p.links || []).map(function (l) {
+        return '<a class="pill link" href="' + l.url + '" target="_blank" rel="noopener">' + t(l.label) + " ↗</a>";
+      }).join("");
       return '<article class="proj-card">' +
         '<div class="proj-media"><span class="flag">' + t(p.flag) + "</span>" +
           '<img loading="lazy" src="' + p.img + '" alt=""></div>' +
@@ -142,6 +145,7 @@
           '<p class="sub">' + t(p.sub) + "</p>" +
           "<h3>" + t(p.title) + "</h3>" +
           "<p>" + t(p.desc) + "</p>" +
+          (projectLinks ? '<div class="pills">' + projectLinks + "</div>" : "") +
           '<div class="tech">' + p.tech.map(function (x) { return "<span>" + x + "</span>"; }).join("") + "</div>" +
         "</div></article>";
     }).join("");

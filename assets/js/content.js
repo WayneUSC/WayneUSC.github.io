@@ -78,6 +78,7 @@ window.SITE = {
   },
 
   news: [
+    { when: "2026.06", en: "<b>OpenArm-Based ShakeSort</b> presented in the finals of the Haptic Technology and Application Competition.", zh: "<b>OpenArm-Based ShakeSort</b> 入围并展示于力触觉技术及应用大赛决赛。" },
     { when: "2026.03", en: "<b>POIROT</b> accepted to ACM/IEEE HRI 2026 (Edinburgh).", zh: "<b>POIROT</b> 论文被 ACM/IEEE HRI 2026（爱丁堡）录用。" },
     { when: "2026.03", en: "<b>AIoT Smart Home Automation Architecture</b> published in ACM IUI Companion 2026.", zh: "<b>AIoT 智能家居自动化架构</b> 论文发表于 ACM IUI Companion 2026。" },
     { when: "2025.11", en: "“Urban Fire Risk Evaluation” published in <i>Applied Spatial Analysis and Policy</i>.", zh: "《城市火灾风险评估》发表于 <i>Applied Spatial Analysis and Policy</i>。" },
@@ -287,14 +288,15 @@ window.SITE = {
     },
     {
       img: "assets/img/proj-shakesort.jpg",
-      flag: { en: "Tactile", zh: "触觉感知" },
-      title: { en: "OpenArm-Based ShakeSort", zh: "ShakeSort 触觉识别" },
-      sub: { en: "Blind-box content identification by vibration", zh: "基于振动触觉的盲盒内容识别" },
+      flag: { en: "Haptics Competition", zh: "力触觉大赛决赛" },
+      title: { en: "OpenArm-Based ShakeSort", zh: "OpenArm-Based ShakeSort" },
+      sub: { en: "Haptic object identification by active shaking", zh: "基于主动摇晃与振动触觉的物体识别" },
       desc: {
-        en: "Identifying the hidden contents of sealed “blind boxes” through high-bandwidth, vibration-based tactile sensing on a robotic arm — exploring how touch alone can reveal an object’s identity.",
-        zh: "通过机械臂上的高带宽振动触觉传感，识别密封「盲盒」中的隐藏物品——探索仅凭触觉如何揭示物体身份。"
+        en: "A competition-finalist haptic system built on OpenArm that identifies hidden objects in sealed blind boxes by actively shaking them and reading high-bandwidth vibration cues. The project explores how robotic touch can support tactile reasoning when vision is unavailable or unreliable.",
+        zh: "入围力触觉技术及应用大赛决赛的触觉识别系统。项目基于 OpenArm 机械臂，通过主动摇晃密封盲盒并采集高带宽振动触觉信号，识别其中隐藏物体，探索在视觉不可用或不可靠时机器人如何依靠触觉完成推理。"
       },
-      tech: ["Tactile Sensing", "Robotic Arm", "ML Classification"]
+      tech: ["OpenArm", "Tactile Sensing", "Vibration", "Robotic Arm", "ML Classification"],
+      links: [{ label: { en: "Poster", zh: "决赛壁报" }, url: "assets/pdf/haptic-competition-poster.pdf" }]
     },
     {
       img: "assets/img/proj-sofa.jpg",
@@ -355,6 +357,8 @@ window.SITE = {
   },
 
   awards: [
+    { ic: "🏅", ti: { en: "Finalist — Haptic Technology and Application Competition", zh: "力触觉技术及应用大赛 决赛入围" },
+      de: { en: "OpenArm-Based ShakeSort, haptic object identification by active shaking.", zh: "OpenArm-Based ShakeSort：基于主动摇晃与振动触觉的物体识别。" } },
     { ic: "🏆", ti: { en: "1st Place — Machine Learning Project Competition", zh: "机器学习项目竞赛 一等奖" },
       de: { en: "", zh: "" } },
     { ic: "🎤", ti: { en: "Invited Talk", zh: "受邀演讲" },
