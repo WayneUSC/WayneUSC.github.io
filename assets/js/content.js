@@ -78,7 +78,7 @@ window.SITE = {
   },
 
   news: [
-    { when: "2026.06", en: "<b>OpenArm-Based ShakeSort</b> presented in the finals of the Haptic Technology and Application Competition.", zh: "<b>OpenArm-Based ShakeSort</b> 入围并展示于力触觉技术及应用大赛决赛。" },
+    { when: "2026.06", en: "<b>Bio-inspired Full-dimensional Tactile Sensing</b> presented in the finals of the Haptic Technology and Application Competition.", zh: "<b>仿生全维度触觉传感系统</b> 入围并展示于力触觉技术及应用大赛决赛。" },
     { when: "2026.03", en: "<b>POIROT</b> accepted to ACM/IEEE HRI 2026 (Edinburgh).", zh: "<b>POIROT</b> 论文被 ACM/IEEE HRI 2026（爱丁堡）录用。" },
     { when: "2026.03", en: "<b>AIoT Smart Home Automation Architecture</b> published in ACM IUI Companion 2026.", zh: "<b>AIoT 智能家居自动化架构</b> 论文发表于 ACM IUI Companion 2026。" },
     { when: "2025.11", en: "“Urban Fire Risk Evaluation” published in <i>Applied Spatial Analysis and Policy</i>.", zh: "《城市火灾风险评估》发表于 <i>Applied Spatial Analysis and Policy</i>。" },
