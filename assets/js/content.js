@@ -57,23 +57,23 @@ window.SITE = {
   },
 
   intro: {
-    eyebrow: { en: "Human–Robot Interaction · Embodied Intelligence", zh: "人机交互 · 具身智能" },
+    eyebrow: { en: "Dynamic Tactile Sensing · Embodied Social Intelligence", zh: "动态触觉感知 · 具身社会智能" },
     paras: [
       {
-        en: "I am a Research Assistant at <b>The Future Laboratory, Tsinghua University</b>, in the Center for Human-Cyber-Physical Integration. My work sits at the intersection of systems engineering, algorithms, and human studies — building more natural and adaptive human–robot collaboration for everyday domestic and social settings.",
-        zh: "我是 <b>清华大学未来实验室</b> 人机物融合及前沿探索中心的科研助理。我的研究横跨系统设计、算法开发与用户实验，致力于在家庭与社交等多方场景中，构建更自然、更具适应性的人机协作系统。"
+        en: "I build robots that understand the physical world through dynamic touch, and use that understanding to support adaptive, trustworthy social interaction. My research treats tactile sensing not only as feedback for manipulation, but as a temporal and multimodal channel: vibration, force, material response, and human behavior become signals for embodied intelligence.",
+        zh: "我研究如何让机器人通过动态触觉理解物理世界，并将这种理解用于更自适应、更可信的人机社会交互。我的研究并不只把触觉视为操作反馈，而是将其看作一种时序化、多模态的物理通道：振动、力、材料响应与人的行为共同成为具身智能的信号来源。"
       },
       {
-        en: "Before Tsinghua, I earned an M.S. in Computer Science and an M.S. in Chemical Engineering from the <b>University of Southern California</b>, following a B.S. in Chemical Engineering at Nanjing Tech University. This interdisciplinary path runs through my publications — spanning HRI, multimodal sensing, urban computing, and materials science.",
-        zh: "在加入清华之前，我于 <b>南加州大学（USC）</b> 获得计算机科学与化学工程双硕士学位，本科毕业于南京工业大学化学工程专业。这一跨学科背景也贯穿于我的研究成果之中——涵盖人机交互、多模态感知、城市计算与材料科学等多个领域。"
+        en: "As a Research Assistant at <b>The Future Laboratory, Tsinghua University</b>, I work across sensing hardware, algorithms, system building, and controlled human studies. My background in both Computer Science and Chemical Engineering lets me move between materials, sensors, learning models, and human-centered evaluation — a through-line across my work in tactile sensing, HRI, smart habitats, and multimodal AI.",
+        zh: "作为 <b>清华大学未来实验室</b> 的科研助理，我的工作横跨传感硬件、算法、系统搭建与受控用户实验。计算机科学与化学工程的交叉背景，使我能够在材料、传感器、学习模型与以人为中心的评估之间建立连接——这也贯穿了我在触觉感知、人机交互、智能人居与多模态 AI 方向上的研究。"
       }
     ],
     interests: [
+      { en: "Dynamic Tactile Sensing", zh: "动态触觉感知" },
+      { en: "Embodied Social Intelligence", zh: "具身社会智能" },
       { en: "Human–Robot Interaction", zh: "人机交互" },
-      { en: "Embodied Intelligence",   zh: "具身智能" },
-      { en: "Smart Home Systems",      zh: "智能家居" },
-      { en: "Affective Computing",     zh: "情感计算" },
-      { en: "Machine Learning",        zh: "机器学习" }
+      { en: "Adaptive Robotics",       zh: "自适应机器人" },
+      { en: "Multimodal AI",           zh: "多模态 AI" }
     ]
   },
 
@@ -89,29 +89,22 @@ window.SITE = {
 
   research: {
     intro: {
-      en: "My research spans hardware systems, algorithms, and controlled user studies, organized around five threads:",
-      zh: "我的研究横跨硬件系统、算法开发与受控用户实验，主要围绕以下五个方向展开："
+      en: "I organize my work around a central question: how can robots use dynamic physical signals, especially touch, to understand materials, people, and social context?",
+      zh: "我的研究围绕一个核心问题展开：机器人如何利用动态物理信号，尤其是触觉，来理解材料、人以及社会情境？"
     },
     pillars: [
       {
-        title: { en: "Multi-Party HRI & Trust", zh: "多方人机交互与信任" },
+        title: { en: "Dynamic Tactile Sensing", zh: "动态触觉感知" },
         desc: {
-          en: "How robots build, maintain, and repair trust across multi-person settings — and how they can mediate group consultation and team performance. My most active line of work.",
-          zh: "研究机器人如何在多人协同场景中建立、维持与修复信任关系，并在群体咨询与团队表现中发挥调解作用——这是我当前最核心的课题。"
+          en: "High-bandwidth tactile perception through vibration, force, and contact dynamics. Instead of treating touch as a static spatial image, I study its temporal structure and how it can reveal hidden material and object properties.",
+          zh: "通过振动、力与接触动态建立高带宽触觉感知。相比把触觉理解为静态空间图像，我更关注触觉的时间结构，以及它如何揭示材料与物体的隐藏属性。"
         }
       },
       {
-        title: { en: "Embodied Smart-Home Systems", zh: "具身智能家居系统" },
+        title: { en: "Embodied Social Intelligence", zh: "具身社会智能" },
         desc: {
-          en: "Multimodal sensing (flexible pressure sensors, depth cameras, mmWave radar) fused with multimodal LLMs for autonomous perception, decision-making, and home automation.",
-          zh: "融合柔性压力传感器、深度相机、毫米波雷达等多模态传感，并结合多模态大语言模型（MLLM），实现自主感知、决策与家居自动化。"
-        }
-      },
-      {
-        title: { en: "Tactile Sensing & Haptic Interaction", zh: "触觉感知与力触觉交互" },
-        desc: {
-          en: "Bionic and instrumented tactile systems that turn material contact into structured, interpretable signals, spanning full-dimensional tactile sensing, material-perception mapping, and haptic UX evaluation.",
-          zh: "围绕仿生与仪器化触觉系统，将材料接触转化为结构化、可解释的信号，覆盖全维度触觉感知、材料—感知映射与力触觉用户体验评估。"
+          en: "Robots that interpret physical interaction as part of communication, trust, and affect. I use complex social settings, such as multi-party narrative games, to study how robot behavior can adapt to people rather than simply execute commands.",
+          zh: "研究机器人如何把物理交互理解为沟通、信任与情感的一部分。我以多人叙事游戏等复杂社会场景为实验环境，探索机器人如何根据人的状态自适应，而不只是执行指令。"
         }
       },
       {
@@ -122,10 +115,17 @@ window.SITE = {
         }
       },
       {
-        title: { en: "Affective Computing & UX", zh: "情感计算与用户体验" },
+        title: { en: "Multimodal Habitat Intelligence", zh: "多模态人居智能" },
         desc: {
-          en: "Inferring affective states from physical sensor arrays embedded in smart furniture, improving the emotional perception and responsiveness of interactive systems.",
-          zh: "依托智能家具与物理传感阵列采集的交互数据，运用机器学习推断用户情感状态，提升系统的情感感知与响应能力。"
+          en: "Large-scale sensing platforms that combine tactile, visual, audio, mmWave, IMU, and environmental signals for privacy-aware embodied learning in everyday spaces.",
+          zh: "构建融合触觉、视觉、音频、毫米波、IMU 与环境信号的大规模感知平台，面向日常空间中的隐私友好型具身学习。"
+        }
+      },
+      {
+        title: { en: "Human-Centered Experimentation", zh: "以人为中心的实验研究" },
+        desc: {
+          en: "Controlled studies, multimodal logging tools, and behavioral measurement pipelines for evaluating how people perceive, trust, and adapt to intelligent systems.",
+          zh: "通过受控实验、多模态记录工具与行为测量流程，评估人如何感知、信任并适应智能系统。"
         }
       }
     ]
@@ -240,8 +240,8 @@ window.SITE = {
       sub: { en: "Plot-Oriented Interactive Robot for Organized Theatrics",
              zh: "面向叙事的具身交互机器人" },
       desc: {
-        en: "An embodied robot game-master that hosts narrative-driven, multi-party murder-mystery games at home. A controlled between-subjects study compared physical clue delivery against digitally mediated interaction; negative attitudes toward robots (NARS) moderate the effect, yielding a “conditional interaction model.”",
-        zh: "一套能在家庭环境中主持叙事驱动、多方剧本杀游戏的具身机器人系统。通过受控的组间实验，对比实体线索分发与数字媒介交互对体验的影响；研究发现「机器人消极态度（NARS）」会调节交互效果，提出了「条件性交互模型」。"
+        en: "My signature HRI testbed: an embodied robot game-master that hosts narrative-driven, multi-party murder-mystery games at home. The study uses an unusually rich social setting to compare direct physical clue delivery with digitally mediated interaction, showing how users' prior attitudes moderate the effect of robot embodiment.",
+        zh: "我的代表性 HRI 实验平台：一套能在家庭环境中主持叙事驱动、多方剧本杀游戏的具身机器人系统。研究利用高复杂度的多人社会场景，对比实体线索分发与数字媒介交互，并揭示用户既有机器人态度如何调节具身交互效果。"
       },
       tech: ["ESP32", "ROS2", "Rhino", "Python", "Swift", "Android Studio"]
     },
@@ -320,8 +320,8 @@ window.SITE = {
       title: { en: "OpenArm-Based ShakeSort", zh: "OpenArm-Based ShakeSort" },
       sub: { en: "Haptic object identification by active shaking", zh: "基于主动摇晃与振动触觉的物体识别" },
       desc: {
-        en: "A haptic object-identification system built on OpenArm that identifies hidden contents in sealed blind boxes by actively shaking them and reading high-bandwidth vibration cues. The project explores how robotic touch can support tactile reasoning when vision is unavailable or unreliable.",
-        zh: "基于 OpenArm 机械臂的触觉识别系统，通过主动摇晃密封盲盒并采集高带宽振动触觉信号，识别其中隐藏物体，探索在视觉不可用或不可靠时机器人如何依靠触觉完成推理。"
+        en: "A dynamic tactile-sensing system built on OpenArm that identifies hidden contents in sealed blind boxes by actively shaking them and reading high-bandwidth vibration cues. The project treats touch as a temporal signal, showing how robots can infer invisible physical properties when vision is unavailable or unreliable.",
+        zh: "基于 OpenArm 机械臂的动态触觉感知系统，通过主动摇晃密封盲盒并读取高带宽振动信号，识别其中隐藏物体。项目将触觉视为时序信号，展示机器人如何在视觉不可用或不可靠时推断不可见的物理属性。"
       },
       tech: ["OpenArm", "Tactile Sensing", "Vibration", "Robotic Arm", "ML Classification"]
     },
