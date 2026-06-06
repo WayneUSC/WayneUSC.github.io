@@ -108,17 +108,17 @@ window.SITE = {
         }
       },
       {
-        title: { en: "Swarm Localization & Physical Intelligence", zh: "集群定位与物理智能" },
+        title: { en: "Tactile Sensing & Haptic Interaction", zh: "触觉感知与力触觉交互" },
         desc: {
-          en: "GIS-inspired coordination — using TRACLUS trajectory clustering and simulated annealing for efficient localization and physical intelligence in robot swarms.",
-          zh: "借鉴地理信息系统（GIS）理念，运用 TRACLUS 轨迹聚类与模拟退火优化，实现集群机器人的高效空间定位与物理智能协调。"
+          en: "Bionic and instrumented tactile systems that turn material contact into structured, interpretable signals, spanning full-dimensional tactile sensing, material-perception mapping, and haptic UX evaluation.",
+          zh: "围绕仿生与仪器化触觉系统，将材料接触转化为结构化、可解释的信号，覆盖全维度触觉感知、材料—感知映射与力触觉用户体验评估。"
         }
       },
       {
-        title: { en: "Teleoperation Robotics", zh: "远程操控机器人" },
+        title: { en: "Robotics & Embodied Interaction", zh: "机器人与具身交互" },
         desc: {
-          en: "Gaze-aware, responsive teleoperation using face-tracking and MediaPipe body-keypoint capture, so robots can attend and react to human motion in real time.",
-          zh: "通过人脸跟踪与 MediaPipe 身体关键点捕捉，开发面向远程操控的感知与控制模块，使机器人能实时注视并响应人类动作。"
+          en: "Interactive robotic systems that connect sensing, actuation, and human studies, from embodied game-master robots to tactile manipulation and experimental platforms for real-world interaction.",
+          zh: "构建连接感知、执行与用户实验的交互机器人系统，从具身剧本杀主持机器人，到触觉操作与真实交互实验平台。"
         }
       },
       {
@@ -268,6 +268,18 @@ window.SITE = {
       },
       tech: ["Tactile Sensing", "Bio-inspired Design", "Calibration", "Intelligent Computing", "Rapid Prototyping"],
       links: [{ label: { en: "Poster", zh: "决赛壁报" }, url: "assets/pdf/haptic-competition-poster.pdf" }]
+    },
+    {
+      img: "assets/img/proj-tactile-mapping.jpg?v=20260606-tactile-mapping",
+      flag: { en: "Upcoming Study", zh: "即将开展" },
+      title: { en: "Tactile Mapping Human Study", zh: "触觉映射人因实验" },
+      sub: { en: "Mapping material properties to perceived touch",
+             zh: "从材料物性到主观触觉感知的映射" },
+      desc: {
+        en: "An upcoming human-subject study that maps tactile material properties to perceived roughness, sliding resistance, and hardness. The protocol combines driven contact with free exploration, repeated single-dimension blocks, vibration sensing, 6D force data, dual-camera video, and iPad/Web-based trial logging to build a structured physical-to-perceptual tactile dataset.",
+        zh: "一项即将开展的人因实验，旨在建立材料物性与粗糙度、滑动阻力、硬度等主观触觉感知之间的映射。实验结合带动接触与自由探索、单维度重复 block、振动传感、六维力数据、双机位录像，以及 iPad/Web 录入工具，构建结构化的物理—感知触觉数据集。"
+      },
+      tech: ["Tactile Sensing", "Human Study", "6D Force", "Vibration", "SwiftUI", "Data Collection"]
     },
     {
       img: "assets/img/proj-habitat.jpg",
