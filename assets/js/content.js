@@ -304,15 +304,14 @@ window.SITE = {
     },
     {
       img: "assets/img/proj-shakesort.jpg",
-      flag: { en: "Haptics Competition", zh: "力触觉大赛决赛" },
+      flag: { en: "Tactile", zh: "触觉感知" },
       title: { en: "OpenArm-Based ShakeSort", zh: "OpenArm-Based ShakeSort" },
       sub: { en: "Haptic object identification by active shaking", zh: "基于主动摇晃与振动触觉的物体识别" },
       desc: {
-        en: "A competition-finalist haptic system built on OpenArm that identifies hidden objects in sealed blind boxes by actively shaking them and reading high-bandwidth vibration cues. The project explores how robotic touch can support tactile reasoning when vision is unavailable or unreliable.",
-        zh: "入围力触觉技术及应用大赛决赛的触觉识别系统。项目基于 OpenArm 机械臂，通过主动摇晃密封盲盒并采集高带宽振动触觉信号，识别其中隐藏物体，探索在视觉不可用或不可靠时机器人如何依靠触觉完成推理。"
+        en: "A haptic object-identification system built on OpenArm that identifies hidden contents in sealed blind boxes by actively shaking them and reading high-bandwidth vibration cues. The project explores how robotic touch can support tactile reasoning when vision is unavailable or unreliable.",
+        zh: "基于 OpenArm 机械臂的触觉识别系统，通过主动摇晃密封盲盒并采集高带宽振动触觉信号，识别其中隐藏物体，探索在视觉不可用或不可靠时机器人如何依靠触觉完成推理。"
       },
-      tech: ["OpenArm", "Tactile Sensing", "Vibration", "Robotic Arm", "ML Classification"],
-      links: [{ label: { en: "Poster", zh: "决赛壁报" }, url: "assets/pdf/haptic-competition-poster.pdf" }]
+      tech: ["OpenArm", "Tactile Sensing", "Vibration", "Robotic Arm", "ML Classification"]
     },
     {
       img: "assets/img/proj-sofa.jpg",
@@ -374,7 +373,7 @@ window.SITE = {
 
   awards: [
     { ic: "🏅", ti: { en: "Finalist — Haptic Technology and Application Competition", zh: "力触觉技术及应用大赛 决赛入围" },
-      de: { en: "OpenArm-Based ShakeSort, haptic object identification by active shaking.", zh: "OpenArm-Based ShakeSort：基于主动摇晃与振动触觉的物体识别。" } },
+      de: { en: "Bio-inspired full-dimensional tactile sensing system.", zh: "仿生全维度触觉传感系统。" } },
     { ic: "🏆", ti: { en: "1st Place — Machine Learning Project Competition", zh: "机器学习项目竞赛 一等奖" },
       de: { en: "", zh: "" } },
     { ic: "🎤", ti: { en: "Invited Talk", zh: "受邀演讲" },
