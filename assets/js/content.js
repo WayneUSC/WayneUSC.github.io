@@ -257,7 +257,7 @@ window.SITE = {
       tech: ["Haptic UX", "User Study", "Data Analysis", "Python", "Smart Cockpit"]
     },
     {
-      img: "assets/img/proj-bionic-haptics.jpg?v=20260606-bionic-haptics",
+      img: "assets/img/proj-bionic-haptics.jpg?v=20260606-bionic-haptics-en",
       flag: { en: "Competition Finalist", zh: "大赛决赛项目" },
       title: { en: "Bio-inspired Full-dimensional Tactile Sensing", zh: "仿生全维度触觉传感系统" },
       sub: { en: "Mechanism-bionic tactile sensing for interpretable contact events",
