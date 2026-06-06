@@ -135,7 +135,7 @@ window.SITE = {
   publications: [
     {
       year: "2026", venueShort: "IUI Companion 2026", selected: true,
-      img: "assets/img/proj-aiot.jpg",
+      img: "assets/img/pub-aiot.jpg?v=20260606-paperfigs",
       tag: { en: "AIoT", zh: "智能家居" },
       title: {
         en: "AIoT Smart Home Automation Architecture: Autonomous Decision-Making Powered by Multimodal Large Language Models (MLLMs)",
@@ -148,7 +148,7 @@ window.SITE = {
     },
     {
       year: "2026", venueShort: "HRI 2026", selected: true,
-      img: "assets/img/pub-poirot.jpg",
+      img: "assets/img/pub-poirot.jpg?v=20260606-paperfigs",
       tag: { en: "HRI", zh: "人机交互" },
       title: {
         en: "POIROT: Investigating Direct Tangible vs. Digitally Mediated Interaction and Attitude Moderation in Multi-party Murder Mystery Games",
@@ -164,7 +164,7 @@ window.SITE = {
     },
     {
       year: "2025", venueShort: "IEEE T-CSS", selected: true,
-      img: "assets/img/pub-heritage.jpg",
+      img: "assets/img/pub-heritage.jpg?v=20260606-paperfigs",
       tag: { en: "Survey", zh: "综述" },
       title: {
         en: "Emerging Computing Technology for Digital Culture Heritage Preservation and Inheritance: A Literature Review",
@@ -173,7 +173,10 @@ window.SITE = {
       authors: "Xinyi Fu, Meng Li, Xiaomeng Li, Wen Chen, Lening Yu, Zixin Chen, Shuting Wen, Yilin Li, Jiachen Du, Yun Wang, Yingqing Xu, Yunbing Chen",
       venue: { en: "IEEE Transactions on Computational Social Systems, 2025.",
                zh: "IEEE 计算社会系统汇刊（IEEE T-CSS），2025。" },
-      links: []
+      links: [
+        { label: { en: "DOI", zh: "DOI" }, url: "https://doi.org/10.1109/TCSS.2025.3589324" },
+        { label: { en: "IEEE", zh: "IEEE" }, url: "https://ieeexplore.ieee.org/abstract/document/11125963" }
+      ]
     },
     {
       year: "2025", venueShort: "ASAP", selected: true,
