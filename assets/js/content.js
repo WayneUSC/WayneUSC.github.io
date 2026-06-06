@@ -180,7 +180,7 @@ window.SITE = {
     },
     {
       year: "2025", venueShort: "ASAP", selected: true,
-      img: "assets/img/pub-fire.jpg",
+      img: "assets/img/pub-fire.jpg?v=20260606-paper-covers",
       tag: { en: "Urban ML", zh: "城市计算" },
       title: {
         en: "Urban Fire Risk Evaluation Integrating Image Features with Interpretable Machine Learning Models",
@@ -193,7 +193,7 @@ window.SITE = {
     },
     {
       year: "2024", venueShort: "ISPRS IJGI", selected: true,
-      img: "assets/img/pub-network.jpg",
+      img: "assets/img/pub-network.jpg?v=20260606-paper-covers",
       tag: { en: "Urban Resilience", zh: "城市韧性" },
       title: {
         en: "Urban Internal Network Structure and Resilience Characteristics from the Perspective of Population Mobility: A Case Study of Nanjing, China",
@@ -206,7 +206,7 @@ window.SITE = {
     },
     {
       year: "2024", venueShort: "热带地理", selected: false,
-      img: "assets/img/pub-covid.jpg",
+      img: "assets/img/pub-covid.jpg?v=20260606-paper-covers",
       tag: { en: "Urban Resilience", zh: "城市韧性" },
       title: {
         en: "The Impact of the COVID-19 Epidemic on the Structural Resilience of Urban and Town Population Flow Networks: A Case Study of the Nanjing Metropolitan Area",
@@ -219,7 +219,7 @@ window.SITE = {
     },
     {
       year: "2014", venueShort: "RSC Adv.", selected: false,
-      img: "assets/img/pub-solar.svg",
+      img: "assets/img/pub-solar.jpg?v=20260606-paper-covers",
       tag: { en: "Materials", zh: "纳米材料" },
       title: {
         en: "Sn-doped TiO₂ Nanorod Arrays and Application in Perovskite Solar Cells",
@@ -234,7 +234,7 @@ window.SITE = {
 
   projects: [
     {
-      img: "assets/img/proj-poirot.jpg",
+      img: "assets/img/proj-poirot.jpg?v=20260606-paper-covers",
       flag: { en: "HRI 2026", zh: "HRI 2026" },
       title: { en: "POIROT", zh: "POIROT 剧本杀主持机器人" },
       sub: { en: "Plot-Oriented Interactive Robot for Organized Theatrics",
