@@ -257,6 +257,19 @@ window.SITE = {
       tech: ["Haptic UX", "User Study", "Data Analysis", "Python", "Smart Cockpit"]
     },
     {
+      img: "assets/img/proj-bionic-haptics.jpg?v=20260606-bionic-haptics",
+      flag: { en: "Competition Finalist", zh: "大赛决赛项目" },
+      title: { en: "Bio-inspired Full-dimensional Tactile Sensing", zh: "仿生全维度触觉传感系统" },
+      sub: { en: "Mechanism-bionic tactile sensing for interpretable contact events",
+             zh: "面向可解释接触事件的机制仿生触觉系统" },
+      desc: {
+        en: "A finalist project in the Haptic Technology and Application Competition, developed with Tsinghua Future Laboratory and Beijing Qinggong Intelligent Technology. The system reframes tactile sensing from low-dimensional readings into full-dimensional contact events, integrating representation, contact process, and interaction relations for interpretable, invertible, controllable, and generalizable tactile perception.",
+        zh: "力触觉技术及应用大赛决赛项目，由清华大学未来实验室与北京清工智能科技有限公司共同完成。系统将触觉从低维读数重新展开为「表征 × 过程 × 交互」的全维度接触事件，面向可解释、可反演、可控制、可泛化的触觉感知。"
+      },
+      tech: ["Tactile Sensing", "Bio-inspired Design", "Calibration", "Intelligent Computing", "Rapid Prototyping"],
+      links: [{ label: { en: "Poster", zh: "决赛壁报" }, url: "assets/pdf/haptic-competition-poster.pdf" }]
+    },
+    {
       img: "assets/img/proj-habitat.jpg",
       flag: { en: "Platform", zh: "实验平台" },
       title: { en: "Smart Habitat Platform", zh: "人居环境多模态实验平台" },
