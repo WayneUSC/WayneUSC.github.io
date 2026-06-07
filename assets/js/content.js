@@ -293,7 +293,7 @@ window.SITE = {
       tech: ["Depth", "mmWave", "Tactile", "Capacitive Floor", "IMU"]
     },
     {
-      img: "assets/img/proj-aiot.jpg",
+      img: "assets/img/proj-aiot.jpg?v=20260607-project-covers",
       flag: { en: "AIoT", zh: "AIoT" },
       title: { en: "AIoT Smart-Home Automation", zh: "AIoT 智能家居自动化" },
       sub: { en: "Autonomous decisions powered by multimodal LLMs", zh: "多模态大模型驱动的自主决策" },
@@ -304,7 +304,7 @@ window.SITE = {
       tech: ["MLLM", "Computer Vision", "Home Automation"]
     },
     {
-      img: "assets/img/proj-roboleague.jpg",
+      img: "assets/img/proj-roboleague.jpg?v=20260607-project-covers",
       flag: { en: "Swarm", zh: "集群机器人" },
       title: { en: "RoboLeague", zh: "RoboLeague 集群定位" },
       sub: { en: "Swarm localization & physical intelligence", zh: "集群定位与物理智能" },
@@ -315,7 +315,7 @@ window.SITE = {
       tech: ["TRACLUS", "Simulated Annealing", "GIS", "MATLAB"]
     },
     {
-      img: "assets/img/proj-shakesort.jpg",
+      img: "assets/img/proj-shakesort.jpg?v=20260607-project-covers",
       flag: { en: "Tactile", zh: "触觉感知" },
       title: { en: "OpenArm-Based ShakeSort", zh: "OpenArm-Based ShakeSort" },
       sub: { en: "Haptic object identification by active shaking", zh: "基于主动摇晃与振动触觉的物体识别" },
