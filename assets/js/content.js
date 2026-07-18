@@ -246,6 +246,21 @@ window.SITE = {
       tech: ["ESP32", "ROS2", "Rhino", "Python", "Swift", "Android Studio"]
     },
     {
+      img: "assets/img/proj-poirot-demo.jpg?v=20260719-poirot-demo",
+      flag: { en: "Playable Demo", zh: "在线可玩" },
+      title: { en: "POIROT: The Final Demo", zh: "POIROT:最后一次演示" },
+      sub: { en: "A playable machine-Theory-of-Mind game master", zh: "机器心智理论的可玩化演示" },
+      desc: {
+        en: "A browser detective game distilled from the POIROT framework: the robot game master openly maintains a live model of the player — estimated suspicion distribution, critical-evidence coverage, and stuck-detection — and deploys graded, non-spoiling hints exactly when the player's beliefs outrun their evidence. Fully client-side, zero-dependency, bilingual.",
+        zh: "从 POIROT 框架提炼出的浏览器侦探游戏:机器主持人公开维护对玩家的实时模型——怀疑分布估计、关键证据覆盖率与「卡住」判定,并在玩家信念超前于证据时分级投放不剧透的提示。纯前端、零依赖、中英双语。"
+      },
+      links: [
+        { label: { en: "Play (EN)", zh: "开始游玩 (EN)" }, url: "https://wayneusc.github.io/poirot/en.html" },
+        { label: { en: "Play (中文)", zh: "开始游玩 (中文)" }, url: "https://wayneusc.github.io/poirot/" }
+      ],
+      tech: ["Machine ToM", "Player Modeling", "Adaptive Hinting", "JavaScript", "Narrative Design"]
+    },
+    {
       img: "assets/img/proj-smart-surface.jpg?v=20260602-cover",
       flag: { en: "Collaborative UX", zh: "合作项目" },
       title: { en: "Smart Surface", zh: "车载智能表面系统" },
