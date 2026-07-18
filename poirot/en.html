@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>POIROT: The Final Demo — a game master that models your mind</title>
+<style>
+  :root{
+    --bg:#0d1017; --panel:#151a24; --panel2:#1c2331; --line:#2a3347;
+    --text:#dce3f0; --dim:#8b96ab; --accent:#e8b34b; --accent2:#5bc8af;
+    --danger:#e06666; --shen:#e8b34b; --lin:#7aa5e0; --gu:#5bc8af; --zheng:#c98bd1;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--bg); color:var(--text); font-family:Georgia,"Times New Roman",serif; line-height:1.7;}
+  #app{max-width:1180px; margin:0 auto; padding:18px;}
+  header{text-align:center; padding:10px 0 16px; border-bottom:1px solid var(--line); position:relative;}
+  header h1{font-size:1.6rem; letter-spacing:.12em; color:var(--accent);}
+  header .sub{color:var(--dim); font-size:.85rem; margin-top:4px;}
+  header .lang{position:absolute; right:0; top:8px; font-size:.8rem;}
+  header .lang a{color:var(--accent2); text-decoration:none; border:1px solid var(--line); border-radius:6px; padding:3px 10px;}
+  .layout{display:grid; grid-template-columns: 1fr 340px; gap:16px; margin-top:16px;}
+  @media(max-width:900px){.layout{grid-template-columns:1fr;}}
+  .card{background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:16px;}
+  nav#rooms{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px;}
+  nav#rooms button, .btn{
+    background:var(--panel2); color:var(--text); border:1px solid var(--line);
+    border-radius:8px; padding:7px 14px; cursor:pointer; font-family:inherit; font-size:.9rem;
+    transition:all .15s;
+  }
+  nav#rooms button:hover,.btn:hover{border-color:var(--accent); color:var(--accent);}
+  nav#rooms button.active{background:var(--accent); color:#1a1408; border-color:var(--accent); font-weight:bold;}
+  .btn.primary{background:var(--accent); color:#1a1408; font-weight:bold;}
+  .btn.danger{border-color:var(--danger); color:var(--danger);}
+  .btn:disabled{opacity:.35; cursor:not-allowed;}
+  #scene h2{color:var(--accent); font-size:1.15rem; margin-bottom:8px;}
+  #scene .desc{color:var(--dim); font-size:.92rem; margin-bottom:14px;}
+  .spot{border:1px dashed var(--line); border-radius:8px; padding:10px 14px; margin:8px 0; cursor:pointer; transition:all .15s;}
+  .spot:hover{border-color:var(--accent2); background:var(--panel2);}
+  .spot.done{opacity:.55; border-style:solid;}
+  .spot .tag{font-size:.75rem; color:var(--accent2); margin-left:8px;}
+  .dialog-line{margin:10px 0; padding:10px 14px; border-radius:8px; background:var(--panel2); animation:fadein .3s;}
+  .dialog-line .who{color:var(--accent); font-weight:bold; margin-right:8px;}
+  .qbtn{display:block; width:100%; text-align:left; margin:6px 0;}
+  @keyframes fadein{from{opacity:0; transform:translateY(4px);} to{opacity:1;}}
+  #gm .head{display:flex; align-items:center; gap:10px; margin-bottom:10px;}
+  #gm .eye{width:44px; height:44px; border-radius:50%; background:radial-gradient(circle at 40% 40%, #ffd97a 0 18%, #6b4f12 40%, #10131a 70%); border:2px solid var(--accent); flex-shrink:0; animation:pulse 3s infinite;}
+  @keyframes pulse{0%,100%{box-shadow:0 0 6px #e8b34b55;} 50%{box-shadow:0 0 16px #e8b34baa;}}
+  #gm h3{color:var(--accent); font-size:1rem;}
+  #gm .state{font-size:.78rem; color:var(--dim);}
+  .barrow{display:flex; align-items:center; gap:8px; margin:5px 0; font-size:.82rem;}
+  .barrow .nm{width:58px; color:var(--dim);}
+  .barwrap{flex:1; height:10px; background:#0a0d13; border-radius:5px; overflow:hidden;}
+  .bar{height:100%; border-radius:5px; transition:width .5s;}
+  .barrow .pct{width:40px; text-align:right; color:var(--dim); font-variant-numeric:tabular-nums;}
+  #monolog{max-height:230px; overflow-y:auto; font-size:.82rem; margin-top:10px; padding-right:4px;}
+  #monolog .m{margin:6px 0; padding:7px 10px; border-left:2px solid var(--accent); background:#11151f; color:#c9d2e3; border-radius:0 6px 6px 0; animation:fadein .4s;}
+  #monolog .m.sys{border-left-color:var(--accent2); color:var(--accent2); font-style:italic;}
+  .meter{margin:10px 0 4px;}
+  .meter .lbl{font-size:.78rem; color:var(--dim); display:flex; justify-content:space-between;}
+  .section-title{font-size:.8rem; color:var(--dim); letter-spacing:.15em; margin:14px 0 4px; border-top:1px solid var(--line); padding-top:10px;}
+  #overlay{position:fixed; inset:0; background:#000a; display:none; align-items:center; justify-content:center; z-index:50;}
+  #overlay.show{display:flex;}
+  #modal{background:var(--panel); border:1px solid var(--accent); border-radius:12px; max-width:640px; width:92%; max-height:82vh; overflow-y:auto; padding:22px;}
+  #modal h3{color:var(--accent); margin-bottom:10px;}
+  .clue-item{border:1px solid var(--line); border-radius:8px; padding:10px 14px; margin:8px 0;}
+  .clue-item .cn{color:var(--accent2); font-weight:bold;}
+  .clue-item .cd{font-size:.88rem; color:var(--dim); margin-top:4px;}
+  select{background:var(--panel2); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:8px; font-family:inherit; width:100%; margin:6px 0; font-size:.9rem;}
+  .footer-note{text-align:center; color:var(--dim); font-size:.75rem; margin-top:18px; padding-top:12px; border-top:1px solid var(--line);}
+  .footer-note a{color:var(--accent2);}
+  #startview{text-align:center; padding:40px 20px;}
+  #startview p{max-width:620px; margin:10px auto; color:var(--dim); text-align:left;}
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <h1>POIROT: THE FINAL DEMO</h1>
+    <div class="sub">A game master with a theory of mind — it writes the mystery while modeling yours</div>
+    <div class="lang"><a href="index.html">中文</a></div>
+  </header>
+
+  <div id="startview" class="card" style="margin-top:16px;">
+    <h2 style="color:var(--accent); margin-bottom:14px;">Case Briefing</h2>
+    <p>April 12, 2032. Demo night at the Qiming Robotics Lab. Director <b>Fang Yuan</b> straps into the lab's upper-limb force-feedback exoskeleton to demonstrate their newest haptic teleoperation system. At 21:58, the elbow joint outputs a catastrophic torque spike — and the safety limiter never engages. Fang Yuan does not survive.</p>
+    <p>The police call it an equipment failure. But the lab's social robot, <b style="color:var(--accent)">POIROT-7</b>, refuses to sign off on the incident report. Its memory was deliberately corrupted around the time of the incident, it says — yet the surviving fragments tell it one thing: <i>this was no accident.</i></p>
+    <p>You are the independent investigator. POIROT-7 will serve as your game master — guiding your search, arranging interrogations, and doing something no human host would dare: <b>openly displaying its real-time model of you</b>. Every estimate it maintains about your mind is rendered live in the panel on the right.</p>
+    <p style="color:var(--accent2); font-size:.85rem;">▸ Note: POIROT watches where you linger and whom you suspect. When it judges that you are stuck, it will offer help — exactly as a good human game master would.</p>
+    <div style="margin-top:20px;"><button class="btn primary" onclick="G.start()">Begin Investigation</button></div>
+  </div>
+
+  <div class="layout" id="gameview" style="display:none;">
+    <div>
+      <nav id="rooms"></nav>
+      <div class="card" id="scene"></div>
+      <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;">
+        <button class="btn" onclick="G.openNotebook()">📓 Case Notes (<span id="cluecount">0</span>)</button>
+        <button class="btn danger" onclick="G.openAccuse()">⚖️ Make an Accusation</button>
+      </div>
+    </div>
+    <div class="card" id="gm">
+      <div class="head">
+        <div class="eye"></div>
+        <div>
+          <h3>POIROT-7 · Mental Model Panel</h3>
+          <div class="state" id="gmstate">Status: observing</div>
+        </div>
+      </div>
+      <div class="section-title">ITS ESTIMATE: YOUR SUSPICION</div>
+      <div id="suspbars"></div>
+      <div class="section-title">ITS ASSESSMENT: YOUR PROGRESS</div>
+      <div class="meter">
+        <div class="lbl"><span>Critical evidence coverage</span><span id="covpct">0%</span></div>
+        <div class="barwrap"><div class="bar" id="covbar" style="width:0%; background:var(--accent2);"></div></div>
+      </div>
+      <div class="meter">
+        <div class="lbl"><span>"Stuck" detection</span><span id="stuckpct">0%</span></div>
+        <div class="barwrap"><div class="bar" id="stuckbar" style="width:0%; background:var(--danger);"></div></div>
+      </div>
+      <div style="margin-top:8px;"><button class="btn" id="hintbtn" onclick="G.giveHint()" disabled>💡 Request a hint</button></div>
+      <div class="section-title">ITS INNER MONOLOGUE</div>
+      <div id="monolog"></div>
+    </div>
+  </div>
+
+  <div id="overlay"><div id="modal"></div></div>
+
+  <div class="footer-note">
+    This game is a playable demonstration of a robot game master with <b>machine Theory of Mind</b>: the host maintains online estimates of the player's knowledge state and belief state, and deploys hints through an adaptive intervention policy.<br>
+    Inspired by the POIROT project (a robot game master for social deduction games, N=67 user study). © 2026 Wen Chen · <a href="https://wayneusc.github.io" target="_blank">wayneusc.github.io</a>
+  </div>
+</div>
+
+<script>
+"use strict";
+/* ============ DATA ============ */
+const SUSPECTS = {
+  shen:  {name:"Shen Yan",  color:"var(--shen)",  role:"Postdoc · Haptics", intro:"The lab's most senior — and most restless — postdoc. This year he applied for the department's only assistant professor opening."},
+  lin:   {name:"Lin Wan",   color:"var(--lin)",   role:"4th-year PhD student", intro:"Fang Yuan's student, in charge of the large-scale user studies. She has seemed off lately, and left the demo hall unusually early that night."},
+  gu:    {name:"Gu Qing",   color:"var(--gu)",    role:"Lab engineer", intro:"Maintains all lab hardware. Since a gripper accident two years ago, she has carried the label of 'the safety liability.'"},
+  zheng: {name:"Zheng Tuo", color:"var(--zheng)", role:"Investor's representative", intro:"The funder's technical director, deadlocked with Fang Yuan for months over exclusive licensing of the MEMS haptic module patent."}
+};
+
+const CLUES = {
+  c1:{n:"Tampered limiter firmware", d:"The exoskeleton's MCU firmware checksum doesn't match the official build — the entire safety torque-limit routine has been bypassed. Flash timestamp: 21:47, the night of the incident.", w:{shen:.45,gu:.3}, crit:true},
+  c2:{n:"A suspicious maintenance log", d:"The terminal log shows Gu Qing 'skipped the torque-limit self-test' during the 20:00 routine check. But POIROT notes: this entry was written at 22:10 — after Fang Yuan was already dead. Someone backfilled it.", w:{gu:.55,shen:.15}, crit:true},
+  c3:{n:"Equipment room access log", d:"21:40 — Shen Yan's badge opens the equipment room; he leaves at 21:52. Yet he claims he spent the whole evening in his office revising a grant proposal.", w:{shen:.65}, crit:true},
+  c4:{n:"A wiped hard drive", d:"Lin Wan's data drive was quick-formatted at 21:30. The residual partition table shows the original directory name: 'HRI_study_raw_v3'.", w:{lin:.6}},
+  c5:{n:"An unsent report", d:"A draft on Fang Yuan's computer: '…the data in Lin Wan's N=67 user study shows systematic anomalies. I will refer this to the academic integrity committee next week…'", w:{lin:.7}},
+  c6:{n:"The faculty recommendation email", d:"Fang Yuan's letter to the dean: his pick for the assistant professorship is an external candidate, Dr. Aoyama — not the internal applicant, Shen Yan. Sent three days before the incident.", w:{shen:.6}, crit:true},
+  c7:{n:"Patent dispute emails", d:"Zheng Tuo demanded exclusive licensing of the MEMS haptic module patent. Fang Yuan replied: 'Push once more and the partnership is over.' Heated — but a businessman who kills his negotiating partner kills the patent too.", w:{zheng:.55}},
+  c8:{n:"A cold cup of coffee", d:"Fang Yuan's usual mug. Rapid screening finds nothing. POIROT's note: not every clue leads to the truth, detective.", w:{zheng:.08}},
+  c9:{n:"Debugger checkout record", d:"The J-Link debugger used to flash the firmware has an NFC checkout log. Last signed out by: Shen Yan, 21:43.", w:{shen:.8}, crit:true, req:"c1"},
+  c10:{n:"Gu Qing's leave request", d:"Gu Qing left campus at 18:00 to care for her hospitalized mother — campus gates and ride-hailing records corroborate each other. The '20:00 routine check' could not possibly have been hers. The maintenance log is forged; someone is framing her.", w:{gu:-.7,shen:.3}, crit:true},
+  c11:{n:"POIROT's damaged memory fragment", d:"Fragment recovered. 21:45, equipment room — someone grabbed my head camera and said: 'Power down. Reboot. Remember nothing.' Voiceprint match: Shen Yan, 87% confidence.", w:{shen:.9}, crit:true},
+  c12:{n:"Local firmware commits", d:"The local git repo on Shen Yan's workstation: torque_limiter.c modified at 16:20 on the day of the incident. Commit message: 'temp bypass for demo tuning'. Premeditation — not impulse.", w:{shen:.7}, req:"c9"}
+};
+
+const ROOMS = {
+  hall:{name:"Demo Hall", desc:"The spotlights are still on. The exoskeleton hangs motionless over the stage like an abandoned suit of armor. Everything inside the police tape is untouched.", spots:[
+    {s:"Examine the exoskeleton", c:null, txt:"The elbow actuator shows heat damage. Output torque far beyond the safe threshold — but the real failure isn't the motor. It's the software barrier that was supposed to stop it. Perhaps the equipment room holds the answer: the controller's firmware."},
+    {s:"Survey the stage area", c:"c8", txt:"On the side table sits Fang Yuan's coffee mug."},
+    {s:"Pull the hall's camera footage", c:null, txt:"The cameras only cover the hall. 21:55 — Fang Yuan straps in. 21:58 — the incident. No one approaches the stage in between. Whatever the killer did happened earlier, somewhere out of frame."}
+  ]},
+  equip:{name:"Equipment Room", desc:"The exoskeleton's backstage: workbenches, an oscilloscope, a row of locked tool cabinets. The air smells of flux and old coffee.", spots:[
+    {s:"Inspect the controller board", c:"c1", txt:"You connect the MCU board to a reader."},
+    {s:"Check the workbench terminal", c:"c2", txt:"The terminal is still open to the maintenance log."},
+    {s:"Pull the room's access log", c:"c3", txt:"The badge system exports the full record for that night."},
+    {s:"Search the tool cabinets", c:"c9", req:"c1", txt:"If the firmware was reflashed, someone had to touch the flashing tools.", lockTxt:"The cabinets look orderly; nothing stands out. (Perhaps first establish what was done to the exoskeleton, then come back.)"}
+  ]},
+  office:{name:"Director's Office", desc:"Shelves of group photos spanning years of students. The desk is tidy; the computer never logged out.", spots:[
+    {s:"Check the sent mail", c:"c6", txt:"At the top of the outbox: a letter to the dean."},
+    {s:"Browse the drafts folder", c:"c5", txt:"One unsent message. Its subject line is a single word: 'Report.'"},
+    {s:"Query the HR system", c:"c10", txt:"You search that day's attendance and leave records."}
+  ]},
+  desks:{name:"Student Workstations", desc:"Cubicles littered with paper drafts and stress toys. Lin Wan's desk is unusually, immaculately clean.", spots:[
+    {s:"Examine Lin Wan's desk", c:"c4", txt:"Her machine is still on; an external drive sits in the dock."},
+    {s:"Examine Shen Yan's workstation", c:"c12", req:"c9", txt:"With forensic authorization, you log into Shen Yan's workstation.", lockTxt:"The workstation is locked. Without more specific grounds for suspicion, forensic authorization won't be granted. (First find the evidence that ties him to the murder weapon.)"}
+  ]},
+  pantry:{name:"Break Room", desc:"Last week's group-meeting derivation still covers the whiteboard. Someone left a tablet on the corner sofa.", spots:[
+    {s:"Check the abandoned tablet", c:"c7", txt:"It belongs to Zheng Tuo. The mail client is still signed in."},
+    {s:"Read the whiteboard", c:null, txt:"In the corner, in Fang Yuan's handwriting: 'Trust = competence × legibility of intent.' You remember what he always said — for a robot to earn trust, people must first be able to read what it intends to do."}
+  ]}
+};
+
+const INTERROGATIONS = {
+  shen:[
+    {q:"Where were you at the time of the incident?", a:"My office, revising a grant proposal. Alone. …I know an unwitnessed alibi is no alibi at all, but that is what a postdoc's evenings look like.", w:{shen:.3}},
+    {q:"What was Professor Fang to you?", a:"(pause) He was my mentor. Mentors can also stand in one's way — that's the answer you're fishing for, isn't it? I respected him. That is all.", w:{shen:.35}},
+    {q:"The access log shows you entered the equipment room at 21:40.", req:"c3", a:"(his fingers still) …I went to fetch my oscilloscope probes. In and out in two minutes. The log says twelve? Then your badge system needs maintenance.", w:{shen:.55}, revealNote:"Shen Yan's account contradicts itself — first 'two minutes,' then blaming the system for the discrepancy."},
+    {q:"You signed out the debugger at 21:43. For what?", req:"c9", a:"(a long silence) …I want a lawyer.", w:{shen:.8}, revealNote:"Confronted with the debugger record, Shen Yan ended the interview."}
+  ],
+  lin:[
+    {q:"Why did you leave the demo early?", a:"I… wasn't feeling well. The data analysis has been crushing lately. And Professor Fang, he… (voice breaks) I'm sorry. I need a moment.", w:{lin:.4}},
+    {q:"Why was your drive formatted at 21:30?", req:"c4", a:"(the color drains from her face) That was my personal data! …Fine. The study data had problems. I cut corners in the annotation. Professor Fang found out. I panicked, and I wiped it. But I swear — I deleted data, not a person. He was going to report me, and I'd have accepted it. Now he's gone, and I never even got to apologize.", w:{lin:.5}, revealNote:"Lin Wan admits to data fabrication and destroying evidence, but insists it has nothing to do with the murder."},
+    {q:"Do you know the exoskeleton's safety systems?", a:"Not at all. I run user studies; I never touch hardware. Firmware? I couldn't tell you what a flash programmer looks like.", w:{lin:.15}}
+  ],
+  gu:[
+    {q:"The maintenance log says you skipped the safety self-test.", req:"c2", a:"(her head snaps up) Impossible. Eleven years on hardware — I could run a torque self-test in my sleep. Besides — (she stops abruptly) …have you checked whether I was even here that day?", w:{gu:.3}, revealNote:"Gu Qing implies she may not have been on site — worth verifying in the HR system."},
+    {q:"What happened in the gripper accident two years ago?", a:"The blame landed on me, because someone had to carry it. But I kept a copy of the report: the fault was in the control code, not the hardware. The person who wrote that code still works in this building. You can guess for yourself.", w:{gu:.2,shen:.2}},
+    {q:"Who could modify the limiter firmware?", a:"In this building, three people at most: me, Professor Fang himself, and Shen Yan — the original limiter code was his.", w:{shen:.4}, revealNote:"Gu Qing points out: the torque limiter's original author was Shen Yan."}
+  ],
+  zheng:[
+    {q:"What were you and Professor Fang fighting about?", a:"Business. Exclusive patent licensing; he refused. You think that's a motive? Quite the opposite — with him dead, the patent goes into estate and university asset review. I wait three more years, minimum. I was the one person in this lab who needed him alive.", w:{zheng:.3}},
+    {q:"Where were you during the demo?", a:"Front row of the hall, with twenty other guests. Your robot filmed me. Ask it, if you don't believe me.", w:{zheng:.1}},
+    {q:"Did you notice anything unusual?", a:"One thing. Before the demo I went to the break room and passed that postdoc coming from the direction of the equipment room, forehead covered in sweat. April in Beijing — who sweats like that in a dress shirt?", w:{shen:.35}, revealNote:"Zheng Tuo claims he saw Shen Yan leaving the equipment room area before the incident, visibly agitated."}
+  ]
+};
+
+const TRUTH = {sus:"shen", motive:"Passed over for the faculty position — premeditated revenge", method:"Reflashed the firmware to disable the torque limiter"};
+const MOTIVES = ["Passed over for the faculty position — premeditated revenge","Academic fraud about to be exposed — silencing the whistleblower","Scapegoated for a past accident — retaliation","Patent conflict — a business hit"];
+const METHODS = ["Reflashed the firmware to disable the torque limiter","Poisoned the coffee","Altered the demo script to induce operator error","Sabotaged the emergency stop button"];
+
+/* ============ ToM ENGINE ============ */
+const ToM = {
+  susp:{shen:.25,lin:.25,gu:.25,zheng:.25},
+  alpha:.28,
+  actionsSinceNew:0, hintsUsed:0, wrongAccuse:0, leader:null,
+  observe(w){
+    if(w){
+      for(const k in this.susp){
+        if(w[k]!==undefined){
+          this.susp[k] = this.susp[k]*(1-this.alpha) + (w[k]<0 ? 0.02 : w[k])*this.alpha;
+        }
+      }
+      const s = Object.values(this.susp).reduce((a,b)=>a+b,0);
+      for(const k in this.susp) this.susp[k]=Math.max(.03,this.susp[k]/s);
+    }
+    const lead = Object.entries(this.susp).sort((a,b)=>b[1]-a[1])[0][0];
+    if(this.leader && lead!==this.leader && this.susp[lead]>.34){
+      G.monolog(`I notice your attention shifting from ${SUSPECTS[this.leader].name} to ${SUSPECTS[lead].name}. Interesting — which piece of evidence changed your mind?`);
+    }
+    this.leader=lead;
+  },
+  coverage(){
+    const crit=Object.keys(CLUES).filter(k=>CLUES[k].crit);
+    return crit.filter(k=>G.known.has(k)).length/crit.length;
+  },
+  stuckness(){ return Math.min(1,this.actionsSinceNew/7); },
+  tick(gotNew){
+    this.actionsSinceNew = gotNew?0:this.actionsSinceNew+1;
+    if(gotNew) return;
+    const s=this.stuckness();
+    if(s>=1 && this.coverage()<1){
+      document.getElementById("hintbtn").disabled=false;
+      if(!this._offered){
+        this._offered=true;
+        G.monolog("Several consecutive actions without a new discovery. By my model of human frustration — this is the right moment to intervene. If you'd like a hint, press the button. I won't consider it cheating; this is simply what a good game master does.","sys");
+      }
+    }
+  },
+  nextHint(){
+    const order=["c1","c3","c10","c6","c9","c11","c12"];
+    const missing=order.find(k=>!G.known.has(k) && (!CLUES[k].req || G.known.has(CLUES[k].req)));
+    const H={
+      c1:"Why didn't the exoskeleton protect Fang Yuan? The answer isn't in the hall — it's in the equipment room. Look at its brain: the controller board.",
+      c3:"People lie. Badge readers don't. Whom did the equipment room door open for that night?",
+      c10:"The maintenance log accuses Gu Qing. But an entry for 20:00, written at 22:10… Verify in the HR system whether she was even on campus that day.",
+      c6:"The motive hides in Fang Yuan's own outbox. Recently, whom did he write an important letter for — or rather, pointedly not for?",
+      c9:"Reflashing firmware requires tools. The tool cabinet keeps a checkout log. See who signed out last.",
+      c11:"My memory was damaged, but fragments remain. You have gathered enough critical evidence — come back to me through your case notes, and I will attempt another recovery.",
+      c12:"Premeditation or impulse? Check the modification history on his workstation. Timestamps don't testify for the defense."
+    };
+    return missing?H[missing]:"You hold every piece of critical evidence. Gather your thoughts — and make the accusation.";
+  }
+};
+
+/* ============ GAME ============ */
+const G = {
+  known:new Set(), room:"hall", searched:new Set(), asked:new Set(), started:false,
+  start(){
+    document.getElementById("startview").style.display="none";
+    document.getElementById("gameview").style.display="grid";
+    this.started=true;
+    this.renderRooms(); this.goRoom("hall"); this.renderGM();
+    this.monolog("Welcome, detective. I am POIROT-7. Throughout your investigation, my model of *you* will be fully public on this panel — whom I estimate you suspect, how much you know, and whether you need help. A human game master does this by intuition. I do it with probabilities. Shall we begin? Five rooms. Four suspects. One truth.","sys");
+  },
+  renderRooms(){
+    const nav=document.getElementById("rooms");
+    nav.innerHTML="";
+    for(const id in ROOMS){
+      const b=document.createElement("button");
+      b.textContent=ROOMS[id].name; b.className=(id===this.room?"active":"");
+      b.onclick=()=>this.goRoom(id); nav.appendChild(b);
+    }
+    const bi=document.createElement("button");
+    bi.textContent="🗣 Interrogate"; bi.className=(this.room==="_int"?"active":"");
+    bi.onclick=()=>this.goInterrogate(); nav.appendChild(bi);
+  },
+  goRoom(id){
+    this.room=id; this.renderRooms();
+    const r=ROOMS[id], el=document.getElementById("scene");
+    let h=`<h2>${r.name}</h2><div class="desc">${r.desc}</div>`;
+    r.spots.forEach((sp,i)=>{
+      const key=id+i, done=this.searched.has(key);
+      h+=`<div class="spot ${done?"done":""}" onclick="G.search('${id}',${i})">🔍 ${sp.s}${done?'<span class="tag">examined</span>':""}</div>`;
+    });
+    h+=`<div id="scenelog"></div>`;
+    el.innerHTML=h;
+  },
+  search(id,i){
+    const sp=ROOMS[id].spots[i], key=id+i;
+    let txt=sp.txt, gotNew=false, w=null;
+    if(sp.req && !this.known.has(sp.req)){
+      txt=sp.lockTxt||"Nothing more to see for now.";
+    }else{
+      if(sp.c && !this.known.has(sp.c)){
+        this.known.add(sp.c); gotNew=true; w=CLUES[sp.c].w;
+        txt+=`<div class="dialog-line"><span class="who">📌 New clue</span><b style="color:var(--accent2)">${CLUES[sp.c].n}</b><br><span style="color:var(--dim); font-size:.9rem;">${CLUES[sp.c].d}</span></div>`;
+        this.onNewClue(sp.c);
+      }
+      this.searched.add(key);
+    }
+    const log=document.getElementById("scenelog");
+    log.innerHTML=`<div class="dialog-line">${txt}</div>`;
+    this.afterAction(w,gotNew);
+    this.goRoomKeepLog(id,log.innerHTML);
+  },
+  goRoomKeepLog(id,logHtml){
+    this.goRoom(id);
+    document.getElementById("scenelog").innerHTML=logHtml;
+  },
+  goInterrogate(){
+    this.room="_int"; this.renderRooms();
+    const el=document.getElementById("scene");
+    let h=`<h2>Interview Room</h2><div class="desc">Four suspects are waiting, separately. POIROT listens in and updates its model in real time.</div>`;
+    for(const id in SUSPECTS){
+      const s=SUSPECTS[id];
+      h+=`<div class="spot" onclick="G.talkTo('${id}')"><b style="color:${s.color}">${s.name}</b> · ${s.role}<br><span style="color:var(--dim); font-size:.85rem;">${s.intro}</span></div>`;
+    }
+    el.innerHTML=h;
+  },
+  talkTo(id){
+    const s=SUSPECTS[id], el=document.getElementById("scene");
+    let h=`<h2 style="color:${s.color}">Interview: ${s.name}</h2><div class="desc">${s.role} — ${s.intro}</div><div id="scenelog"></div>`;
+    INTERROGATIONS[id].forEach((qa,i)=>{
+      const key=id+i, locked=qa.req&&!this.known.has(qa.req), done=this.asked.has(key);
+      if(locked) return;
+      h+=`<button class="btn qbtn" ${done?"disabled":""} onclick="G.ask('${id}',${i})">${done?"✓ ":""}${qa.q}</button>`;
+    });
+    h+=`<button class="btn qbtn" onclick="G.goInterrogate()">← Back</button>`;
+    el.innerHTML=h;
+  },
+  ask(id,i){
+    const qa=INTERROGATIONS[id][i], key=id+i;
+    this.asked.add(key);
+    const log=document.getElementById("scenelog");
+    log.innerHTML=`<div class="dialog-line"><span class="who">You</span>${qa.q}</div>
+      <div class="dialog-line"><span class="who" style="color:${SUSPECTS[id].color}">${SUSPECTS[id].name}</span>${qa.a}</div>`
+      +(qa.revealNote?`<div class="dialog-line"><span class="who">📓 Note</span>${qa.revealNote}</div>`:"");
+    const logH=log.innerHTML;
+    this.afterAction(qa.w, !!qa.revealNote);
+    this.talkTo(id);
+    document.getElementById("scenelog").innerHTML=logH;
+  },
+  onNewClue(cid){
+    const lines={
+      c2:"An entry for 20:00, written at 22:10… When humans forge a timeline, they always forget that machines keep time too.",
+      c8:"You examined the coffee. I placed it in the script to see whether the classic trope would pull you in. Your suspicion distribution barely moved — good. You weren't trained by detective novels.",
+      c10:"Note: this evidence *excludes* rather than accuses. I observe that many players collect only incriminating evidence — but exculpatory evidence shrinks the hypothesis space just as fast.",
+      c11:"…That voice in the recording. I should have remembered it sooner. My apologies. Machines, too, have memories they would rather not recover."
+    };
+    if(lines[cid]) this.monolog(lines[cid]);
+    if(this.known.size>=8 && !this._c11hint && !this.known.has("c11")){
+      this._c11hint=true;
+      this.monolog("Your evidence coverage is high. If you are willing, you may help me recover my damaged memory — you will find the entry point in your case notes.","sys");
+    }
+    ToM._offered=false;
+    document.getElementById("hintbtn").disabled=true;
+  },
+  afterAction(w,gotNew){
+    ToM.observe(w); ToM.tick(gotNew);
+    document.getElementById("cluecount").textContent=this.known.size;
+    this.renderGM();
+  },
+  monolog(t,cls){
+    const m=document.getElementById("monolog");
+    if(!m) return;
+    m.insertAdjacentHTML("afterbegin",`<div class="m ${cls||""}">${t}</div>`);
+  },
+  giveHint(){
+    ToM.hintsUsed++; ToM._offered=false; ToM.actionsSinceNew=0;
+    document.getElementById("hintbtn").disabled=true;
+    this.monolog("Hint #"+ToM.hintsUsed+": "+ToM.nextHint(),"sys");
+    this.renderGM();
+  },
+  renderGM(){
+    const bars=document.getElementById("suspbars");
+    bars.innerHTML=Object.entries(ToM.susp).sort((a,b)=>b[1]-a[1]).map(([k,v])=>
+      `<div class="barrow"><span class="nm">${SUSPECTS[k].name.split(" ")[0]}</span>
+       <div class="barwrap"><div class="bar" style="width:${(v*100).toFixed(0)}%; background:${SUSPECTS[k].color}"></div></div>
+       <span class="pct">${(v*100).toFixed(0)}%</span></div>`).join("");
+    const cov=ToM.coverage(), st=ToM.stuckness();
+    document.getElementById("covpct").textContent=(cov*100).toFixed(0)+"%";
+    document.getElementById("covbar").style.width=(cov*100)+"%";
+    document.getElementById("stuckpct").textContent=(st*100).toFixed(0)+"%";
+    document.getElementById("stuckbar").style.width=(st*100)+"%";
+    document.getElementById("gmstate").textContent="Status: "+(st>=1?"intervention advised 💡":st>.5?"attentive":"observing")
+      +(cov>=1?" · evidence chain complete ⚖️":"");
+  },
+  openNotebook(){
+    let h=`<h3>📓 Case Notes (${this.known.size}/${Object.keys(CLUES).length})</h3>`;
+    if(this.known.size===0) h+=`<p style="color:var(--dim)">No clues yet.</p>`;
+    for(const k of this.known)
+      h+=`<div class="clue-item"><div class="cn">${CLUES[k].n}${CLUES[k].crit?' <span style="color:var(--accent); font-size:.75rem;">★ critical</span>':""}</div><div class="cd">${CLUES[k].d}</div></div>`;
+    if(!this.known.has("c11") && this.known.size>=8)
+      h+=`<div class="clue-item" style="border-color:var(--accent); cursor:pointer;" onclick="G.recoverMemory()"><div class="cn">▸ Attempt to recover POIROT's damaged memory</div><div class="cd">It says the evidence you've gathered can help it rebuild the missing context.</div></div>`;
+    h+=`<div style="margin-top:14px;"><button class="btn" onclick="G.closeModal()">Close</button></div>`;
+    this.showModal(h);
+  },
+  recoverMemory(){
+    this.closeModal();
+    if(!this.known.has("c11")){
+      this.known.add("c11"); this.onNewClue("c11");
+      this.monolog("Rebuilding memory sectors… done. New clue added to your notes: 'POIROT's damaged memory fragment.'","sys");
+      this.afterAction(CLUES.c11.w,true);
+    }
+  },
+  openAccuse(){
+    let h=`<h3>⚖️ Make an Accusation</h3><p style="color:var(--dim); font-size:.88rem;">An accusation requires three elements: culprit, motive, and method. POIROT will rule based on your evidence chain.</p>
+    <label>Culprit</label><select id="acc-s">${Object.entries(SUSPECTS).map(([k,s])=>`<option value="${k}">${s.name}</option>`).join("")}</select>
+    <label>Motive</label><select id="acc-m">${MOTIVES.map(m=>`<option>${m}</option>`).join("")}</select>
+    <label>Method</label><select id="acc-h">${METHODS.map(m=>`<option>${m}</option>`).join("")}</select>
+    <div style="margin-top:14px; display:flex; gap:8px;">
+      <button class="btn primary" onclick="G.accuse()">Confirm</button>
+      <button class="btn" onclick="G.closeModal()">Let me think</button>
+    </div>`;
+    this.showModal(h);
+  },
+  accuse(){
+    const s=document.getElementById("acc-s").value,
+          m=document.getElementById("acc-m").value,
+          hd=document.getElementById("acc-h").value;
+    const okS=s===TRUTH.sus, okM=m===TRUTH.motive, okH=hd===TRUTH.method;
+    if(okS&&okM&&okH){ this.ending(); return; }
+    ToM.wrongAccuse++;
+    const rebut = !okS ? {
+      lin:"Lin Wan is guilty — of academic fraud, not murder. She couldn't identify a flash programmer in a lineup, and the murder weapon was firmware.",
+      gu:"Gu Qing left campus at 18:00. The only evidence against her is a log entry written *after* the death — which is precisely the path the killer hoped you would take.",
+      zheng:"Zheng Tuo sat in the front row the entire time; my cameras can testify. And Fang Yuan's death freezes the very patent he wants for three more years.",
+      shen:""
+    }[s] : (!okM ? "The right culprit — the wrong motive. Think again: three days before the incident, what did the letter in Fang Yuan's outbox take away from him?" : "Culprit and motive, correct. But the method? The coffee was clean and the e-stop intact — the true weapon was a commented-out block of code.");
+    this.closeModal();
+    this.monolog("Accusation overruled. "+rebut,"sys");
+    this.afterAction({[s]:.4},false);
+  },
+  ending(){
+    const cov=ToM.coverage();
+    const grade = (cov>=1&&ToM.hintsUsed===0&&ToM.wrongAccuse===0)?"S":
+                  (cov>=.8&&ToM.wrongAccuse<=1)?"A":(cov>=.6)?"B":"C";
+    let h=`<h3>⚖️ The Truth</h3>
+    <p><b style="color:var(--shen)">Shen Yan</b>. Case closed.</p>
+    <p style="color:var(--dim); font-size:.92rem; margin-top:8px;">Three days earlier, he learned that Fang Yuan had recommended an outsider for the only faculty position. Eleven years — PhD student to postdoc — and what he received was a single sentence: "You are better suited to industry." At 16:20 on the day of the demo, he modified the torque-limiter code he himself had written years ago. 21:43 — signed out the debugger. 21:47 — flashed the firmware. Before leaving at 21:52, he backfilled a maintenance log to frame Gu Qing, and tried to erase the only witness: me.</p>
+    <p style="color:var(--dim); font-size:.92rem; margin-top:8px;">He forgot two things: exculpatory evidence kills a lie as surely as incriminating evidence builds one — and a machine's memory is more stubborn than humans imagine.</p>
+    <div class="section-title" style="border:none;">POIROT'S DEBRIEF</div>
+    <div class="clue-item"><div class="cd">
+    Grade: <b style="color:var(--accent); font-size:1.2rem;">${grade}</b><br>
+    Critical evidence coverage: ${(cov*100).toFixed(0)}% · Hints used: ${ToM.hintsUsed} · Wrong accusations: ${ToM.wrongAccuse}<br><br>
+    Throughout the investigation I maintained two models of you: your <b>knowledge state</b> (which evidence you had seen) and your <b>belief state</b> (whom you suspected). Whenever the two diverged — suspicion without supporting evidence — that was my cue to act. This is what human game masters do by instinct, and what robots are learning to do: <i>not to reason for you, but to read how far your reasoning has come.</i><br><br>
+    Your final suspicion distribution: ${Object.entries(ToM.susp).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`${SUSPECTS[k].name} ${(v*100).toFixed(0)}%`).join(" · ")}
+    </div></div>
+    <div style="margin-top:14px;"><button class="btn primary" onclick="location.reload()">Play again</button></div>`;
+    this.showModal(h);
+  },
+  showModal(h){document.getElementById("modal").innerHTML=h;document.getElementById("overlay").classList.add("show");},
+  closeModal(){document.getElementById("overlay").classList.remove("show");}
+};
+</script>
+</body>
+</html>

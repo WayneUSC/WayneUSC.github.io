@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>POIROT:最后一次演示 — 一个会读你的心的机器主持人</title>
+<style>
+  :root{
+    --bg:#0d1017; --panel:#151a24; --panel2:#1c2331; --line:#2a3347;
+    --text:#dce3f0; --dim:#8b96ab; --accent:#e8b34b; --accent2:#5bc8af;
+    --danger:#e06666; --shen:#e8b34b; --lin:#7aa5e0; --gu:#5bc8af; --zheng:#c98bd1;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--bg); color:var(--text); font-family:"Songti SC","Noto Serif SC",Georgia,serif; line-height:1.7;}
+  #app{max-width:1180px; margin:0 auto; padding:18px;}
+  header{text-align:center; padding:10px 0 16px; border-bottom:1px solid var(--line); position:relative;}
+  header .lang{position:absolute; right:0; top:8px; font-size:.8rem;}
+  header .lang a{color:var(--accent2); text-decoration:none; border:1px solid var(--line); border-radius:6px; padding:3px 10px;}
+  header h1{font-size:1.6rem; letter-spacing:.2em; color:var(--accent);}
+  header .sub{color:var(--dim); font-size:.85rem; margin-top:4px;}
+  .layout{display:grid; grid-template-columns: 1fr 340px; gap:16px; margin-top:16px;}
+  @media(max-width:900px){.layout{grid-template-columns:1fr;}}
+  .card{background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:16px;}
+  nav#rooms{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px;}
+  nav#rooms button, .btn{
+    background:var(--panel2); color:var(--text); border:1px solid var(--line);
+    border-radius:8px; padding:7px 14px; cursor:pointer; font-family:inherit; font-size:.9rem;
+    transition:all .15s;
+  }
+  nav#rooms button:hover,.btn:hover{border-color:var(--accent); color:var(--accent);}
+  nav#rooms button.active{background:var(--accent); color:#1a1408; border-color:var(--accent); font-weight:bold;}
+  .btn.primary{background:var(--accent); color:#1a1408; font-weight:bold;}
+  .btn.danger{border-color:var(--danger); color:var(--danger);}
+  .btn:disabled{opacity:.35; cursor:not-allowed;}
+  #scene h2{color:var(--accent); font-size:1.15rem; margin-bottom:8px;}
+  #scene .desc{color:var(--dim); font-size:.92rem; margin-bottom:14px;}
+  .spot{border:1px dashed var(--line); border-radius:8px; padding:10px 14px; margin:8px 0; cursor:pointer; transition:all .15s;}
+  .spot:hover{border-color:var(--accent2); background:var(--panel2);}
+  .spot.done{opacity:.55; border-style:solid;}
+  .spot .tag{font-size:.75rem; color:var(--accent2); margin-left:8px;}
+  .dialog-line{margin:10px 0; padding:10px 14px; border-radius:8px; background:var(--panel2); animation:fadein .3s;}
+  .dialog-line .who{color:var(--accent); font-weight:bold; margin-right:8px;}
+  .qbtn{display:block; width:100%; text-align:left; margin:6px 0;}
+  @keyframes fadein{from{opacity:0; transform:translateY(4px);} to{opacity:1;}}
+  /* POIROT panel */
+  #gm .head{display:flex; align-items:center; gap:10px; margin-bottom:10px;}
+  #gm .eye{width:44px; height:44px; border-radius:50%; background:radial-gradient(circle at 40% 40%, #ffd97a 0 18%, #6b4f12 40%, #10131a 70%); border:2px solid var(--accent); flex-shrink:0; animation:pulse 3s infinite;}
+  @keyframes pulse{0%,100%{box-shadow:0 0 6px #e8b34b55;} 50%{box-shadow:0 0 16px #e8b34baa;}}
+  #gm h3{color:var(--accent); font-size:1rem;}
+  #gm .state{font-size:.78rem; color:var(--dim);}
+  .barrow{display:flex; align-items:center; gap:8px; margin:5px 0; font-size:.82rem;}
+  .barrow .nm{width:44px; color:var(--dim);}
+  .barwrap{flex:1; height:10px; background:#0a0d13; border-radius:5px; overflow:hidden;}
+  .bar{height:100%; border-radius:5px; transition:width .5s;}
+  .barrow .pct{width:40px; text-align:right; color:var(--dim); font-variant-numeric:tabular-nums;}
+  #monolog{max-height:230px; overflow-y:auto; font-size:.82rem; margin-top:10px; padding-right:4px;}
+  #monolog .m{margin:6px 0; padding:7px 10px; border-left:2px solid var(--accent); background:#11151f; color:#c9d2e3; border-radius:0 6px 6px 0; animation:fadein .4s;}
+  #monolog .m.sys{border-left-color:var(--accent2); color:var(--accent2); font-style:italic;}
+  .meter{margin:10px 0 4px;}
+  .meter .lbl{font-size:.78rem; color:var(--dim); display:flex; justify-content:space-between;}
+  .section-title{font-size:.8rem; color:var(--dim); letter-spacing:.15em; margin:14px 0 4px; border-top:1px solid var(--line); padding-top:10px;}
+  /* notebook / modal */
+  #overlay{position:fixed; inset:0; background:#000a; display:none; align-items:center; justify-content:center; z-index:50;}
+  #overlay.show{display:flex;}
+  #modal{background:var(--panel); border:1px solid var(--accent); border-radius:12px; max-width:640px; width:92%; max-height:82vh; overflow-y:auto; padding:22px;}
+  #modal h3{color:var(--accent); margin-bottom:10px;}
+  .clue-item{border:1px solid var(--line); border-radius:8px; padding:10px 14px; margin:8px 0;}
+  .clue-item .cn{color:var(--accent2); font-weight:bold;}
+  .clue-item .cd{font-size:.88rem; color:var(--dim); margin-top:4px;}
+  select{background:var(--panel2); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:8px; font-family:inherit; width:100%; margin:6px 0; font-size:.9rem;}
+  .footer-note{text-align:center; color:var(--dim); font-size:.75rem; margin-top:18px; padding-top:12px; border-top:1px solid var(--line);}
+  .footer-note a{color:var(--accent2);}
+  #startview{text-align:center; padding:40px 20px;}
+  #startview p{max-width:600px; margin:10px auto; color:var(--dim); text-align:left;}
+  .hintbadge{display:inline-block; background:var(--danger); color:#fff; border-radius:10px; font-size:.7rem; padding:1px 8px; margin-left:6px; animation:pulse 1.5s infinite;}
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <h1>POIROT:最后一次演示</h1>
+    <div class="sub">一个拥有「心智理论」的机器游戏主持人 · 它一边给你出题,一边在建模你的内心</div>
+    <div class="lang"><a href="en.html">EN</a></div>
+  </header>
+
+  <div id="startview" class="card" style="margin-top:16px;">
+    <h2 style="color:var(--accent); margin-bottom:14px;">案情简报</h2>
+    <p>2032 年 4 月 12 日晚,启明机器人实验室的年度演示夜。主任<b>方远</b>教授亲自穿戴上肢力反馈外骨骼,演示实验室最新的触觉遥操作系统。21:58,外骨骼肘关节输出异常扭矩——安全限制器没有介入。方远抢救无效。</p>
+    <p>警方初步认定为设备事故,但实验室的社交机器人 <b style="color:var(--accent)">POIROT-7</b> 拒绝在事故报告上签署传感日志。它说,它的记忆在案发前后被人为损坏了,但残存的片段告诉它:<i>这不是事故。</i></p>
+    <p>你是受聘的独立调查员。POIROT-7 将担任你的「游戏主持人」——它会陪你搜证、安排问询,并且毫不掩饰地告诉你:<b>它正在实时推测你的想法</b>。它对你的每一次建模,都显示在右侧面板中。</p>
+    <p style="color:var(--accent2); font-size:.85rem;">▸ 提示:POIROT 会观察你在哪里徘徊、在怀疑谁。当它判断你卡住了,它会主动伸出援手——就像一个称职的人类主持人那样。</p>
+    <div style="margin-top:20px;"><button class="btn primary" onclick="G.start()">开始调查</button></div>
+  </div>
+
+  <div class="layout" id="gameview" style="display:none;">
+    <div>
+      <nav id="rooms"></nav>
+      <div class="card" id="scene"></div>
+      <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;">
+        <button class="btn" onclick="G.openNotebook()">📓 线索笔记 (<span id="cluecount">0</span>)</button>
+        <button class="btn danger" onclick="G.openAccuse()">⚖️ 提出指控</button>
+      </div>
+    </div>
+    <div class="card" id="gm">
+      <div class="head">
+        <div class="eye"></div>
+        <div>
+          <h3>POIROT-7 · 心智模型面板</h3>
+          <div class="state" id="gmstate">状态:观察中</div>
+        </div>
+      </div>
+      <div class="section-title">它推测:你的怀疑分布</div>
+      <div id="suspbars"></div>
+      <div class="section-title">它评估:你的调查进度</div>
+      <div class="meter">
+        <div class="lbl"><span>关键证据覆盖率</span><span id="covpct">0%</span></div>
+        <div class="barwrap"><div class="bar" id="covbar" style="width:0%; background:var(--accent2);"></div></div>
+      </div>
+      <div class="meter">
+        <div class="lbl"><span>「卡住」判定</span><span id="stuckpct">0%</span></div>
+        <div class="barwrap"><div class="bar" id="stuckbar" style="width:0%; background:var(--danger);"></div></div>
+      </div>
+      <div style="margin-top:8px;"><button class="btn" id="hintbtn" onclick="G.giveHint()" disabled>💡 请求提示</button></div>
+      <div class="section-title">它的内心独白</div>
+      <div id="monolog"></div>
+    </div>
+  </div>
+
+  <div id="overlay"><div id="modal"></div></div>
+
+  <div class="footer-note">
+    本作是「机器人游戏主持人 + 机器心智理论 (machine Theory of Mind)」的可玩化演示:主持人对玩家的知识状态与怀疑分布进行在线估计,并以自适应策略投放提示。<br>
+    灵感来自 POIROT 项目(机器人剧本杀主持人,N=67 用户实验)。© 2026 Wen Chen · <a href="https://wayneusc.github.io" target="_blank">wayneusc.github.io</a>
+  </div>
+</div>
+
+<script>
+"use strict";
+/* ============ 数据 ============ */
+const SUSPECTS = {
+  shen:  {name:"沈砚",  color:"var(--shen)",  role:"博士后 · 触觉方向", intro:"实验室资历最深的博士后,方远最得力也最不安分的下属。今年申请了院里唯一的助理教授职位。"},
+  lin:   {name:"林晚",  color:"var(--lin)",   role:"四年级博士生",     intro:"方远的学生,负责大规模用户实验。最近状态反常,案发当晚很早就离开了演示大厅。"},
+  gu:    {name:"顾青",  color:"var(--gu)",    role:"实验室工程师",     intro:"负责所有硬件维护。两年前的一次夹爪事故后,她一直背着『安全隐患责任人』的名声。"},
+  zheng: {name:"郑拓",  color:"var(--zheng)", role:"资方代表",         intro:"投资方派驻的技术总监,为 MEMS 触觉模组的专利授权问题与方远僵持了几个月。"}
+};
+
+const CLUES = {
+  c1:{n:"被篡改的限制器固件", d:"外骨骼主控 MCU 固件校验值与官方版本不符——安全扭矩限制函数被整段旁路。刷写时间戳:案发当晚 21:47。", w:{shen:.45,gu:.3}, crit:true},
+  c2:{n:"可疑的维护日志", d:"终端日志显示顾青在 20:00 例行检查中『跳过扭矩限制自检』。但 POIROT 指出:这条记录的写入时间是 22:10——在方远出事之后。有人事后补写了它。", w:{gu:.55,shen:.15}, crit:true},
+  c3:{n:"设备间门禁记录", d:"21:40,沈砚的工牌刷开设备间;21:52 离开。而他声称当晚一直在办公室改基金本子。", w:{shen:.65}, crit:true},
+  c4:{n:"被格式化的硬盘", d:"林晚的实验数据硬盘在 21:30 被快速格式化。残留分区表显示原目录名:『HRI_study_raw_v3』。", w:{lin:.6}},
+  c5:{n:"未发出的举报信", d:"方远电脑里的草稿:『……林晚同学在 N=67 的用户实验中数据存在系统性异常,我将于下周提交学术道德委员会……』", w:{lin:.7}},
+  c6:{n:"教职推荐邮件", d:"方远发给院长的推荐信:助理教授职位人选为外部候选人 Dr. Aoyama——而非内部申请人沈砚。发送日期:案发前三天。", w:{shen:.6}, crit:true},
+  c7:{n:"专利争执邮件", d:"郑拓要求 MEMS 触觉模组专利独占授权,方远回复:『再逼一步,合作终止。』火药味十足,但生意人杀掉谈判对手,等于杀掉专利本身。", w:{zheng:.55}},
+  c8:{n:"冷掉的咖啡", d:"方远的常用杯。快检无任何异常。POIROT 备注:不是每条线索都通向真相,侦探。", w:{zheng:.08}},
+  c9:{n:"调试器借用记录", d:"刷写固件所用的 J-Link 调试器带 NFC 借用登记:最后一次签出——沈砚,21:43。", w:{shen:.8}, crit:true, req:"c1"},
+  c10:{n:"顾青的请假审批", d:"顾青当天 18:00 已离开园区照顾住院的母亲,园区门禁与网约车记录相互印证。所谓 20:00 的『例行检查』根本不可能由她完成——维护日志是伪造的,有人在栽赃。", w:{gu:-.7,shen:.3}, crit:true},
+  c11:{n:"POIROT 受损内存片段", d:"碎片恢复成功。21:45,设备间,有人抓住我的头部摄像头:『断电,重启,什么都别记。』声纹匹配:沈砚,置信度 87%。", w:{shen:.9}, crit:true},
+  c12:{n:"固件修改的本地提交", d:"沈砚工作站的本地 git 仓库:torque_limiter.c 于案发当天 16:20 被修改,提交信息:『temp bypass for demo tuning』。预谋,而非临时起意。", w:{shen:.7}, req:"c9"}
+};
+
+const ROOMS = {
+  hall:{name:"演示大厅", desc:"聚光灯还亮着,外骨骼静静垂在展台中央,像一件被遗弃的盔甲。警戒线内一切保持原状。", spots:[
+    {s:"检查外骨骼本体", c:null, txt:"肘关节电机有过热痕迹。输出扭矩远超安全阈值——但真正的问题不在电机,在于本该拦住它的那道软件防线。也许该去设备间看看主控板的固件。"},
+    {s:"查看现场布置", c:"c8", txt:"展台侧桌上放着方远的咖啡杯。"},
+    {s:"调取大厅监控", c:null, txt:"监控只覆盖大厅。21:55 方远穿戴设备,21:58 事故发生。期间无人靠近展台。凶手的动作,发生在更早、更隐蔽的地方。"}
+  ]},
+  equip:{name:"设备间", desc:"外骨骼的『后台』:工作台、示波器、一排上锁的工具柜。空气里有松香和咖啡混合的味道。", spots:[
+    {s:"检查主控板与固件", c:"c1", txt:"你把主控板接上读取器。"},
+    {s:"翻查工作台终端", c:"c2", txt:"终端还停留在维护日志页面。"},
+    {s:"查设备间门禁", c:"c3", txt:"门禁系统导出了当晚的完整记录。"},
+    {s:"检查工具柜", c:"c9", req:"c1", txt:"既然固件被刷写过,刷写工具一定被人动过。", lockTxt:"工具柜里工具齐全,看不出异常。(也许先弄清楚外骨骼被做了什么手脚,再回来。)"}
+  ]},
+  office:{name:"方远办公室", desc:"书架上摆着他历年学生的合影。桌面整洁,电脑还没有注销。", spots:[
+    {s:"查看电脑邮件", c:"c6", txt:"发件箱最上面是一封给院长的信。"},
+    {s:"翻阅草稿箱", c:"c5", txt:"一封没有发出的信,标题只有两个字:『举报』。"},
+    {s:"查阅行政审批系统", c:"c10", txt:"你在 HR 系统里检索当天的考勤与请假记录。"}
+  ]},
+  desks:{name:"学生工位区", desc:"隔间里散落着论文打印稿和减压玩具。林晚的工位收拾得反常地干净。", spots:[
+    {s:"检查林晚的工位", c:"c4", txt:"主机还开着,一块移动硬盘插在机箱上。"},
+    {s:"检查沈砚的工作站", c:"c12", req:"c9", txt:"你用取证权限登入了沈砚的工作站。", lockTxt:"工作站锁着屏。没有更具体的怀疑理由,取证权限批不下来。(先找到把他和作案工具连起来的证据。)"}
+  ]},
+  pantry:{name:"茶水间", desc:"白板上还留着上周组会的推导。角落的沙发上有人落下了一台平板电脑。", spots:[
+    {s:"查看落下的平板", c:"c7", txt:"平板属于郑拓,邮件客户端没有登出。"},
+    {s:"看看白板", c:null, txt:"白板角落有一行小字:『信任 = 能力 × 意图的可读性』。是方远的笔迹。你想起他生前总说:机器人要赢得信任,先要让人读懂它想干什么。"}
+  ]}
+};
+
+const INTERROGATIONS = {
+  shen:[
+    {q:"案发时你在哪里?", a:"办公室,改国自然的本子。一个人。……我知道单独在场证明等于没有,但博士后的夜晚就是这样。", w:{shen:.3}},
+    {q:"你对方远教授怎么看?", a:"(停顿)他是我的领路人。当然,领路人也会挡路——这话是你们想听的吧?我尊敬他。就这样。", w:{shen:.35}},
+    {q:"门禁显示你 21:40 进过设备间。", req:"c3", a:"(手指停住)……我去拿我的示波器探头。两分钟就出来了。日志有 12 分钟?那是门禁系统不准。你们该修修它。", w:{shen:.55}, revealNote:"沈砚对 12 分钟的解释前后矛盾——他先说『两分钟』,又把误差推给系统。"},
+    {q:"调试器是你 21:43 签出的。用来做什么?", req:"c9", a:"(长时间沉默)……我要见律师。", w:{shen:.8}, revealNote:"面对调试器记录,沈砚终止了问询。"}
+  ],
+  lin:[
+    {q:"你当晚为什么提前离开演示?", a:"我……身体不舒服。最近数据分析压力很大。方老师他……(哽咽)对不起,我需要缓一缓。", w:{lin:.4}},
+    {q:"你的硬盘为什么在 21:30 被格式化?", req:"c4", a:"(脸色煞白)那是我的私人数据!……好吧。实验数据有问题,是我标注时抄了近道。方老师发现了。我害怕,就删了。但我发誓,我删的是数据,不是人!他要举报我,我认——可他死了,我连认错的机会都没有了。", w:{lin:.5}, revealNote:"林晚承认数据造假并删除证据,但坚称与命案无关。"},
+    {q:"你了解外骨骼的安全系统吗?", a:"不了解,我是做用户实验的,硬件我从来不碰。固件?我连烧录器长什么样都不知道。", w:{lin:.15}}
+  ],
+  gu:[
+    {q:"维护日志说你跳过了安全自检。", req:"c2", a:"(猛地抬头)不可能。我干了十一年硬件,扭矩自检我闭着眼都不会跳。再说——(她突然停住)……你们查过我当天在不在吗?", w:{gu:.3}, revealNote:"顾青暗示自己当天可能不在场——值得去行政系统核实。"},
+    {q:"两年前的夹爪事故是怎么回事?", a:"责任算在我头上,因为总要有人担。但事故报告我留了底:那次是控制代码的问题,不是硬件。写代码的人现在还在这栋楼里。你自己去猜。", w:{gu:.2,shen:.2}},
+    {q:"谁有能力改限制器固件?", a:"这栋楼里不超过三个人:我,方老师自己,还有沈砚——限制器最早那版代码,就是他写的。", w:{shen:.4}, revealNote:"顾青指出:扭矩限制器的原始代码作者是沈砚。"}
+  ],
+  zheng:[
+    {q:"你和方教授在争什么?", a:"生意。专利独占授权,他不肯。你们觉得这是杀人动机?恰恰相反——他一死,专利进遗产和学校资产清算程序,我至少要多等三年。我是全实验室最希望他活着的人。", w:{zheng:.3}},
+    {q:"案发时你在哪里?", a:"演示大厅第一排,和二十个观众一起。你们的机器人拍到我了,不信问它。", w:{zheng:.1}},
+    {q:"你注意到什么异常吗?", a:"有一件事。演示前我去茶水间,碰到那位博士后从设备间方向过来,额头全是汗。四月的北京,穿件衬衫能出那么多汗?", w:{shen:.35}, revealNote:"郑拓称案发前见到沈砚从设备间方向离开,神态异常。"}
+  ]
+};
+
+const TRUTH = {sus:"shen", motive:"教职竞聘落选,怀恨预谋", method:"篡改固件,禁用扭矩限制器"};
+const MOTIVES = ["教职竞聘落选,怀恨预谋","学术不端即将败露,杀人灭口","为旧事故背锅,报复泄愤","专利利益冲突,商业灭口"];
+const METHODS = ["篡改固件,禁用扭矩限制器","在咖啡中投毒","篡改演示脚本,诱发误操作","破坏紧急停止按钮"];
+
+/* ============ ToM 引擎 ============ */
+const ToM = {
+  susp:{shen:.25,lin:.25,gu:.25,zheng:.25},
+  alpha:.28,
+  actionsSinceNew:0, hintsUsed:0, wrongAccuse:0, leader:null,
+  observe(w){ // w: 权重对象,更新对玩家怀疑分布的估计
+    if(w){
+      for(const k in this.susp){
+        const t = (w[k]!==undefined)? Math.max(0,Math.min(1,(w[k]+ (w[k]<0?0.7:0)) )) : null;
+        if(w[k]!==undefined){
+          this.susp[k] = this.susp[k]*(1-this.alpha) + (w[k]<0 ? 0.02 : w[k])*this.alpha;
+        }
+      }
+      const s = Object.values(this.susp).reduce((a,b)=>a+b,0);
+      for(const k in this.susp) this.susp[k]=Math.max(.03,this.susp[k]/s);
+    }
+    const lead = Object.entries(this.susp).sort((a,b)=>b[1]-a[1])[0][0];
+    if(this.leader && lead!==this.leader && this.susp[lead]>.34){
+      G.monolog(`我注意到,你的注意力正在从${SUSPECTS[this.leader].name}转向${SUSPECTS[lead].name}。有意思——是哪条证据改变了你?`);
+    }
+    this.leader=lead;
+  },
+  coverage(){
+    const crit=Object.keys(CLUES).filter(k=>CLUES[k].crit);
+    return crit.filter(k=>G.known.has(k)).length/crit.length;
+  },
+  stuckness(){ return Math.min(1,this.actionsSinceNew/7); },
+  tick(gotNew){
+    this.actionsSinceNew = gotNew?0:this.actionsSinceNew+1;
+    if(gotNew) return;
+    const s=this.stuckness();
+    if(s>=1 && this.coverage()<1){
+      document.getElementById("hintbtn").disabled=false;
+      if(!this._offered){
+        this._offered=true;
+        G.monolog("你已经连续多次行动没有新发现了。以我对人类挫败感的建模——现在是介入的好时机。需要提示的话,按下那个按钮。我不会觉得那是作弊,好的主持人本来就该这么做。","sys");
+      }
+    }
+  },
+  nextHint(){
+    const order=["c1","c3","c10","c6","c9","c11","c12"];
+    const missing=order.find(k=>!G.known.has(k) && (!CLUES[k].req || G.known.has(CLUES[k].req)));
+    const H={
+      c1:"外骨骼为什么没有『保护』方远?答案不在大厅,在设备间——去看看它的大脑:主控板。",
+      c3:"人会撒谎,门禁不会。设备间的门,当晚为谁开过?",
+      c10:"维护日志指控顾青。可一条 22:10 才写入的『20:00 记录』……先去行政系统核实她当天到底在不在。",
+      c6:"动机藏在方远自己的发件箱里。他最近替谁——或者说,没替谁——写过一封重要的信?",
+      c9:"刷固件需要工具。设备间的工具柜有借用登记,去看看最后签出的人是谁。",
+      c11:"我的记忆被人损坏,但碎片还在。你的关键证据已经足够多——回来问我,我试着再恢复一次。",
+      c12:"预谋还是冲动?去他的工作站看看代码的修改历史,时间戳不会替人辩护。"
+    };
+    return missing?H[missing]:"你已经掌握了全部关键证据。整理一下思路,去提出指控吧。";
+  }
+};
+
+/* ============ 游戏 ============ */
+const G = {
+  known:new Set(), room:"hall", searched:new Set(), asked:new Set(), started:false,
+  start(){
+    document.getElementById("startview").style.display="none";
+    document.getElementById("gameview").style.display="grid";
+    this.started=true;
+    this.renderRooms(); this.goRoom("hall"); this.renderGM();
+    this.monolog("侦探,欢迎。我是 POIROT-7。在你调查期间,我会把我对『你』的建模全部公开在这块面板上——我推测你在怀疑谁、你掌握了多少、你是否需要帮助。人类主持人靠直觉做这些事,我靠概率。开始吧,五个房间,四个嫌疑人,一个真相。","sys");
+  },
+  /* ---- 房间 ---- */
+  renderRooms(){
+    const nav=document.getElementById("rooms");
+    nav.innerHTML="";
+    for(const id in ROOMS){
+      const b=document.createElement("button");
+      b.textContent=ROOMS[id].name; b.className=(id===this.room?"active":"");
+      b.onclick=()=>this.goRoom(id); nav.appendChild(b);
+    }
+    const bi=document.createElement("button");
+    bi.textContent="🗣 问询嫌疑人"; bi.className=(this.room==="_int"?"active":"");
+    bi.onclick=()=>this.goInterrogate(); nav.appendChild(bi);
+  },
+  goRoom(id){
+    this.room=id; this.renderRooms();
+    const r=ROOMS[id], el=document.getElementById("scene");
+    let h=`<h2>${r.name}</h2><div class="desc">${r.desc}</div>`;
+    r.spots.forEach((sp,i)=>{
+      const key=id+i, done=this.searched.has(key);
+      h+=`<div class="spot ${done?"done":""}" onclick="G.search('${id}',${i})">🔍 ${sp.s}${done?'<span class="tag">已检查</span>':""}</div>`;
+    });
+    h+=`<div id="scenelog"></div>`;
+    el.innerHTML=h;
+  },
+  search(id,i){
+    const sp=ROOMS[id].spots[i], key=id+i;
+    let txt=sp.txt, gotNew=false, w=null;
+    if(sp.req && !this.known.has(sp.req)){
+      txt=sp.lockTxt||"暂时看不出更多东西。";
+    }else{
+      if(sp.c && !this.known.has(sp.c)){
+        this.known.add(sp.c); gotNew=true; w=CLUES[sp.c].w;
+        txt+=`<div class="dialog-line"><span class="who">📌 新线索</span><b style="color:var(--accent2)">${CLUES[sp.c].n}</b><br><span style="color:var(--dim); font-size:.9rem;">${CLUES[sp.c].d}</span></div>`;
+        this.onNewClue(sp.c);
+      }
+      this.searched.add(key);
+    }
+    const log=document.getElementById("scenelog");
+    log.innerHTML=`<div class="dialog-line">${txt}</div>`+(gotNew?"":"");
+    this.afterAction(w,gotNew);
+    this.goRoomKeepLog(id,log.innerHTML);
+  },
+  goRoomKeepLog(id,logHtml){
+    this.goRoom(id);
+    document.getElementById("scenelog").innerHTML=logHtml;
+  },
+  /* ---- 问询 ---- */
+  goInterrogate(){
+    this.room="_int"; this.renderRooms();
+    const el=document.getElementById("scene");
+    let h=`<h2>问询室</h2><div class="desc">四位嫌疑人分别在等候。POIROT 会旁听并实时更新它的模型。</div>`;
+    for(const id in SUSPECTS){
+      const s=SUSPECTS[id];
+      h+=`<div class="spot" onclick="G.talkTo('${id}')"><b style="color:${s.color}">${s.name}</b> · ${s.role}<br><span style="color:var(--dim); font-size:.85rem;">${s.intro}</span></div>`;
+    }
+    el.innerHTML=h;
+  },
+  talkTo(id){
+    const s=SUSPECTS[id], el=document.getElementById("scene");
+    let h=`<h2 style="color:${s.color}">问询:${s.name}</h2><div class="desc">${s.role} — ${s.intro}</div><div id="scenelog"></div>`;
+    INTERROGATIONS[id].forEach((qa,i)=>{
+      const key=id+i, locked=qa.req&&!this.known.has(qa.req), done=this.asked.has(key);
+      if(locked) return;
+      h+=`<button class="btn qbtn ${done?"":""}" ${done?"disabled":""} onclick="G.ask('${id}',${i})">${done?"✓ ":""}${qa.q}</button>`;
+    });
+    h+=`<button class="btn qbtn" onclick="G.goInterrogate()">← 返回</button>`;
+    el.innerHTML=h;
+  },
+  ask(id,i){
+    const qa=INTERROGATIONS[id][i], key=id+i;
+    this.asked.add(key);
+    const log=document.getElementById("scenelog");
+    log.innerHTML=`<div class="dialog-line"><span class="who">你</span>${qa.q}</div>
+      <div class="dialog-line"><span class="who" style="color:${SUSPECTS[id].color}">${SUSPECTS[id].name}</span>${qa.a}</div>`
+      +(qa.revealNote?`<div class="dialog-line"><span class="who">📓 笔记</span>${qa.revealNote}</div>`:"");
+    const logH=log.innerHTML;
+    this.afterAction(qa.w, !!qa.revealNote);
+    this.talkTo(id);
+    document.getElementById("scenelog").innerHTML=logH;
+  },
+  /* ---- ToM 联动 ---- */
+  onNewClue(cid){
+    const c=CLUES[cid];
+    const lines={
+      c2:"22:10 写入的 20:00 记录……人类伪造时间线时,总是忘了机器也在记录时间。",
+      c8:"你检查了咖啡。我把它放进剧本,就是想看看你会不会被『经典桥段』带走。你的怀疑分布几乎没动——很好,你不是被侦探小说训练出来的。",
+      c10:"注意:这条证据在『排除』而非『指认』。我观察到许多玩家只收集指向性证据——排除性证据同样在收缩假设空间。",
+      c11:"……那段录音里的声音,我本该早点想起来的。抱歉。机器也会有不愿恢复的记忆。"
+    };
+    if(lines[cid]) this.monolog(lines[cid]);
+    if(this.known.size>=8 && !this._c11hint && !this.known.has("c11")){
+      this._c11hint=true;
+      this.monolog("你的证据覆盖率已经很高。如果你愿意,可以尝试帮我恢复受损的内存——在线索笔记里找到那个入口。","sys");
+    }
+    ToM._offered=false;
+    document.getElementById("hintbtn").disabled=true;
+  },
+  afterAction(w,gotNew){
+    ToM.observe(w); ToM.tick(gotNew);
+    document.getElementById("cluecount").textContent=this.known.size;
+    this.renderGM();
+  },
+  monolog(t,cls){
+    const m=document.getElementById("monolog");
+    if(!m) return;
+    m.insertAdjacentHTML("afterbegin",`<div class="m ${cls||""}">${t}</div>`);
+  },
+  giveHint(){
+    ToM.hintsUsed++; ToM._offered=false; ToM.actionsSinceNew=0;
+    document.getElementById("hintbtn").disabled=true;
+    this.monolog("提示 #"+ToM.hintsUsed+":"+ToM.nextHint(),"sys");
+    this.renderGM();
+  },
+  renderGM(){
+    const bars=document.getElementById("suspbars");
+    bars.innerHTML=Object.entries(ToM.susp).sort((a,b)=>b[1]-a[1]).map(([k,v])=>
+      `<div class="barrow"><span class="nm">${SUSPECTS[k].name}</span>
+       <div class="barwrap"><div class="bar" style="width:${(v*100).toFixed(0)}%; background:${SUSPECTS[k].color}"></div></div>
+       <span class="pct">${(v*100).toFixed(0)}%</span></div>`).join("");
+    const cov=ToM.coverage(), st=ToM.stuckness();
+    document.getElementById("covpct").textContent=(cov*100).toFixed(0)+"%";
+    document.getElementById("covbar").style.width=(cov*100)+"%";
+    document.getElementById("stuckpct").textContent=(st*100).toFixed(0)+"%";
+    document.getElementById("stuckbar").style.width=(st*100)+"%";
+    document.getElementById("gmstate").textContent="状态:"+(st>=1?"建议介入 💡":st>.5?"关注中":"观察中")
+      +(cov>=1?" · 证据链完整 ⚖️":"");
+  },
+  /* ---- 笔记 / 内存恢复 ---- */
+  openNotebook(){
+    let h=`<h3>📓 线索笔记 (${this.known.size}/${Object.keys(CLUES).length})</h3>`;
+    if(this.known.size===0) h+=`<p style="color:var(--dim)">还没有任何线索。</p>`;
+    for(const k of this.known)
+      h+=`<div class="clue-item"><div class="cn">${CLUES[k].n}${CLUES[k].crit?' <span style="color:var(--accent); font-size:.75rem;">★关键</span>':""}</div><div class="cd">${CLUES[k].d}</div></div>`;
+    if(!this.known.has("c11") && this.known.size>=8)
+      h+=`<div class="clue-item" style="border-color:var(--accent); cursor:pointer;" onclick="G.recoverMemory()"><div class="cn">▸ 尝试恢复 POIROT 的受损内存</div><div class="cd">它说,你收集的证据可以帮它重建上下文。</div></div>`;
+    h+=`<div style="margin-top:14px;"><button class="btn" onclick="G.closeModal()">关闭</button></div>`;
+    this.showModal(h);
+  },
+  recoverMemory(){
+    this.closeModal();
+    if(!this.known.has("c11")){
+      this.known.add("c11"); this.onNewClue("c11");
+      this.monolog("内存扇区重建中……完成。新线索已写入你的笔记:『POIROT 受损内存片段』。","sys");
+      this.afterAction(CLUES.c11.w,true);
+    }
+  },
+  /* ---- 指控 ---- */
+  openAccuse(){
+    let h=`<h3>⚖️ 提出指控</h3><p style="color:var(--dim); font-size:.88rem;">指控需要三要素:凶手、动机、手法。POIROT 将根据你的证据链作出裁定。</p>
+    <label>凶手</label><select id="acc-s">${Object.entries(SUSPECTS).map(([k,s])=>`<option value="${k}">${s.name}</option>`).join("")}</select>
+    <label>动机</label><select id="acc-m">${MOTIVES.map(m=>`<option>${m}</option>`).join("")}</select>
+    <label>手法</label><select id="acc-h">${METHODS.map(m=>`<option>${m}</option>`).join("")}</select>
+    <div style="margin-top:14px; display:flex; gap:8px;">
+      <button class="btn primary" onclick="G.accuse()">确认指控</button>
+      <button class="btn" onclick="G.closeModal()">再想想</button>
+    </div>`;
+    this.showModal(h);
+  },
+  accuse(){
+    const s=document.getElementById("acc-s").value,
+          m=document.getElementById("acc-m").value,
+          hd=document.getElementById("acc-h").value;
+    const okS=s===TRUTH.sus, okM=m===TRUTH.motive, okH=hd===TRUTH.method;
+    if(okS&&okM&&okH){ this.ending(); return; }
+    ToM.wrongAccuse++;
+    const rebut = !okS ? {
+      lin:"林晚有罪——但她的罪是学术不端,不是谋杀。她连烧录器长什么样都不知道,而凶器是一段固件。",
+      gu:"顾青当天 18:00 就离开了园区。指向她的唯一证据是一条在案发『之后』才写入的日志——那正是凶手希望你走的路。",
+      zheng:"郑拓全程坐在大厅第一排,我的摄像头可以作证。而且方远之死会让他等的专利多冻结三年。",
+      shen:""
+    }[s] : (!okM ? "凶手找对了,但动机不对。再想想:案发前三天,方远发出的那封邮件,夺走了他什么?" : "凶手和动机都对。但手法呢?咖啡是干净的,急停按钮完好——真正的凶器,是一段被注释掉的代码。");
+    this.closeModal();
+    this.monolog("指控被驳回。"+rebut,"sys");
+    this.afterAction({[s]:.4},false);
+  },
+  ending(){
+    const cov=ToM.coverage();
+    const grade = (cov>=1&&ToM.hintsUsed===0&&ToM.wrongAccuse===0)?"S":
+                  (cov>=.8&&ToM.wrongAccuse<=1)?"A":(cov>=.6)?"B":"C";
+    let h=`<h3>⚖️ 真相</h3>
+    <p><b style="color:var(--shen)">沈砚</b>,伏法。</p>
+    <p style="color:var(--dim); font-size:.92rem; margin-top:8px;">三天前,他得知方远把唯一的教职推荐给了外部候选人。十一年,从博士生到博士后,他等来的是一句『你更适合工业界』。案发当天 16:20,他修改了自己当年亲手写下的扭矩限制器代码;21:43 签出调试器;21:47 刷入固件;21:52 离开设备间前,补写了一条栽赃顾青的维护日志,并试图抹掉唯一的目击者——我。</p>
+    <p style="color:var(--dim); font-size:.92rem; margin-top:8px;">他忘了两件事:排除性证据同样致命,而机器的记忆,比人类想象的顽固。</p>
+    <div class="section-title" style="border:none;">POIROT 的复盘</div>
+    <div class="clue-item"><div class="cd">
+    评级:<b style="color:var(--accent); font-size:1.2rem;">${grade}</b><br>
+    关键证据覆盖率:${(cov*100).toFixed(0)}% · 使用提示:${ToM.hintsUsed} 次 · 错误指控:${ToM.wrongAccuse} 次<br><br>
+    整场调查中,我对你维护着两个模型:<b>你的知识状态</b>(你看过什么证据)和<b>你的信念状态</b>(你在怀疑谁)。当两者出现落差——比如你怀疑某人却缺少对应证据——那就是我该出手的时刻。这正是人类主持人天生擅长、而机器人正在学习的事:<i>不是替你推理,而是读懂你推理到了哪里。</i><br><br>
+    你最终的怀疑分布:${Object.entries(ToM.susp).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`${SUSPECTS[k].name} ${(v*100).toFixed(0)}%`).join(" · ")}
+    </div></div>
+    <div style="margin-top:14px;"><button class="btn primary" onclick="location.reload()">再玩一次</button></div>`;
+    this.showModal(h);
+  },
+  showModal(h){document.getElementById("modal").innerHTML=h;document.getElementById("overlay").classList.add("show");},
+  closeModal(){document.getElementById("overlay").classList.remove("show");}
+};
+</script>
+</body>
+</html>
