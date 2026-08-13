@@ -246,7 +246,7 @@ window.SITE = {
       tech: ["ESP32", "ROS2", "Rhino", "Python", "Swift", "Android Studio"]
     },
     {
-      img: "assets/img/proj-poirot-demo.jpg?v=20260719-poirot-demo",
+      img: "assets/img/proj-poirot-demo-v2.webp?v=20260813-project-covers",
       flag: { en: "Playable Demo", zh: "在线可玩" },
       title: { en: "POIROT: The Final Demo", zh: "POIROT:最后一次演示" },
       sub: { en: "A playable machine-Theory-of-Mind game master", zh: "机器心智理论的可玩化演示" },
@@ -297,7 +297,7 @@ window.SITE = {
       tech: ["Tactile Sensing", "Human Study", "6D Force", "Vibration", "SwiftUI", "Data Collection"]
     },
     {
-      img: "assets/img/proj-habitat.jpg",
+      img: "assets/img/proj-habitat-v2.webp?v=20260813-project-covers",
       flag: { en: "Platform", zh: "实验平台" },
       title: { en: "Smart Habitat Platform", zh: "人居环境多模态实验平台" },
       sub: { en: "Multimodal dataset for embodied learning", zh: "面向具身学习的多模态数据库" },
@@ -330,7 +330,7 @@ window.SITE = {
       tech: ["TRACLUS", "Simulated Annealing", "GIS", "MATLAB"]
     },
     {
-      img: "assets/img/proj-shakesort.jpg?v=20260607-project-covers",
+      img: "assets/img/proj-shakesort-v2.webp?v=20260813-project-covers",
       flag: { en: "Tactile", zh: "触觉感知" },
       title: { en: "OpenArm-Based ShakeSort", zh: "OpenArm-Based ShakeSort" },
       sub: { en: "Haptic object identification by active shaking", zh: "基于主动摇晃与振动触觉的物体识别" },
@@ -390,9 +390,9 @@ window.SITE = {
     tagline: { en: "Making global ideas accessible across language and culture.",
                zh: "让全球的思想跨越语言与文化的边界。" },
     stats: [
-      { num: "~30K", lab: { en: "Followers", zh: "粉丝" } },
-      { num: "810K+", lab: { en: "Views", zh: "播放量" } },
-      { num: "200+", lab: { en: "Episodes", zh: "期节目" } }
+      { num: "32K+", lab: { en: "Followers", zh: "粉丝" } },
+      { num: "34K+", lab: { en: "Likes", zh: "获赞" } },
+      { num: "~850K", lab: { en: "Views", zh: "播放量" } }
     ],
     topics: { en: "A bilingual media initiative translating global insights for Chinese audiences — across technology, finance, culture, and psychology.",
               zh: "一档面向中文观众的双语知识节目，内容覆盖科技、金融、文化与心理学等领域，将全球洞见带给本地受众。" }
