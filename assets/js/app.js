@@ -174,7 +174,7 @@
   function renderOutreach() {
     var o = S.outreach;
     var stats = o.stats.map(function (s) {
-      return '<div class="stat"><div class="num">' + s.num + '</div><div class="lab">' + t(s.lab) + "</div></div>";
+      return '<div class="stat"><div class="num">' + t(s.num) + '</div><div class="lab">' + t(s.lab) + "</div></div>";
     }).join("");
     el("outreach").innerHTML = sectionHead("05", S.ui.sec.outreach) +
       '<div class="outreach">' +
