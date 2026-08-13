@@ -390,9 +390,9 @@ window.SITE = {
     tagline: { en: "Making global ideas accessible across language and culture.",
                zh: "让全球的思想跨越语言与文化的边界。" },
     stats: [
-      { num: "32K+", lab: { en: "Followers", zh: "粉丝" } },
-      { num: "34K+", lab: { en: "Likes", zh: "获赞" } },
-      { num: "~850K", lab: { en: "Views", zh: "播放量" } }
+      { num: { en: "32K+", zh: "3.2万+" }, lab: { en: "Followers", zh: "粉丝" } },
+      { num: { en: "34K+", zh: "3.4万+" }, lab: { en: "Likes", zh: "获赞" } },
+      { num: { en: "~850K", zh: "约85万" }, lab: { en: "Views", zh: "播放量" } }
     ],
     topics: { en: "A bilingual media initiative translating global insights for Chinese audiences — across technology, finance, culture, and psychology.",
               zh: "一档面向中文观众的双语知识节目，内容覆盖科技、金融、文化与心理学等领域，将全球洞见带给本地受众。" }
