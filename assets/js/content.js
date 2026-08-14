@@ -332,16 +332,16 @@ window.SITE = {
     {
       img: "assets/img/proj-shakesort-v3.webp?v=20260814-distinct-project-covers",
       flag: { en: "Tactile", zh: "触觉感知" },
-      title: { en: "OpenArm-Based ShakeSort", zh: "OpenArm-Based ShakeSort" },
+      title: { en: "ShakeSort", zh: "ShakeSort" },
       sub: { en: "Haptic object identification by active shaking", zh: "基于主动摇晃与振动触觉的物体识别" },
       desc: {
-        en: "A dynamic tactile-sensing system built on OpenArm that identifies hidden contents in sealed blind boxes by actively shaking them and reading high-bandwidth vibration cues. The project treats touch as a temporal signal, showing how robots can infer invisible physical properties when vision is unavailable or unreliable.",
-        zh: "基于 OpenArm 机械臂的动态触觉感知系统，通过主动摇晃密封盲盒并读取高带宽振动信号，识别其中隐藏物体。项目将触觉视为时序信号，展示机器人如何在视觉不可用或不可靠时推断不可见的物理属性。"
+        en: "A dynamic tactile-sensing system implemented across OpenArm and UR5 platforms that identifies hidden contents in sealed blind boxes by actively shaking them and reading high-bandwidth vibration cues. The project treats touch as a temporal signal, showing how robots can infer invisible physical properties when vision is unavailable or unreliable.",
+        zh: "在 OpenArm 与 UR5 机械臂平台上实现的动态触觉感知系统，通过主动摇晃密封盲盒并读取高带宽振动信号，识别其中隐藏物体。项目将触觉视为时序信号，展示机器人如何在视觉不可用或不可靠时推断不可见的物理属性。"
       },
-      tech: ["OpenArm", "Tactile Sensing", "Vibration", "Robotic Arm", "ML Classification"]
+      tech: ["OpenArm", "UR5", "Tactile Sensing", "Vibration", "ML Classification"]
     },
     {
-      img: "assets/img/proj-sofa.jpg",
+      img: "assets/img/proj-sofa-v2.webp?v=20260814-bright-sofa-cover",
       flag: { en: "Affective", zh: "情感计算" },
       title: { en: "Smart Sofa Sensing", zh: "智能沙发姿态检测" },
       sub: { en: "Posture & affect from a pressure array", zh: "基于压力阵列的姿态与情感感知" },
@@ -350,17 +350,6 @@ window.SITE = {
         zh: "由柔性压力传感器阵列与 ESP32 构成的无线坐姿感知系统，运用机器学习识别人员数量、位置与姿态，并配套 Web 与 iOS 端可视化应用，进一步拓展到情感状态推断。"
       },
       tech: ["ESP32", "Pressure Array", "Web", "iOS", "ML"]
-    },
-    {
-      img: "assets/img/proj-armrl.jpg",
-      flag: { en: "RL", zh: "强化学习" },
-      title: { en: "Robotic Arm + RL", zh: "机械臂与强化学习" },
-      sub: { en: "Additive manufacturing & intelligent therapy", zh: "增材制造与智能理疗" },
-      desc: {
-        en: "Using simulation and reinforcement learning to develop robotic-arm systems for additive (3D-printing) manufacturing and intelligent physical therapy.",
-        zh: "利用仿真环境与强化学习算法，开发面向增材制造（3D 打印）与智能物理治疗的机械臂系统。"
-      },
-      tech: ["Reinforcement Learning", "Simulation", "3D Printing"]
     }
   ],
 
