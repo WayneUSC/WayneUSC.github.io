@@ -246,7 +246,7 @@ window.SITE = {
       tech: ["ESP32", "ROS2", "Rhino", "Python", "Swift", "Android Studio"]
     },
     {
-      img: "assets/img/proj-poirot-demo-v2.webp?v=20260813-project-covers",
+      img: "assets/img/proj-poirot-demo-v3.webp?v=20260814-distinct-project-covers",
       flag: { en: "Playable Demo", zh: "在线可玩" },
       title: { en: "POIROT: The Final Demo", zh: "POIROT:最后一次演示" },
       sub: { en: "A playable machine-Theory-of-Mind game master", zh: "机器心智理论的可玩化演示" },
@@ -297,7 +297,7 @@ window.SITE = {
       tech: ["Tactile Sensing", "Human Study", "6D Force", "Vibration", "SwiftUI", "Data Collection"]
     },
     {
-      img: "assets/img/proj-habitat-v2.webp?v=20260813-project-covers",
+      img: "assets/img/proj-habitat-v3.webp?v=20260814-distinct-project-covers",
       flag: { en: "Platform", zh: "实验平台" },
       title: { en: "Smart Habitat Platform", zh: "人居环境多模态实验平台" },
       sub: { en: "Multimodal dataset for embodied learning", zh: "面向具身学习的多模态数据库" },
@@ -330,7 +330,7 @@ window.SITE = {
       tech: ["TRACLUS", "Simulated Annealing", "GIS", "MATLAB"]
     },
     {
-      img: "assets/img/proj-shakesort-v2.webp?v=20260813-project-covers",
+      img: "assets/img/proj-shakesort-v3.webp?v=20260814-distinct-project-covers",
       flag: { en: "Tactile", zh: "触觉感知" },
       title: { en: "OpenArm-Based ShakeSort", zh: "OpenArm-Based ShakeSort" },
       sub: { en: "Haptic object identification by active shaking", zh: "基于主动摇晃与振动触觉的物体识别" },
