@@ -37,13 +37,13 @@ window.SITE = {
     nameZh: "陈稳",
     alias: "Wayne",
     role:  {
-      en: "Research Assistant · <b>The Future Laboratory</b>, Tsinghua University",
-      zh: "科研助理 · 清华大学 <b>未来实验室</b>"
+      en: "R&amp;D Engineer · <b>The Future Laboratory</b>, Tsinghua University<br>Co-founder · <b>Kaiwu Robotics</b>",
+      zh: "研发工程师 · 清华大学 <b>未来实验室</b><br>联合创始人 · <b>北京清工开物科技有限公司（Kaiwu Robotics）</b>"
     },
     info: {
       affiliation: {
-        en: "The Future Laboratory<br>Tsinghua University",
-        zh: "清华大学 未来实验室<br>人机物融合及前沿探索中心"
+        en: "The Future Laboratory · Tsinghua University<br>Kaiwu Robotics",
+        zh: "清华大学未来实验室<br>北京清工开物科技有限公司"
       },
       location: { en: "Beijing, China", zh: "中国 · 北京" },
       email: "chenwen_bot@mail.tsinghua.edu.cn"
@@ -64,8 +64,8 @@ window.SITE = {
         zh: "我研究如何让机器人通过动态触觉理解物理世界，并将这种理解用于更自适应、更可信的人机社会交互。我的研究并不只把触觉视为操作反馈，而是将其看作一种时序化、多模态的物理通道：振动、力、材料响应与人的行为共同成为具身智能的信号来源。"
       },
       {
-        en: "As a Research Assistant at <b>The Future Laboratory, Tsinghua University</b>, I work across sensing hardware, algorithms, system building, and controlled human studies. My background in both Computer Science and Chemical Engineering lets me move between materials, sensors, learning models, and human-centered evaluation — a through-line across my work in tactile sensing, HRI, smart habitats, and multimodal AI.",
-        zh: "作为 <b>清华大学未来实验室</b> 的科研助理，我的工作横跨传感硬件、算法、系统搭建与受控用户实验。计算机科学与化学工程的交叉背景，使我能够在材料、传感器、学习模型与以人为中心的评估之间建立连接——这也贯穿了我在触觉感知、人机交互、智能人居与多模态 AI 方向上的研究。"
+        en: "As an R&amp;D Engineer at <b>The Future Laboratory, Tsinghua University</b>, and Co-founder of <b>Kaiwu Robotics</b>, I work across sensing hardware, algorithms, system building, and controlled human studies. My background in both Computer Science and Chemical Engineering lets me move between materials, sensors, learning models, and human-centered evaluation — a through-line across my work in tactile sensing, HRI, smart habitats, and multimodal AI.",
+        zh: "作为 <b>清华大学未来实验室</b> 的研发工程师及 <b>北京清工开物科技有限公司（Kaiwu Robotics）</b> 联合创始人，我的工作横跨传感硬件、算法、系统搭建与受控用户实验。计算机科学与化学工程的交叉背景，使我能够在材料、传感器、学习模型与以人为中心的评估之间建立连接——这也贯穿了我在触觉感知、人机交互、智能人居与多模态 AI 方向上的研究。"
       }
     ],
     interests: [
@@ -78,6 +78,7 @@ window.SITE = {
   },
 
   news: [
+    { when: "2026.09", en: "<b>Cultivating Connections</b> published at IEEE CoG 2026 (Madrid).", zh: "<b>Cultivating Connections</b> 发表于 IEEE CoG 2026（马德里）。" },
     { when: "2026.06", en: "<b>Bio-inspired Full-dimensional Tactile Sensing</b> presented in the finals of the Haptic Technology and Application Competition.", zh: "<b>仿生全维度触觉传感系统</b> 入围并展示于力触觉技术及应用大赛决赛。" },
     { when: "2026.03", en: "<b>POIROT</b> accepted to ACM/IEEE HRI 2026 (Edinburgh).", zh: "<b>POIROT</b> 论文被 ACM/IEEE HRI 2026（爱丁堡）录用。" },
     { when: "2026.03", en: "<b>AIoT Smart Home Automation Architecture</b> published in ACM IUI Companion 2026.", zh: "<b>AIoT 智能家居自动化架构</b> 论文发表于 ACM IUI Companion 2026。" },
@@ -133,6 +134,22 @@ window.SITE = {
 
   /* most recent first; selected:true → shown in "Selected" tab */
   publications: [
+    {
+      year: "2026", venueShort: "IEEE CoG 2026", selected: true,
+      img: "assets/img/pub-cog.jpg?v=20260902-cog-paper",
+      tag: { en: "Games & Aging", zh: "游戏与老龄化" },
+      title: {
+        en: "Cultivating Connections: A Tangible Tabletop Game for Older Adults’ Social Engagement",
+        zh: "促进联结：面向老年人社会参与的实体交互桌面游戏"
+      },
+      authors: "Yirui Zuo, Yaxin Zhu, Wen Chen, Ziqiang Yan, Jiachen Du, Longtao Gai*, Xinyi Fu*",
+      venue: { en: "2026 IEEE Conference on Games (CoG 2026), Madrid, Spain.",
+               zh: "2026 IEEE 游戏大会（CoG 2026），西班牙马德里。" },
+      links: [
+        { label: { en: "Paper", zh: "论文 PDF" }, url: "assets/pdf/Cultivating-Connections-CoG-2026.pdf" },
+        { label: { en: "Conference", zh: "会议主页" }, url: "https://www.cog2026.org/" }
+      ]
+    },
     {
       year: "2026", venueShort: "IUI Companion 2026", selected: true,
       img: "assets/img/pub-aiot.jpg?v=20260606-paperfigs",
@@ -278,8 +295,8 @@ window.SITE = {
       sub: { en: "Mechanism-bionic tactile sensing for interpretable contact events",
              zh: "面向可解释接触事件的机制仿生触觉系统" },
       desc: {
-        en: "A finalist project in the Haptic Technology and Application Competition, developed with Tsinghua Future Laboratory and Beijing Qinggong Intelligent Technology. The system reframes tactile sensing from low-dimensional readings into full-dimensional contact events, integrating representation, contact process, and interaction relations for interpretable, invertible, controllable, and generalizable tactile perception.",
-        zh: "力触觉技术及应用大赛决赛项目，由清华大学未来实验室与北京清工智能科技有限公司共同完成。系统将触觉从低维读数重新展开为「表征 × 过程 × 交互」的全维度接触事件，面向可解释、可反演、可控制、可泛化的触觉感知。"
+        en: "A finalist project in the Haptic Technology and Application Competition, developed with Tsinghua Future Laboratory and Kaiwu Robotics. The system reframes tactile sensing from low-dimensional readings into full-dimensional contact events, integrating representation, contact process, and interaction relations for interpretable, invertible, controllable, and generalizable tactile perception.",
+        zh: "力触觉技术及应用大赛决赛项目，由清华大学未来实验室与北京清工开物科技有限公司（Kaiwu Robotics）共同完成。系统将触觉从低维读数重新展开为「表征 × 过程 × 交互」的全维度接触事件，面向可解释、可反演、可控制、可泛化的触觉感知。"
       },
       tech: ["Tactile Sensing", "Bio-inspired Design", "Calibration", "Intelligent Computing", "Rapid Prototyping"],
       links: [{ label: { en: "Poster", zh: "决赛壁报" }, url: "assets/pdf/haptic-competition-poster.pdf" }]
@@ -355,7 +372,9 @@ window.SITE = {
 
   experience: {
     work: [
-      { when: "2023 – Present", what: { en: "Research & Teaching Assistant", zh: "科研助理 / 助教" },
+      { when: { en: "Present", zh: "现任" }, what: { en: "Co-founder", zh: "联合创始人" },
+        where: { en: "Kaiwu Robotics", zh: "北京清工开物科技有限公司（Kaiwu Robotics）" } },
+      { when: "2023 – Present", what: { en: "R&D Engineer", zh: "研发工程师" },
         where: { en: "The Future Laboratory, Tsinghua University", zh: "清华大学 未来实验室" } },
       { when: "2022 – 2023", what: { en: "Researcher", zh: "研究员" },
         where: { en: "New Jersey Institute of Technology", zh: "新泽西理工学院（NJIT）" } },

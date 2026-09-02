@@ -157,7 +157,8 @@
   function renderExperience() {
     function timeline(items) {
       return '<div class="timeline">' + items.map(function (i) {
-        return '<div class="tl-item"><div class="when">' + i.when + "</div>" +
+        var when = typeof i.when === "string" ? i.when : t(i.when);
+        return '<div class="tl-item"><div class="when">' + when + "</div>" +
           '<div class="what">' + t(i.what) + "</div>" +
           '<div class="where">' + t(i.where) + "</div></div>";
       }).join("") + "</div>";
