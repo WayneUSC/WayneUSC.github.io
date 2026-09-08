@@ -1,275 +1,108 @@
-/* ============================================================
-   Renderer + interactions for Wen Chen's homepage.
-   Reads window.SITE (content.js) and renders bilingually.
-   ============================================================ */
+/* Progressive bilingual portfolio. Content is maintained in content.js. */
 (function () {
-  "use strict";
+  'use strict';
   var S = window.SITE;
-  if (!S) { console.error("SITE content missing"); return; }
-
-  // ---------- language state ----------
-  var lang = "en";
-  try {
-    var saved = localStorage.getItem("wc-lang");
-    if (saved === "en" || saved === "zh") lang = saved;
-    else if ((navigator.language || "").toLowerCase().indexOf("zh") === 0) lang = "zh";
-  } catch (e) { /* sandboxed: ignore */ }
-
-  var pubTab = "selected"; // 'selected' | 'all'
-
-  // ---------- helpers ----------
-  function t(o) { return o ? (o[lang] != null ? o[lang] : o.en) : ""; }
+  if (!S) return;
+  var lang = 'en', pubTab = 'selected', projectsOpen = false, newsOpen = false, currentSection = '';
+  try { var saved = localStorage.getItem('wc-lang'); if (saved === 'en' || saved === 'zh') lang = saved; else if (/^zh/i.test(navigator.language || '')) lang = 'zh'; } catch (e) {}
   function el(id) { return document.getElementById(id); }
-  function boldAuthors(str) {
-    return str.replace(/Wen Chen/g, "<b>Wen Chen</b>").replace(/陈稳/g, "<b>陈稳</b>");
-  }
-  function sectionHead(idx, titleObj) {
-    return '<div class="section-head"><span class="idx">' + idx +
-      '</span><h2>' + t(titleObj) + '</h2></div>';
-  }
-
-  // ---------- nav ----------
+  function t(value) { return typeof value === 'string' ? value : (value ? (value[lang] || value.en || '') : ''); }
+  function tr(en, zh) { return lang === 'zh' ? zh : en; }
+  function esc(value) { return String(value).replace(/[&<>"']/g, function(c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function plain(value) { var node = document.createElement('div'); node.innerHTML = value; return node.textContent; }
+  function link(url, label, cls) { return '<a' + (cls ? ' class="' + cls + '"' : '') + ' href="' + esc(url) + '"' + (/^https?:/.test(url) ? ' target="_blank" rel="noopener noreferrer"' : '') + '>' + label + '</a>'; }
+  function sectionHead(n, title, aside) { return '<div class="section-head"><div class="heading"><span class="idx">' + n + '</span><h2>' + t(title) + '</h2></div>' + (aside ? '<span class="aside">' + aside + '</span>' : '') + '</div>'; }
+  function announce(message) { el('statusMessage').textContent = message; }
+  function closeMenu() { el('topnav').classList.remove('open'); el('navToggle').setAttribute('aria-expanded', 'false'); }
   function renderNav() {
-    var nav = el("topnav");
-    nav.innerHTML = S.ui.nav.map(function (n) {
-      return '<a href="#' + n.id + '">' + t(n) + '</a>';
-    }).join("");
-    // close mobile menu on click
-    Array.prototype.forEach.call(nav.querySelectorAll("a"), function (a) {
-      a.addEventListener("click", function () { nav.classList.remove("open"); });
-    });
+    el('topnav').innerHTML = S.ui.nav.map(function(n) { return '<a href="#' + n.id + '"' + (currentSection === n.id ? ' aria-current="location"' : '') + '>' + t(n) + '</a>'; }).join('');
+    el('navToggle').setAttribute('aria-label', tr('Menu', '导航菜单'));
+    el('backToTop').setAttribute('aria-label', tr('Back to top', '返回顶部'));
+    el('topnav').querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeMenu); });
   }
-
-  // ---------- sidebar ----------
-  function renderInfo() {
-    var p = S.profile, info = p.info;
-    var rows = "";
-    rows += row(t({ en: "Affil.", zh: "机构" }), t(info.affiliation));
-    rows += row(t({ en: "Base", zh: "地点" }), t(info.location));
-    rows += row(t({ en: "Email", zh: "邮箱" }), '<a href="mailto:' + info.email + '">' + info.email + '</a>');
-    var links = p.links.map(function (l) {
-      return '<a href="' + l.url + '" target="_blank" rel="noopener">' + t(l.label) + '</a>';
-    }).join("");
-    rows += row(t({ en: "Links", zh: "链接" }), '<span class="info-links">' + links + '</span>');
-    el("infoTable").innerHTML = rows;
-
-    function row(ic, html) {
-      return '<div class="info-row"><span class="ic">' + ic + '</span><p>' + html + "</p></div>";
-    }
-  }
-
-  function renderNews() {
-    el("newsTitle").textContent = t(S.ui.newsTitle);
-    el("newsList").innerHTML = S.news.map(function (n) {
-      return '<div class="news-item"><span class="when">' + n.when +
-        '</span><span class="what">' + t(n) + "</span></div>";
-    }).join("");
-  }
-
-  // ---------- intro ----------
   function renderIntro() {
-    var p = S.profile, intro = S.intro;
-    var aliasHTML = p.alias ? ' <span class="alias">(' + p.alias + ")</span>" : "";
-    var html =
-      '<p class="eyebrow">' + t(intro.eyebrow) + "</p>" +
-      '<h1>' + p.name + ' <span class="zh">' + p.nameZh + "</span>" + aliasHTML + "</h1>" +
-      '<p class="role">' + t(p.role) + "</p>" +
-      intro.paras.map(function (x) { return "<p" + (x === intro.paras[0] ? ' class="lead"' : "") + ">" + t(x) + "</p>"; }).join("") +
-      '<div class="interests">' + intro.interests.map(function (i) {
-        return '<span class="chip">' + t(i) + "</span>";
-      }).join("") + "</div>";
-    el("home").innerHTML = html;
+    var p = S.profile;
+    el('home').innerHTML = '<div class="intro-grid"><div class="intro-copy"><p class="eyebrow">' + tr('Tactile sensing / Human–robot interaction', '触觉感知 / 人机交互') + '</p>' +
+      '<h1 id="profileName">' + p.name + '<span class="zh">' + p.nameZh + '</span></h1><p class="alias">' + tr('Also known as Wayne', '也可以叫我 Wayne') + '</p>' +
+      '<p class="headline">' + t(S.design.headline) + '</p><p class="lead">' + t(S.design.lead) + '</p><p class="role">' + t(p.role) + '</p>' +
+      '<div class="hero-actions">' + link('#projects', tr('Explore my work ↗', '探索我的研究 ↗'), 'button primary') + link(p.links[0].url, tr('Google Scholar ↗','谷歌学术 ↗'), 'button') + link('research-profile.html?lang=' + lang, tr('Research profile ↓','研究概览 ↓'), 'button') + '</div></div>' +
+      '<figure class="portrait"><img src="assets/img/avatar.jpg" width="310" height="350" fetchpriority="high" alt="' + tr('Portrait of Wen Chen','陈稳的肖像') + '"><figcaption><span>' + tr('Researcher. Engineer. Maker.','研究 · 工程 · 创造') + '</span><span class="location">' + tr('Beijing, China','中国 · 北京') + '</span></figcaption></figure></div>' +
+      '<div class="research-ribbon"><span class="label">' + tr('Research interests','研究兴趣') + '</span><p>' + t(S.design.researchNote) + '</p>' + link('#contact', tr('Let’s connect ↗','联系我 ↗'), 'text-link') + '</div>';
   }
-
-  // ---------- research ----------
   function renderResearch() {
-    var r = S.research;
-    var pillars = r.pillars.map(function (p, i) {
-      var n = ("0" + (i + 1)).slice(-2);
-      return '<div class="pillar"><div class="pn">' + n + "</div><h3>" + t(p.title) +
-        "</h3><p>" + t(p.desc) + "</p></div>";
-    }).join("");
-    el("research").innerHTML = sectionHead("01", S.ui.sec.research) +
-      '<p style="margin:-4px 0 18px;color:var(--muted);max-width:62ch;">' + t(r.intro) + "</p>" +
-      '<div class="pillars">' + pillars + "</div>";
+    el('research').innerHTML = sectionHead('01', S.ui.sec.research, tr('Physical signals → human experience','物理信号 → 人的体验')) +
+      '<p class="research-question">' + tr('How can robots use physical signals to understand materials and interact adaptively with people?', '机器人如何利用物理信号理解材料，并与人展开自适应交互？') + '</p>' +
+      '<div class="pillars">' + S.design.lanes.map(function(p) { return '<article class="pillar"><span class="pn">' + t(p.label) + '</span><h3>' + t(p.title) + '</h3><p>' + t(p.desc) + '</p>' + link('#' + p.target, t(p.evidence) + ' ↗', 'evidence') + '</article>'; }).join('') + '</div>' +
+      '<div class="methods"><strong>' + tr('Across the stack','贯穿研究全流程') + '</strong><span>' + tr('Materials & sensors · Robotic systems · Multimodal learning · Controlled human studies', '材料与传感器 · 机器人系统 · 多模态学习 · 受控人因实验') + '</span></div>';
   }
-
-  // ---------- publications ----------
-  function renderPublications() {
-    var list = S.publications.filter(function (p) {
-      return pubTab === "all" ? true : p.selected;
-    });
-    var papers = list.map(function (p) {
-      var titleHTML = t(p.title);
-      if (p.links && p.links.length) {
-        titleHTML = '<a href="' + p.links[0].url + '" target="_blank" rel="noopener">' + titleHTML + "</a>";
-      }
-      var pills = '<span class="pill venue">' + p.venueShort + "</span>" +
-        '<span class="pill year">' + p.year + "</span>" +
-        '<span class="pill tag">' + t(p.tag) + "</span>" +
-        p.links.map(function (l) {
-          return '<a class="pill link" href="' + l.url + '" target="_blank" rel="noopener">' + t(l.label) + " ↗</a>";
-        }).join("");
-      return '<article class="paper">' +
-        '<div class="paper-thumb"><img loading="lazy" src="' + p.img + '" alt=""></div>' +
-        '<div class="paper-meta">' +
-          "<h4>" + titleHTML + "</h4>" +
-          '<p class="authors">' + boldAuthors(p.authors) + "</p>" +
-          '<p class="venue-line">' + t(p.venue) + "</p>" +
-          '<div class="pills">' + pills + "</div>" +
-        "</div></article>";
-    }).join("");
-
-    el("publications").innerHTML = sectionHead("02", S.ui.sec.publications) +
-      '<div class="pub-tabs">' +
-        '<button class="pub-tab' + (pubTab === "selected" ? " active" : "") + '" data-tab="selected">' + t(S.ui.selected) + "</button>" +
-        '<button class="pub-tab' + (pubTab === "all" ? " active" : "") + '" data-tab="all">' + t(S.ui.all) + "</button>" +
-      "</div>" +
-      '<div class="paper-list">' + papers + "</div>";
-
-    Array.prototype.forEach.call(el("publications").querySelectorAll(".pub-tab"), function (b) {
-      b.addEventListener("click", function () { pubTab = b.getAttribute("data-tab"); renderPublications(); });
-    });
+  function projectCard(p, featured, compact) {
+    var projectLinks = (p.links || []).map(function(l) { var url = l.url; if (p.id === 'poirot' && url === 'poirot/' && lang === 'en') url = 'poirot/en.html'; return link(url, t(l.label) + ' ↗'); }).join('');
+    return '<article class="proj-card' + (featured ? ' featured' : '') + '" id="project-' + p.id + '"><div class="proj-media"><img loading="lazy" src="' + esc(p.img) + '" alt="' + esc(t(p.title)) + '"></div><div class="proj-body"><span class="flag">' + t(p.displayFlag || p.flag) + '</span><h3>' + t(p.title) + '</h3><p class="sub">' + t(p.sub) + '</p><p>' + t(compact && p.summary ? p.summary : p.desc) + '</p>' + (projectLinks ? '<div class="project-links">' + projectLinks + '</div>' : '') + '<div class="tech">' + p.tech.map(function(x) { return '<span>' + esc(x) + '</span>'; }).join('') + '</div></div></article>';
   }
-
-  // ---------- projects ----------
   function renderProjects() {
-    var cards = S.projects.map(function (p) {
-      var projectLinks = (p.links || []).map(function (l) {
-        return '<a class="pill link" href="' + l.url + '" target="_blank" rel="noopener">' + t(l.label) + " ↗</a>";
-      }).join("");
-      return '<article class="proj-card">' +
-        '<div class="proj-media"><span class="flag">' + t(p.flag) + "</span>" +
-          '<img loading="lazy" src="' + p.img + '" alt=""></div>' +
-        '<div class="proj-body">' +
-          '<p class="sub">' + t(p.sub) + "</p>" +
-          "<h3>" + t(p.title) + "</h3>" +
-          "<p>" + t(p.desc) + "</p>" +
-          (projectLinks ? '<div class="pills">' + projectLinks + "</div>" : "") +
-          '<div class="tech">' + p.tech.map(function (x) { return "<span>" + x + "</span>"; }).join("") + "</div>" +
-        "</div></article>";
-    }).join("");
-    el("projects").innerHTML = sectionHead("03", S.ui.sec.projects) +
-      '<div class="proj-grid">' + cards + "</div>";
+    var highlighted = ['poirot', 'shakesort', 'bionic-haptics'];
+    var first = highlighted.map(function(id, i) { return projectCard(S.projects.find(function(p) { return p.id === id; }), i === 0, true); }).join('');
+    var rest = S.projects.filter(function(p) { return highlighted.indexOf(p.id) === -1; });
+    el('projects').innerHTML = sectionHead('02', {en:'Selected work',zh:'代表性研究'}, tr('Systems built. Questions explored.','构建系统，探索问题。')) + '<div class="featured-projects">' + first + '</div>' +
+      '<details class="more-projects"' + (projectsOpen ? ' open' : '') + '><summary>' + tr('More projects & interactive demos', '更多项目与交互演示') + ' <span aria-hidden="true">(' + rest.length + ')</span></summary><div class="proj-grid">' + rest.map(function(p) { return projectCard(p, false, false); }).join('') + '</div></details>';
+    el('projects').querySelector('details').addEventListener('toggle', function(e) { projectsOpen = e.target.open; });
   }
-
-  // ---------- experience / education ----------
+  function renderPublications(focusTab) {
+    var list = S.publications.filter(function(p) { return pubTab === 'all' || p.selected; });
+    if (pubTab === 'selected') list.sort(function(a, b) { return (a.venueShort === 'HRI 2026' ? -1 : b.venueShort === 'HRI 2026' ? 1 : 0); });
+    var papers = list.map(function(p) {
+      var firstAuthor = p.authors.indexOf('Wen Chen,') === 0;
+      return '<article class="paper"><div class="paper-thumb"><img loading="lazy" src="' + esc(p.img) + '" alt=""></div><div class="paper-meta"><span class="venue-label">' + esc(p.venueShort) + '</span>' + (firstAuthor ? '<span class="author-label">' + tr('First author','第一作者') + '</span>' : '') + '<h3>' + link(p.links[0].url,t(p.title)) + '</h3><p class="authors">' + esc(p.authors).replace(/Wen Chen/g,'<b>Wen Chen</b>').replace(/陈稳/g,'<b>陈稳</b>') + '</p><p class="venue-line">' + t(p.venue) + '</p><div class="pills">' + p.links.map(function(l) { return link(l.url,t(l.label) + ' ↗','pill link'); }).join('') + '<button class="cite-button" data-paper="' + S.publications.indexOf(p) + '">' + tr('Cite','引用') + '</button></div></div></article>';
+    }).join('');
+    el('publications').innerHTML = sectionHead('03', S.ui.sec.publications, tr('Selected for research relevance','按研究相关性精选')) + '<div class="pub-tools"><div class="pub-tabs" role="group" aria-label="' + tr('Publication selection','论文筛选') + '">' + ['selected','all'].map(function(tab) { return '<button class="pub-tab' + (pubTab === tab ? ' active' : '') + '" data-tab="' + tab + '" aria-pressed="' + (pubTab === tab) + '">' + t(tab === 'all' ? S.ui.all : S.ui.selected) + '</button>'; }).join('') + '</div>' + link(S.profile.links[0].url,tr('View on Google Scholar ↗','在谷歌学术查看 ↗'),'text-link') + '</div><div class="paper-list">' + papers + '</div><p class="pub-note">' + tr('Full author lists and publication venues are retained.','保留完整作者列表及发表刊物、会议名称。') + '</p>';
+    el('publications').querySelectorAll('.pub-tab').forEach(function(button) { button.addEventListener('click',function() { pubTab = button.dataset.tab; renderPublications(true); announce(tr('Showing ' + listCount() + ' publications','显示 ' + listCount() + ' 篇论文')); }); });
+    el('publications').querySelectorAll('.cite-button').forEach(function(button) { button.addEventListener('click',function() { showCitation(S.publications[Number(button.dataset.paper)]); }); });
+    if (focusTab) el('publications').querySelector('[data-tab="' + pubTab + '"]').focus({preventScroll:true});
+  }
+  function listCount() { return S.publications.filter(function(p) { return pubTab === 'all' || p.selected; }).length; }
+  function showCitation(p) {
+    el('citationTitle').textContent = tr('Citation','引用信息');
+    var citationURL = new URL(p.links[0].url, 'https://wayneusc.github.io/').href;
+    el('citationText').textContent = p.authors.split(' / ')[0].replace(/\*/g,'') + '. ' + p.year + '. ' + plain(p.title.en) + '. ' + plain(p.venue.en) + ' ' + citationURL;
+    el('copyCitation').textContent = tr('Copy citation','复制引用');
+    el('closeCitation').setAttribute('aria-label',tr('Close','关闭'));
+    el('citationDialog').showModal();
+  }
   function renderExperience() {
-    function timeline(items) {
-      return '<div class="timeline">' + items.map(function (i) {
-        var when = typeof i.when === "string" ? i.when : t(i.when);
-        return '<div class="tl-item"><div class="when">' + when + "</div>" +
-          '<div class="what">' + t(i.what) + "</div>" +
-          '<div class="where">' + t(i.where) + "</div></div>";
-      }).join("") + "</div>";
-    }
-    var e = S.experience;
-    el("experience").innerHTML = sectionHead("04", S.ui.sec.experience) +
-      '<div class="xp-grid">' +
-        '<div class="xp-col"><h3>' + t(S.ui.eduTitle) + "</h3>" + timeline(e.education) + "</div>" +
-        '<div class="xp-col"><h3>' + t(S.ui.workTitle) + "</h3>" + timeline(e.work) + "</div>" +
-      "</div>";
+    function timeline(items) { return items.map(function(i) { return '<div class="tl-item"><div class="when">' + t(i.when) + '</div><div><div class="what">' + t(i.what) + '</div><div class="where">' + t(i.where) + '</div></div></div>'; }).join(''); }
+    el('experience').innerHTML = sectionHead('04',S.ui.sec.experience) + '<p class="xp-intro">' + t(S.design.background) + '</p><div class="xp-grid"><div class="xp-col"><h3>' + t(S.ui.workTitle) + '</h3>' + timeline(S.experience.work) + '</div><div class="xp-col"><h3>' + t(S.ui.eduTitle) + '</h3>' + timeline(S.experience.education) + '</div></div>';
   }
-
-  // ---------- outreach ----------
+  function renderNews() {
+    function items(news) { return news.map(function(n) { return '<div class="news-item"><time class="when">' + esc(n.when) + '</time><div class="what">' + t(n) + '</div></div>'; }).join(''); }
+    el('news').innerHTML = sectionHead('05',S.ui.newsTitle) + items(S.news.slice(0,3)) + '<details class="news-archive"' + (newsOpen ? ' open' : '') + '><summary>' + tr('Earlier updates','过往动态') + '</summary>' + items(S.news.slice(3)) + '</details>';
+    el('news').querySelector('details').addEventListener('toggle',function(e) { newsOpen = e.target.open; });
+  }
   function renderOutreach() {
     var o = S.outreach;
-    var stats = o.stats.map(function (s) {
-      return '<div class="stat"><div class="num">' + t(s.num) + '</div><div class="lab">' + t(s.lab) + "</div></div>";
-    }).join("");
-    el("outreach").innerHTML = sectionHead("05", S.ui.sec.outreach) +
-      '<div class="outreach">' +
-        '<div class="ot-body">' +
-          '<p class="ot-kicker">' + t(o.kicker) + "</p>" +
-          "<h3>" + t(o.title) + "</h3>" +
-          '<p class="tagline">' + t(o.tagline) + "</p>" +
-          '<div class="stats">' + stats + "</div>" +
-          '<p class="topics">' + t(o.topics) + "</p>" +
-        "</div>" +
-        '<div class="ot-media"><img loading="lazy" src="' + o.img + '" alt=""></div>' +
-      "</div>";
+    el('outreach').innerHTML = sectionHead('06', {en:'Beyond the lab',zh:'实验室之外'}) + '<div class="outreach"><div class="ot-body"><p class="ot-kicker">' + t(o.kicker) + '</p><h3>' + t(o.title) + '</h3><p class="tagline">' + t(o.tagline) + '</p><p class="topics">' + t(o.topics) + '</p>' + link(S.profile.links[3].url,tr('Explore the channel ↗','访问我的频道 ↗'),'text-link') + '</div><div class="ot-media"><img loading="lazy" src="' + o.img + '" alt="' + esc(t(o.title)) + '"></div></div>';
   }
-
-  // ---------- awards ----------
   function renderAwards() {
-    var items = S.awards.map(function (a) {
-      var de = t(a.de);
-      return '<div class="award"><span class="ic">' + a.ic + "</span><div>" +
-        '<div class="ti">' + t(a.ti) + "</div>" +
-        (de ? '<div class="de">' + de + "</div>" : "") +
-        "</div></div>";
-    }).join("");
-    el("awards").innerHTML = sectionHead("06", S.ui.sec.awards) +
-      '<div class="awards">' + items + "</div>";
+    el('awards').innerHTML = sectionHead('07',S.ui.sec.awards) + '<div class="awards">' + S.awards.map(function(a) { return '<div class="award"><div class="ti">' + t(a.ti) + '</div><div class="de">' + t(a.de) + '</div></div>'; }).join('') + '</div>';
   }
-
-  // ---------- footer ----------
-  function renderFooter() {
-    var p = S.profile;
-    var links = p.links.map(function (l) {
-      return '<a href="' + l.url + '" target="_blank" rel="noopener">' + t(l.label) + "</a>";
-    }).join("");
-    el("footer").innerHTML =
-      "<div>© " + new Date().getFullYear() + " " + p.name + " · " + p.nameZh + "</div>" +
-      '<div class="f-links">' + links + "</div>" +
-      '<div style="flex-basis:100%;color:#9aa4b4;font-size:.8rem;">' + t(S.ui.footnote) + "</div>";
+  function renderContact() {
+    el('contact').innerHTML = '<div><h2>' + t(S.design.contact) + '</h2><p>' + t(S.design.contactText) + '</p></div><div class="contact-actions">' + link('mailto:' + S.profile.info.email,tr('Get in touch ↗','邮件联系 ↗'),'button') + '<a class="text-link" href="mailto:' + S.profile.info.email + '">' + S.profile.info.email + '</a><button class="button" id="copyEmail">' + tr('Copy email','复制邮箱') + '</button></div>';
+    el('copyEmail').addEventListener('click',function() { copyText(S.profile.info.email,el('copyEmail')); });
   }
-
-  // ---------- language toggle ----------
-  function setLang(next) {
-    lang = next;
-    document.documentElement.setAttribute("lang", lang);
-    try { localStorage.setItem("wc-lang", lang); } catch (e) {}
-    Array.prototype.forEach.call(document.querySelectorAll("#langToggle button"), function (b) {
-      b.classList.toggle("active", b.getAttribute("data-lang") === lang);
-    });
-    renderAll();
-  }
-
-  function renderAll() {
-    renderNav(); renderInfo(); renderNews(); renderIntro(); renderResearch();
-    renderPublications(); renderProjects(); renderExperience(); renderOutreach();
-    renderAwards(); renderFooter();
-  }
-
-  // ---------- interactions ----------
-  function wireChrome() {
-    Array.prototype.forEach.call(document.querySelectorAll("#langToggle button"), function (b) {
-      b.addEventListener("click", function () { setLang(b.getAttribute("data-lang")); });
-    });
-    var navToggle = el("navToggle"), topnav = el("topnav");
-    if (navToggle) navToggle.addEventListener("click", function () { topnav.classList.toggle("open"); });
-
-    var btt = el("backToTop");
-    window.addEventListener("scroll", function () {
-      btt.classList.toggle("show", window.scrollY > 460);
-    }, { passive: true });
-    btt.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: "smooth" }); });
-  }
-
-  function wireReveal() {
-    var els = document.querySelectorAll(".reveal");
-    if (!("IntersectionObserver" in window)) {
-      Array.prototype.forEach.call(els, function (e) { e.classList.add("in"); });
-      return;
-    }
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
-      });
-    }, { threshold: 0.08, rootMargin: "0px 0px -40px 0px" });
-    Array.prototype.forEach.call(els, function (e, i) {
-      e.style.transitionDelay = Math.min(i * 70, 350) + "ms";
-      io.observe(e);
-    });
-  }
-
-  // ---------- init ----------
-  document.documentElement.setAttribute("lang", lang);
-  Array.prototype.forEach.call(document.querySelectorAll("#langToggle button"), function (b) {
-    b.classList.toggle("active", b.getAttribute("data-lang") === lang);
-  });
-  renderAll();
-  wireChrome();
-  wireReveal();
+  function renderFooter() { el('footer').innerHTML = '<span>© ' + new Date().getFullYear() + ' Wen Chen · 陈稳</span><div class="f-links">' + S.profile.links.map(function(l) { return link(l.url,t(l.label)); }).join('') + '</div><span>' + tr('Beijing, China · English / 中文','中国 · 北京 · English / 中文') + '</span>'; }
+  function renderAll() { renderNav();renderIntro();renderResearch();renderProjects();renderPublications();renderExperience();renderNews();renderOutreach();renderAwards();renderContact();renderFooter(); }
+  function setLang(next) { lang = next; document.documentElement.lang = lang; try { localStorage.setItem('wc-lang',lang); } catch(e) {} document.querySelectorAll('#langToggle button').forEach(function(b) { var active = b.dataset.lang === lang; b.classList.toggle('active',active); b.setAttribute('aria-pressed',String(active)); }); renderAll(); }
+  async function copyText(text,button) { try { await navigator.clipboard.writeText(text); button.textContent = tr('Copied ✓','已复制 ✓'); announce(tr('Copied to clipboard','已复制到剪贴板')); } catch(e) { button.textContent = tr('Select and copy the text','请选中文字复制'); announce(tr('Clipboard unavailable. Select the displayed text to copy it.','剪贴板不可用，请选中显示的文字手动复制。')); } }
+  document.querySelectorAll('#langToggle button').forEach(function(b) { b.addEventListener('click',function() { setLang(b.dataset.lang); }); });
+  el('navToggle').addEventListener('click',function() { var open = el('topnav').classList.toggle('open'); el('navToggle').setAttribute('aria-expanded',String(open)); if(open) el('topnav').querySelector('a').focus(); });
+  document.addEventListener('keydown',function(e) { if(e.key === 'Escape' && el('topnav').classList.contains('open')) { closeMenu();el('navToggle').focus(); } });
+  el('backToTop').addEventListener('click',function() { el('home').focus({preventScroll:true}); window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'}); });
+  window.addEventListener('scroll',function() { el('backToTop').classList.toggle('show',window.scrollY > 600); },{passive:true});
+  el('closeCitation').addEventListener('click',function() { el('citationDialog').close(); });
+  el('copyCitation').addEventListener('click',function() { copyText(el('citationText').textContent,el('copyCitation')); });
+  setLang(lang);
+  if ('IntersectionObserver' in window) { var observer = new IntersectionObserver(function(entries) { entries.forEach(function(entry) { if(entry.isIntersecting) { currentSection = entry.target.id; el('topnav').querySelectorAll('a').forEach(function(a) { if(a.hash === '#' + currentSection) a.setAttribute('aria-current','location'); else a.removeAttribute('aria-current'); }); } }); },{rootMargin:'-15% 0px -60% 0px',threshold:0}); S.ui.nav.forEach(function(n) { observer.observe(el(n.id)); }); }
+  // Native hash navigation also works for anchors inside the project archive.
+  function revealHash() { var target = document.getElementById(location.hash.slice(1)); if(target) { var details = target.closest('details'); if(details) details.open = true; target.scrollIntoView(); } }
+  if(location.hash) requestAnimationFrame(revealHash);
+  window.addEventListener('hashchange',revealHash);
 })();

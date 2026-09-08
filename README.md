@@ -1,115 +1,41 @@
-# Wen Chen — Personal Academic Homepage
+# Wen Chen — bilingual academic homepage
 
-A bilingual (English / 中文) academic homepage in a clean two-column style,
-built as a static site — just HTML, CSS, and vanilla JavaScript. No build step,
-no framework, no dependencies.
+Live at https://wayneusc.github.io/. Static HTML, CSS and vanilla JavaScript, served by GitHub Pages from `main`. No dependencies, framework or build step.
 
-```
-.
-├── index.html               # page shell + SEO meta + JSON-LD
-├── 404.html                 # branded not-found page
-├── site.webmanifest         # PWA manifest / icons
-├── .nojekyll                # tells GitHub Pages to serve /assets as-is
-├── assets/
-│   ├── css/site.css         # all styling (design system)
-│   ├── js/content.js        # ← ALL your content lives here (edit this)
-│   ├── js/app.js            # renderer + language toggle + interactions
-│   └── img/                 # photos, logo, paper/project thumbnails
-└── deploy.sh                # one-shot publish helper (optional)
-```
+## September 2026 redesign
 
----
+An editorial research portfolio organized around dynamic tactile sensing, embodied human–robot interaction and multimodal systems. The live-text signature uses **Great Vibes**, also used on Xinyi Fu's homepage. A locally hosted subset for “Wayne Chen” avoids a Google Fonts network dependency; its SIL Open Font License is included in `assets/fonts/OFL.txt`.
 
-## 1. Preview locally
+The home page features POIROT, ShakeSort and bio-inspired tactile sensing, with all ten projects available in the expandable project archive. Three relevant papers appear initially; all eight original publication records remain available. English and Chinese content, publication selection, citation copying, contact links and the POIROT browser demo are retained or supported. A standalone research profile supports printing or saving as PDF in either language.
 
-Open `index.html` directly in a browser, or serve it:
+## Edit and preview
 
-```bash
-cd this-folder
-python3 -m http.server 8000
-# then visit http://localhost:8000
-```
+- `assets/js/content.js`: bilingual records and presentation copy (`SITE.design`). Stable project IDs and curated summaries are at the bottom. Display overrides are intentional; edit them when updating the underlying record.
+- `assets/js/app.js`: homepage rendering and interactions.
+- `assets/css/site.css`: layout, typography, responsive and print styles.
+- `index.html`: page shell, canonical URL, existing social preview metadata and structured data.
+- `research-profile.html` and `assets/js/profile.js`: printable research summary using the same content source. This is a research profile, not a replacement for a complete CV.
+- `poirot/`: existing English and Chinese detective-game demos; unchanged by this redesign.
 
-Click **EN / 中** (top-right) to switch languages. The choice is remembered.
+Run `python3 -m http.server 8000` in this directory and open http://localhost:8000/. The homepage remembers an explicit language choice and otherwise follows the browser language. The profile accepts `?lang=en` or `?lang=zh`.
 
----
+GitHub Pages continues to serve the repository root. Preserve `.nojekyll`, asset paths, and the existing project routes. Social preview images are preserved.
 
-## 2. Publish to GitHub Pages  →  https://wayneusc.github.io
+## Backup and rollback
 
-Your username is **WayneUSC**, so a *user site* repo named
-**`WayneUSC.github.io`** will be served at the root URL `https://wayneusc.github.io`.
+The complete version before the redesign is preserved at:
 
-> Anything that needs your password / GitHub login must be done by you — the
-> steps below are the exact commands; run them in this folder.
+- Branch: `codex/backup-before-redesign-2026-09-08`
+- Original commit: `1a14c072737b180fff5be852002b661b1a3deb05`
 
-### Option A — command line (recommended)
+A source ZIP and a Git bundle with history were also saved outside the checkout. The backup branch should remain unchanged.
 
-1. On GitHub, create a **new, empty** repository named exactly
-   `WayneUSC.github.io` (no README, no .gitignore).
-2. In this folder, run:
+For a complete return to the original site without rewriting Git history, make a new branch from current `main`, run `git restore --source=codex/backup-before-redesign-2026-09-08 --staged --worktree .`, inspect the changes, and commit them. This restores the saved source tree, including removing newly added tracked files, while retaining the history of the redesign. Merge that restoration into `main` to publish it. Preserve any later work you want to retain before restoring the entire tree.
 
-   ```bash
-   ./deploy.sh
-   ```
+## Content maintenance notes
 
-   (or do it manually:)
-
-   ```bash
-   git init
-   git add -A
-   git commit -m "Launch bilingual homepage"
-   git branch -M main
-   git remote add origin https://github.com/WayneUSC/WayneUSC.github.io.git
-   git push -u origin main
-   ```
-3. On GitHub: **Settings → Pages → Build and deployment → Source = "Deploy from a
-   branch"**, Branch = `main` / `/ (root)`, Save.
-4. Wait ~1 minute, then open **https://wayneusc.github.io**.
-
-### Option B — drag & drop (no terminal)
-
-1. Create the empty `WayneUSC.github.io` repo on GitHub.
-2. **Add file → Upload files**, drag in everything from this folder
-   (keep the folder structure — upload the `assets` folder too, and the hidden
-   `.nojekyll` file).
-3. Commit, then enable Pages as in step 3 above.
-
----
-
-## 3. Editing the site later
-
-Almost everything you'd want to change is in **`assets/js/content.js`**, written
-as `{ en: "...", zh: "..." }` pairs. Edit the text, save, refresh. For example,
-to add a publication, copy one block in the `publications` array and change the
-fields; to add news, add a line to the `news` array.
-
-**Swap in a real photo:** the sidebar avatar currently uses your WAYNE logo.
-Replace `assets/img/avatar.jpg` with a square headshot (≈560×560 px, same
-filename) and it appears automatically.
-
-**Add your CV:** drop a `cv.pdf` in the root and the footer/links can point to it.
-
----
-
-## 4. Please double-check these details
-
-A few things were inferred from your files — verify before sharing widely:
-
-- **Solar-cell paper (RSC Advances).** The PDF is dated **2014** (DOI
-  `10.1039/C4RA11155A`) with authors *Zhou, Zhang, Bao, Tao, Sun, W. Chen*.
-  Your summary report listed it as 2024 — confirm the **year** and that the
-  "W. Chen" is **you**. (Currently shown as 2014.)
-- **ISPRS IJGI DOI** (`10.3390/ijgi13090331`) was reconstructed from the volume/
-  article numbers — click it once to confirm it resolves.
-- **Digital-heritage review (IEEE T-CSS)** has **no link** yet — add the DOI when
-  the issue is paginated.
-- **Bilibili link** points to a search for "腓尼基城邦23号". Replace it with your
-  exact channel URL in `content.js → profile.links`.
-- The **AIoT MLLM** work is shown as a *project* (it had no venue/PDF). If it’s
-  formally published, move it into the `publications` array.
-- Canonical URL/meta assume `https://wayneusc.github.io`. If you use a custom
-  domain or a project repo, update the `<link rel="canonical">` and `og:url` in
-  `index.html`.
-
-The site was designed as a static GitHub Pages homepage, so future edits can stay
-lightweight and transparent.
+- Add an approved CV file and a real link if a full CV is available. No missing CV download is advertised.
+- The owner confirmed on September 8, 2026 that the 2014 RSC Advances paper is his work. It remains in the full publication list as part of his materials research background; the topical selection focuses on HRI, CoG, and IUI Companion.
+- Planned tactile-mapping research stays labeled as planned. Platform and bio-inspired sensing descriptions express research scope rather than unverified benchmark results.
+- Outreach counts from the previous content are retained in the data but omitted from the redesigned presentation because their measurement date was not supplied.
+- Future news, positions, paper status, and project results should be updated from verified sources. No PhD intake year or availability window is assumed.

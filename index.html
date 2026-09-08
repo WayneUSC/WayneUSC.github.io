@@ -26,7 +26,8 @@
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png" />
   <link rel="manifest" href="site.webmanifest" />
 
-  <link rel="stylesheet" href="assets/css/site.css" />
+  <link rel="preload" href="assets/fonts/signature.ttf" as="font" type="font/ttf" crossorigin />
+  <link rel="stylesheet" href="assets/css/site.css?v=20260908" />
 
   <script type="application/ld+json">
   {
@@ -54,49 +55,46 @@
   </script>
 </head>
 <body>
+  <a class="skip-link" href="#home">Skip to content / 跳至正文</a>
   <div class="topbar-wrap">
     <div class="container topbar">
-      <a class="brand" href="#home">
-        <img src="assets/img/logo.jpg" alt="Wayne Chen logo" />
-        <span class="wordmark">Wayne&nbsp;Chen</span>
+      <a class="brand" href="#home" aria-label="Wayne Chen — Home">
+        <span class="wordmark">Wayne Chen</span><span class="brand-dot" aria-hidden="true">.</span>
       </a>
-      <nav class="topnav" id="topnav"><!-- nav links injected --></nav>
-      <div style="display:inline-flex;align-items:center;gap:10px;">
-        <div class="lang-toggle" id="langToggle">
-          <button data-lang="en" class="active">EN</button>
-          <button data-lang="zh">中</button>
+      <nav class="topnav" id="topnav" aria-label="Main navigation"><!-- nav links injected --></nav>
+      <div class="header-controls">
+        <div class="lang-toggle" id="langToggle" role="group" aria-label="Language / 语言">
+          <button data-lang="en" class="active" aria-pressed="true">EN</button>
+          <button data-lang="zh" aria-pressed="false">中</button>
         </div>
-        <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="topnav">☰</button>
       </div>
     </div>
   </div>
 
   <div class="container">
-    <div class="layout">
-      <aside class="sidebar reveal">
-        <div class="photo-wrap">
-          <div class="photo-ring"><img src="assets/img/avatar.jpg?v=20260527-portrait" alt="Wen Chen" /></div>
-        </div>
-        <div class="info-table" id="infoTable"><!-- injected --></div>
-        <h4 class="sidebar-title" id="newsTitle">News</h4>
-        <div class="news-list" id="newsList"><!-- injected --></div>
-      </aside>
-
-      <main class="content">
-        <section class="section intro reveal" id="home"><!-- injected --></section>
-        <section class="section reveal" id="research"><!-- injected --></section>
-        <section class="section reveal" id="publications"><!-- injected --></section>
-        <section class="section reveal" id="projects"><!-- injected --></section>
-        <section class="section reveal" id="experience"><!-- injected --></section>
-        <section class="section reveal" id="outreach"><!-- injected --></section>
-        <section class="section reveal" id="awards"><!-- injected --></section>
-      </main>
-    </div>
+    <main class="content">
+      <section class="intro" id="home" aria-labelledby="profileName" tabindex="-1"></section>
+      <section class="section" id="research"></section>
+      <section class="section" id="projects"></section>
+      <section class="section" id="publications"></section>
+      <section class="section" id="experience"></section>
+      <section class="section" id="news"></section>
+      <section class="section" id="outreach"></section>
+      <section class="section" id="awards"></section>
+      <section class="contact" id="contact"></section>
+    </main>
 
     <footer class="footer" id="footer"><!-- injected --></footer>
   </div>
 
   <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+  <div id="statusMessage" class="sr-only" role="status" aria-live="polite"></div>
+  <dialog id="citationDialog" aria-labelledby="citationTitle">
+    <div class="dialog-head"><h2 id="citationTitle">Citation</h2><button id="closeCitation" aria-label="Close">×</button></div>
+    <p id="citationText"></p>
+    <button class="button primary" id="copyCitation">Copy citation</button>
+  </dialog>
 
   <noscript>
     <div style="max-width:760px;margin:40px auto;padding:0 20px;font-family:Georgia,serif;">
@@ -111,7 +109,7 @@
     </div>
   </noscript>
 
-  <script src="assets/js/content.js?v=20260902-cog-profile-update" defer></script>
-  <script src="assets/js/app.js?v=20260902-localized-timeline" defer></script>
+  <script src="assets/js/content.js?v=20260908" defer></script>
+  <script src="assets/js/app.js?v=20260908" defer></script>
 </body>
 </html>

@@ -416,3 +416,40 @@ window.SITE = {
             zh: "《智能时代：美国机器人研究生项目申请及就业攻略》。" } }
   ]
 };
+
+/* Presentation copy for the September 2026 redesign. Original records remain above. */
+SITE.design = {
+  headline: { en: 'From physical signals<br>to <em>embodied intelligence.</em>', zh: '从物理信号，<br>到<em>具身智能。</em>' },
+  lead: { en: 'I build tactile and interactive robotic systems, connecting sensing hardware, multimodal learning, and human studies to explore how robots understand the world and the people in it.', zh: '我构建触觉感知与交互机器人系统，将传感硬件、多模态学习与人因实验连接起来，探索机器人如何理解物理世界，以及身处其中的人。' },
+  researchNote: { en: 'Dynamic touch. Adaptive robots. Human-centered interaction.', zh: '动态触觉 · 自适应机器人 · 以人为中心的交互' },
+  lanes: [
+    { label: { en: '01 / Sense', zh: '01 / 感知' }, title: { en: 'Read the world through touch', zh: '通过触觉，读取物理世界' }, desc: { en: 'Vibration, force, and contact dynamics as temporal signals for understanding hidden material and object properties.', zh: '将振动、力和接触动态视为时序信号，理解材料与物体中不可见的物理属性。' }, evidence: { en: 'ShakeSort & bio-inspired sensing', zh: 'ShakeSort 与仿生触觉感知' }, target: 'project-shakesort' },
+    { label: { en: '02 / Interact', zh: '02 / 交互' }, title: { en: 'Bring robots into social life', zh: '让机器人参与社会交互' }, desc: { en: 'Embodied systems for multi-party interaction, with human studies examining experience, attitudes, and adaptive behavior.', zh: '构建面向多人交互的具身系统，通过人因实验研究交互体验、用户态度与自适应行为。' }, evidence: { en: 'POIROT · HRI 2026', zh: 'POIROT · HRI 2026' }, target: 'project-poirot' },
+    { label: { en: '03 / Integrate', zh: '03 / 融合' }, title: { en: 'Connect signals to systems', zh: '从多模态信号走向完整系统' }, desc: { en: 'Multimodal sensing and learning in everyday spaces, connecting physical prototypes, software, and human-centered evaluation.', zh: '在日常空间中融合多模态传感与学习，将物理原型、软件系统和以人为中心的评估连接起来。' }, evidence: { en: 'AIoT · IUI Companion 2026', zh: 'AIoT · IUI Companion 2026' }, target: 'publications' }
+  ],
+  background: { en: 'My training in Chemical Engineering and Computer Science gives me a way to connect materials, sensors, algorithms, and complete robotic systems. I work across hardware prototyping, software development, and human-centered evaluation.', zh: '化学工程与计算机科学的交叉训练，让我能够连接材料、传感器、算法与完整的机器人系统。我的工作横跨硬件原型、软件开发以及以人为中心的评估。' },
+  contact: { en: 'Let’s talk about embodied intelligence.', zh: '一起探索具身智能。' },
+  contactText: { en: 'I welcome conversations about doctoral research and collaborations in tactile sensing, human–robot interaction, and multimodal embodied intelligence.', zh: '欢迎交流动态触觉感知、人机交互与多模态具身智能方向的博士研究机会和科研合作。' }
+};
+// Stable anchors and topical highlights; original project records remain accessible.
+['poirot','poirot-demo','smart-surface','bionic-haptics','tactile-mapping','habitat','aiot','roboleague','shakesort','sofa'].forEach(function(id, i) { SITE.projects[i].id = id; });
+SITE.projects[0].links = [
+  {label:{en:'Read paper',zh:'阅读论文'},url:'https://doi.org/10.1145/3757279.3788663'},
+  {label:{en:'arXiv',zh:'arXiv'},url:'https://arxiv.org/abs/2603.08136'},
+  {label:{en:'Play the demo',zh:'体验互动演示'},url:'poirot/'}
+];
+SITE.projects[0].summary = { en: 'An embodied robot game master for multi-party narrative games. Our study compares tangible clue delivery with digitally mediated interaction and examines how prior attitudes toward robots moderate the experience.', zh: '面向多人叙事游戏的具身机器人主持人。研究比较实体线索分发与数字媒介交互，并考察用户既有机器人态度对交互体验的调节作用。' };
+SITE.projects[0].displayFlag = { en: 'First-author paper · HRI 2026', zh: '第一作者论文 · HRI 2026' };
+SITE.projects[8].summary = { en: 'What can a robot learn by shaking a sealed box? Active shaking and high-bandwidth vibration sensing help identify hidden contents on OpenArm and UR5 platforms.', zh: '摇晃一个密封盒子，机器人能感知到什么？通过主动摇晃与高带宽振动传感，在 OpenArm 和 UR5 平台上识别盒中隐藏的物体。' };
+SITE.projects[3].summary = { en: 'A tactile system developed with Tsinghua Future Laboratory and Kaiwu Robotics, organizing contact events through their representation, temporal process, and interaction context.', zh: '与清华大学未来实验室及 Kaiwu Robotics 共同开发的触觉系统，从表征、时间过程与交互关系组织接触事件。' };
+// Describe aims and planned work without presenting them as validated findings.
+SITE.projects[3].desc = SITE.projects[3].summary;
+SITE.projects[5].desc = { en: 'A multimodal sensing platform for studying human activity in living spaces, combining depth, audio, mmWave, IMU, tactile and olfactory sensing with a 60 m² capacitive floor. The platform supports research toward privacy-aware activity understanding and embodied learning.', zh: '面向日常居住空间中人体活动研究的多模态传感平台，融合深度、音频、毫米波、IMU、触觉、嗅觉传感及 60㎡ 电容地板，支持隐私友好型活动理解与具身学习研究。' };
+SITE.projects[1].sub = { en: 'An interactive player-modeling demonstration', zh: '玩家建模的交互演示' };
+SITE.projects[4].flag = { en: 'Planned study', zh: '研究计划' };
+SITE.publications.forEach(function(p) { p.selected = ['HRI 2026','IEEE CoG 2026','IUI Companion 2026'].indexOf(p.venueShort) !== -1; });
+SITE.ui.nav = [
+  {id:'research',en:'Research',zh:'研究'}, {id:'projects',en:'Selected work',zh:'代表作'},
+  {id:'publications',en:'Publications',zh:'论文'}, {id:'experience',en:'About',zh:'经历'},
+  {id:'contact',en:'Contact',zh:'联系'}
+];
