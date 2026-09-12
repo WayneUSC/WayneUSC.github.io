@@ -8,6 +8,25 @@ An editorial research portfolio organized around dynamic tactile sensing, embodi
 
 The home page features POIROT, ShakeSort and bio-inspired tactile sensing, with all ten projects available in the expandable project archive. Three relevant papers appear initially; all eight original publication records remain available. English and Chinese content, publication selection, citation copying, contact links and the POIROT browser demo are retained or supported. A standalone research profile supports printing or saving as PDF in either language.
 
+## September 12 visual refinement
+
+Inspired by the restrained typography and section rhythm of Apple's Mac pages: system sans-serif headings, white and light-gray surfaces, consistent rounded cards and controls, and more generous spacing. The Great Vibes signature remains unchanged.
+
+Typography is controlled in `assets/css/site.css` through shared roles, rather than per-card size overrides:
+
+| Role | Desktop | Mobile (≤650 px) |
+| --- | --- | --- |
+| Name | 72 px | 48 px |
+| Section heading (including contact) | 48 px | 32 px |
+| Every project title | 28 px | 24 px |
+| Research / experience / outreach subtitle | 22 px | 20 px |
+| Every paper title | 21 px | 19 px |
+| Body text | 17 px | 16 px |
+
+These values use rem units and follow the browser's text-size preference. Tablet sizes are shared tokens too. Featured projects gain emphasis from layout and media, with the same heading size, weight and line height as the rest. Chinese headings do not inherit negative English letter spacing. The printable research profile and error page use the same sans-serif direction.
+
+A second backup preserves the version immediately before this refinement: `codex/backup-before-apple-refinement-2026-09-12` at `f4d65506f5395f531937afa9e203a1d5a3af0076`. The September 8 original backup remains available.
+
 ## Edit and preview
 
 - `assets/js/content.js`: bilingual records and presentation copy (`SITE.design`). Stable project IDs and curated summaries are at the bottom. Display overrides are intentional; edit them when updating the underlying record.
