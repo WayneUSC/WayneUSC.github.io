@@ -1,0 +1,91 @@
+/* A native spatial exhibit within the portfolio's shared type system. */
+.habitat-showcase { margin-top:32px; border:1px solid #e2e5e2; border-radius:var(--card-radius); overflow:hidden; background:#fff; }
+.habitat-visual { position:relative; isolation:isolate; aspect-ratio:16/9; min-height:380px; background:#edf0ea; }
+.habitat-preview-canvas { display:block; width:100%; height:100%; position:absolute; inset:0; pointer-events:none; }
+.habitat-visual-top, .habitat-visual-bottom { position:absolute; left:36px; right:36px; display:flex; justify-content:space-between; gap:24px; pointer-events:none; }
+.habitat-visual-top { top:25px; color:#41574b; font-size:.6875rem; letter-spacing:.12em; font-weight:600; }
+.habitat-visual-top span:last-child { letter-spacing:0; font-weight:400; }
+.habitat-visual-bottom { bottom:28px; align-items:flex-end; }
+.habitat-visual-bottom p { margin:0; font-size:clamp(1.5rem,3vw,2.5rem); line-height:1.12; font-weight:600; letter-spacing:-.035em; color:#234438; text-shadow:0 2px 14px #f1f3ef; }
+.habitat-play { pointer-events:auto; display:flex; align-items:center; gap:20px; padding:13px 22px; min-height:48px; flex-shrink:0; border:1px solid #d7ded7; border-radius:28px; background:#ffffffed; color:#244d3f; font-size:.875rem; box-shadow:0 4px 24px #1735240d; }
+.habitat-play:hover { background:#fff; box-shadow:0 4px 24px #1735241a; }
+.habitat-play span { font-size:1.15rem; }
+.habitat-load-note { position:absolute; top:45%; width:100%; padding:0 28px; text-align:center; font-size:.875rem; color:#51675b; pointer-events:none; }
+.habitat-copy { padding:36px; gap:28px; }
+.habitat-intro { display:grid; grid-template-columns:1fr 1fr; gap:40px; width:100%; }
+.habitat-intro .flag { display:block; color:#64746a; margin-bottom:12px; }
+.habitat-intro > p { margin:0; color:#59645d; }
+.habitat-features { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:32px; width:100%; padding:26px 0; border-block:1px solid #e2e6e1; }
+.habitat-features > div > span { color:#84938a; font-size:.6875rem; letter-spacing:.1em; }
+.habitat-features h4 { font-size:1rem; font-weight:600; margin:8px 0; }
+.habitat-features p { color:#626c66; font-size:.875rem; margin:0; }
+.habitat-actions { display:flex; flex-wrap:wrap; align-items:center; gap:12px; width:100%; }
+.habitat-actions .button.primary { background:#244d3f; border-color:#244d3f; }
+.habitat-actions .button.primary:hover { background:#163d2f; }
+.habitat-actions > p { color:#727a74; font-size:.75rem; margin:0 0 0 auto; line-height:1.65; }
+.habitat-dialog { width:min(1240px,calc(100% - 48px)); max-height:calc(100dvh - 40px); padding:0; overflow:auto; overscroll-behavior:contain; border-radius:24px; background:#fff; }
+.habitat-dialog::backdrop { background:rgba(19,29,24,.48); backdrop-filter:blur(12px); }
+.habitat-dialog-head { display:flex; align-items:center; justify-content:space-between; padding:22px 28px 18px; gap:20px; }
+.habitat-eyebrow { display:block; font-size:.625rem; font-weight:600; letter-spacing:.13em; color:#727a74; margin-bottom:5px; }
+.habitat-dialog h2 { margin:0; font-size:1.625rem; letter-spacing:-.025em; line-height:1.2; }
+.habitat-close { position:sticky; right:0; width:40px; height:40px; flex-shrink:0; border:0; border-radius:50%; font-size:1.6rem; line-height:1; background:#f0f1f0; color:#3a443e; }
+.habitat-toolbar { display:flex; gap:8px; align-items:center; padding:0 28px 16px; flex-wrap:wrap; }
+.habitat-toolbar button { min-height:38px; padding:6px 14px; border:1px solid #dce2dd; border-radius:22px; background:#fff; color:#465c4e; font-size:.8125rem; }
+.habitat-toolbar button[aria-pressed=true] { background:#244d3f; color:#fff; border-color:#244d3f; }
+.habitat-view-tabs { display:flex; gap:5px; margin-right:auto; }
+.habitat-stage { height:clamp(260px,49dvh,600px); position:relative; background:#edf0ea; overflow:hidden; }
+.habitat-stage canvas { display:block; width:100%; height:100%; touch-action:none; cursor:grab; outline-offset:-4px; }
+.habitat-stage canvas:active { cursor:grabbing; }
+.habitat-stage canvas:focus-visible { outline:2px solid #46705b; }
+.habitat-stage-label { position:absolute; left:24px; top:18px; font-size:.625rem; color:#597363; letter-spacing:.12em; pointer-events:none; }
+.habitat-stage-status { position:absolute; inset:40% 24px auto; text-align:center; font-size:.875rem; pointer-events:none; }
+.habitat-zoom { display:flex; flex-direction:column; position:absolute; right:20px; bottom:20px; gap:6px; }
+.habitat-zoom button, .habitat-move button { background:#fffef4e8; border:1px solid #c7d2c8; border-radius:12px; color:#345341; width:44px; height:44px; font-size:1.25rem; user-select:none; touch-action:none; }
+.habitat-zoom button:hover, .habitat-move button:hover { background:#fff; }
+.habitat-move { display:none; position:absolute; right:20px; bottom:20px; text-align:center; }
+.habitat-move > div { display:flex; gap:5px; margin-top:5px; }
+.is-walking .habitat-move { display:block; }
+.is-walking .habitat-zoom { display:none; }
+.habitat-viewer-bottom { padding:14px 28px 18px; }
+.habitat-viewer-bottom > p:first-child { font-size:.75rem; color:#69776e; margin:0 0 16px; }
+.habitat-inspector { display:grid; grid-template-columns:230px 1fr; gap:32px; padding-top:16px; border-top:1px solid #e4e8e3; }
+.habitat-inspector label { display:block; font-size:.6875rem; color:#6d7870; margin-bottom:5px; }
+.habitat-inspector select { max-width:100%; width:100%; min-height:38px; font:inherit; font-size:.8125rem; border-radius:9px; border:1px solid #d8dfd8; padding:7px 10px; background:#fff; color:#344e3d; }
+.habitat-inspector h3 { font-size:.9375rem; font-weight:600; margin:0 0 5px; }
+.habitat-inspector p { font-size:.8125rem; line-height:1.6; color:#647168; margin:0; }
+.habitat-provenance { margin:15px 0 0; font-size:.6875rem; color:#7b857e; line-height:1.5; }
+@media(max-width:900px) {
+  .habitat-intro { grid-template-columns:1fr; gap:18px; }
+  .habitat-actions > p { margin:8px 0 0; flex-basis:100%; }
+}
+@media(max-width:650px) {
+  .habitat-visual { aspect-ratio:1; min-height:300px; }
+  .habitat-visual-top, .habitat-visual-bottom { left:20px; right:20px; gap:12px; }
+  .habitat-visual-top { top:20px; font-size:.5625rem; }
+  .habitat-visual-bottom { bottom:20px; }
+  .habitat-visual-bottom p { font-size:1.375rem; }
+  .habitat-play { padding:10px 14px; gap:9px; font-size:.75rem; min-height:44px; }
+  .habitat-copy { padding:26px 22px; gap:24px; }
+  .habitat-features { grid-template-columns:1fr; gap:20px; padding:22px 0; }
+  .habitat-features > div { display:grid; grid-template-columns:24px 1fr; column-gap:12px; }
+  .habitat-features > div > span { grid-row:1/3; padding-top:2px; }
+  .habitat-features h4 { margin:0 0 5px; }
+  .habitat-dialog { width:calc(100% - 16px); max-height:calc(100dvh - 16px); border-radius:18px; }
+  .habitat-dialog-head { padding:16px; }
+  .habitat-toolbar { padding:0 16px 12px; gap:6px; }
+  .habitat-toolbar button { padding:6px 10px; font-size:.75rem; }
+  .habitat-view-tabs { gap:4px; }
+  .habitat-stage { height:42dvh; min-height:260px; }
+  .habitat-stage-label { left:16px; font-size:.5625rem; }
+  .habitat-viewer-bottom { padding:12px 16px 16px; }
+  .habitat-inspector { grid-template-columns:1fr; gap:12px; }
+  .habitat-inspector > div:first-child { display:flex; align-items:center; gap:12px; }
+  .habitat-inspector label { flex-shrink:0; margin:0; }
+  .habitat-inspector select { min-width:0; }
+  .habitat-provenance { font-size:.625rem; }
+}
+@media print {
+  .habitat-play, .habitat-actions { display:none!important; }
+  .habitat-showcase { break-inside:avoid; }
+  .habitat-visual { min-height:200px; max-height:200px; }
+}

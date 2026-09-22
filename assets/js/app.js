@@ -3,6 +3,7 @@
   'use strict';
   var S = window.SITE;
   if (!S) return;
+  var habitatController = null, habitatMount = 0;
   var lang = 'en', pubTab = 'selected', projectsOpen = false, newsOpen = false, currentSection = '';
   try { var saved = localStorage.getItem('wc-lang'); if (saved === 'en' || saved === 'zh') lang = saved; else if (/^zh/i.test(navigator.language || '')) lang = 'zh'; } catch (e) {}
   function el(id) { return document.getElementById(id); }
@@ -47,39 +48,24 @@
       habitatShowcase() +
       '<details class="more-projects"' + (projectsOpen ? ' open' : '') + '><summary>' + tr('More projects & interactive demos', '更多项目与交互演示') + ' <span aria-hidden="true">(' + rest.length + ')</span></summary><div class="proj-grid">' + rest.map(function(p) { return projectCard(p, false, false); }).join('') + '</div></details>';
     el('projects').querySelector('details').addEventListener('toggle', function(e) { projectsOpen = e.target.open; });
-    el('habitatPreview').addEventListener('click', openHabitatPreview);
-    el('habitatClose').addEventListener('click', closeHabitatPreview);
+    if (habitatController) habitatController.dispose();
+    var mount = ++habitatMount, root = el('project-habitat'), locale = lang;
+    import('./habitat.js?v=20260922-inline').then(function(module) {
+      if (mount === habitatMount && root.isConnected) habitatController = module.mountHabitat(root, locale);
+    }).catch(function() {
+      if (root.isConnected) root.querySelector('.habitat-load-note').textContent = tr('The 3D viewer could not load. Please refresh to try again.','3D 浏览器未能加载，请刷新重试。');
+    });
   }
   function habitatShowcase() {
     var p = S.projects.find(function(p) { return p.id === 'habitat'; });
     return '<article class="habitat-showcase" id="project-habitat" aria-labelledby="habitatTitle">' +
-      '<div class="habitat-visual"><img src="assets/img/snail-lab-preview.webp" loading="lazy" width="1440" height="900" alt="' + tr('Reconstructed SNAIL Lab with a cutaway view of the living and sensing spaces','SNAIL Lab 空间重构：居住区域与传感设施的剖切视图') + '">' +
-      '<div class="habitat-visual-top"><span>HABITAT STUDIO</span><span>' + tr('Interactive spatial demo','可交互空间演示') + '</span></div>' +
-      '<div class="habitat-visual-bottom"><div><span class="habitat-overline">THE FUTURE LABORATORY · TSINGHUA UNIVERSITY</span><p>SNAIL Lab<span>' + tr('A space to explore. A system to understand.','走进空间，理解系统。') + '</span></p></div>' +
-      '<button class="habitat-play" id="habitatPreview" aria-controls="habitatEmbed" aria-expanded="false"><span aria-hidden="true">▶</span>' + tr('Explore here','在此探索') + '</button></div></div>' +
-      '<div class="habitat-embed" id="habitatEmbed" hidden><div class="habitat-embed-bar"><span>' + tr('Interactive preview · Chinese interface','交互预览 · 中文界面') + '</span><div>' + link('habitat-studio/?view=snail',tr('Open full page ↗','打开完整页面 ↗')) + '<button id="habitatClose" type="button">' + tr('Close preview ×','关闭预览 ×') + '</button></div></div><div id="habitatFrame"></div></div>' +
-      '<div class="habitat-copy proj-body"><div class="habitat-intro"><div><span class="flag">' + tr('Research platform / Interactive experience','研究平台 / 交互体验') + '</span><h3 id="habitatTitle">' + t(p.title) + '</h3></div><p>' + tr('Step inside the lab, explore its sensing layout, and trace activity through a synchronized multimodal replay.','走进实验室，探索传感布局，在同步回放中理解活动与多模态信号的联系。') + '</p></div>' +
-      '<div class="habitat-features"><div><span>01 / SPACE</span><h4>' + tr('Explore SNAIL Lab','探索 SNAIL Lab') + '</h4><p>' + tr('Orbit the reconstructed space and inspect its sensor layout.','旋转查看重构空间，了解传感设施与空间布局。') + '</p></div><div><span>02 / WALK</span><h4>' + tr('Take a first-person walk','第一人称漫游') + '</h4><p>' + tr('Move with WASD; drag to look around. Touch controls on mobile.','WASD 移动，拖动环顾；手机支持触控操作。') + '</p></div><div><span>03 / SENSE</span><h4>' + tr('Follow the signals','沿着信号观察') + '</h4><p>' + tr('Connect events, sensor traces, and a shared replay timeline.','在同一时间轴上关联事件、传感信号与回放。') + '</p></div></div>' +
-      '<div class="habitat-actions">' + link('habitat-studio/?view=snail',tr('Enter SNAIL Lab ↗','进入 SNAIL Lab ↗'),'button primary') + link('habitat-studio/?view=snail&mode=walk',tr('WASD walkthrough ↗','WASD 空间漫游 ↗'),'button') + '<p>' + tr('Browser-based · No installation<br>Spatial reconstruction & illustrative sample data · Chinese interface','浏览器直接体验 · 无需安装<br>空间重构与示例数据演示 · 中文界面') + '</p></div></div></article>';
-  }
-  function openHabitatPreview() {
-    var frame = document.createElement('iframe');
-    frame.src = 'habitat-studio/?view=snail&embed=1';
-    frame.title = tr('Habitat Studio — interactive SNAIL Lab preview','Habitat Studio — SNAIL Lab 交互预览');
-    frame.setAttribute('allow', 'fullscreen');
-    el('habitatFrame').replaceChildren(frame);
-    el('habitatEmbed').hidden = false;
-    el('habitatPreview').setAttribute('aria-expanded','true');
-    el('habitatPreview').disabled = true;
-    el('habitatClose').focus({preventScroll:true});
-    el('habitatEmbed').scrollIntoView({block:'start',behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
-  }
-  function closeHabitatPreview() {
-    el('habitatFrame').replaceChildren();
-    el('habitatEmbed').hidden = true;
-    el('habitatPreview').disabled = false;
-    el('habitatPreview').setAttribute('aria-expanded','false');
-    el('habitatPreview').focus({preventScroll:true});
+      '<div class="habitat-visual"><canvas class="habitat-preview-canvas" role="img" aria-label="' + tr('Photo-assisted 3D model of SNAIL Lab, showing the living, rest, work and discussion areas.','SNAIL Lab 照片辅助三维模型，展示会客、休息、工作与研讨区域。') + '"></canvas>' +
+      '<div class="habitat-visual-top"><span>SNAIL LAB</span><span>' + tr('An interactive spatial model','可交互空间模型') + '</span></div>' +
+      '<div class="habitat-visual-bottom"><p>' + tr('A living lab.<br>A closer look.','走进实验室。<br>看见空间里的研究。') + '</p><button class="habitat-play" data-habitat-open="orbit" aria-haspopup="dialog">' + tr('Explore in 3D','探索三维空间') + ' <span aria-hidden="true">↗</span></button></div>' +
+      '<p class="habitat-load-note" role="status">' + tr('Preparing the spatial model…','正在准备空间模型…') + '</p></div>' +
+      '<div class="habitat-copy proj-body"><div class="habitat-intro"><div><span class="flag">' + tr('Research platform · The Future Laboratory, Tsinghua University','研究平台 · 清华大学未来实验室') + '</span><h3 id="habitatTitle">' + t(p.title) + '</h3></div><p>' + tr('How can a living space help us understand human activity? Explore the spatial context behind a multimodal sensing platform, from everyday living to collaborative research.','居住空间如何帮助我们理解人的活动？从日常起居到协作研究，探索多模态传感平台背后的空间情境。') + '</p></div>' +
+      '<div class="habitat-features"><div><span>01</span><h4>' + tr('Spatial context','空间情境') + '</h4><p>' + tr('A photo-assisted model of SNAIL Lab, with distinct living, rest and discussion areas.','照片辅助构建 SNAIL Lab 模型，呈现会客、休息与研讨区域。') + '</p></div><div><span>02</span><h4>' + tr('Explore at your pace','自由探索') + '</h4><p>' + tr('Orbit, inspect objects or walk through the room with WASD and touch controls.','旋转空间、查看物件，或通过 WASD 与触控按钮在室内漫游。') + '</p></div><div><span>03</span><h4>' + tr('Multimodal research','多模态研究') + '</h4><p>' + tr('The platform combines depth, audio, mmWave, IMU, tactile and olfactory sensing with a capacitive floor.','平台融合深度、音频、毫米波、IMU、触觉、嗅觉传感与电容地板。') + '</p></div></div>' +
+      '<div class="habitat-actions"><button class="button primary" data-habitat-open="orbit" aria-haspopup="dialog">' + tr('Explore SNAIL Lab','探索 SNAIL Lab') + '</button><button class="button" data-habitat-open="walk" aria-haspopup="dialog">' + tr('Take a walkthrough','开启空间漫游') + '</button><p>' + tr('Photo-assisted model · Approximate geometry<br>No live sensor data in this demonstration','照片辅助模型 · 几何尺寸为近似值<br>本演示不包含实时传感数据') + '</p></div></div></article>';
   }
   function renderPublications(focusTab) {
     var list = S.publications.filter(function(p) { return pubTab === 'all' || p.selected; });

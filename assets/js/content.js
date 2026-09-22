@@ -318,15 +318,14 @@ window.SITE = {
       img: "assets/img/proj-habitat-v3.webp?v=20260814-distinct-project-covers",
       flag: { en: "Interactive research platform", zh: "交互研究平台" },
       title: { en: "Smart Habitat Platform", zh: "人居环境多模态实验平台" },
-      sub: { en: "Explore SNAIL Lab, from spatial context to multimodal signals", zh: "走进 SNAIL Lab，连接空间情境与多模态信号" },
+      sub: { en: "A living lab for multimodal human-activity research", zh: "面向人体活动研究的多模态人居实验空间" },
       desc: {
-        en: "A multimodal sensing platform for studying human activity in living spaces, combining depth, audio, mmWave, IMU, tactile and olfactory sensing with a 60 m² capacitive floor. The browser demonstration pairs a spatial reconstruction of SNAIL Lab with synthetic sample replay and a first-person walkthrough, illustrating the platform’s research workflow for privacy-aware activity understanding and embodied learning.",
-        zh: "面向日常居住空间中人体活动研究的多模态传感平台，融合深度、音频、毫米波、IMU、触觉、嗅觉传感及 60㎡ 电容地板。浏览器演示结合 SNAIL Lab 空间重构、合成样本回放与第一人称漫游，呈现面向隐私友好型活动理解与具身学习的平台研究流程。"
+        en: "A multimodal sensing platform for studying human activity in living spaces, combining depth, audio, mmWave, IMU, tactile and olfactory sensing with a 60 m² capacitive floor. Explore a photo-assisted model of SNAIL Lab, inspect its objects, and move through the room in a first-person walkthrough. This spatial demonstration uses approximate geometry and contains no live sensor measurements.",
+        zh: "面向日常居住空间中人体活动研究的多模态传感平台，融合深度、音频、毫米波、IMU、触觉、嗅觉传感及 60㎡ 电容地板。通过照片辅助构建的 SNAIL Lab 模型，探索空间布局、查看物件，并以第一人称在室内漫游。本空间演示采用近似几何，不含实时传感测量。"
       },
-      tech: ["3D Lab", "Multimodal Sensing", "Sample Replay", "WASD Walkthrough"],
+      tech: ["Spatial Modeling", "Multimodal Research", "Interactive 3D", "WASD Walkthrough"],
       links: [
-        { label: { en: "Explore SNAIL Lab", zh: "探索 SNAIL Lab" }, url: "habitat-studio/?view=snail" },
-        { label: { en: "Start a walkthrough", zh: "开启空间漫游" }, url: "habitat-studio/?view=snail&mode=walk" }
+        { label: { en: "Explore SNAIL Lab", zh: "探索 SNAIL Lab" }, url: "#project-habitat" }
       ]
     },
     {
@@ -449,7 +448,7 @@ SITE.projects[8].summary = { en: 'What can a robot learn by shaking a sealed box
 SITE.projects[3].summary = { en: 'A tactile system developed with Tsinghua Future Laboratory and Kaiwu Robotics, organizing contact events through their representation, temporal process, and interaction context.', zh: '与清华大学未来实验室及 Kaiwu Robotics 共同开发的触觉系统，从表征、时间过程与交互关系组织接触事件。' };
 // Describe aims and planned work without presenting them as validated findings.
 SITE.projects[3].desc = SITE.projects[3].summary;
-SITE.projects[5].summary = { en: 'Step inside SNAIL Lab. Explore its spatial reconstruction, follow synthetic multimodal sample replay, and move through the space in a first-person walkthrough.', zh: '走进 SNAIL Lab，探索实验室空间重构，观察合成多模态样本回放，并以第一人称在空间中自由漫游。' };
+SITE.projects[5].summary = { en: 'Step inside SNAIL Lab: explore the spatial model and discover the setting behind multimodal habitat research.', zh: '走进 SNAIL Lab：探索空间模型，了解多模态人居研究背后的实验场景。' };
 SITE.projects[5].displayFlag = { en: 'SNAIL Lab · Interactive demo', zh: 'SNAIL Lab · 交互演示' };
 SITE.projects[1].sub = { en: 'An interactive player-modeling demonstration', zh: '玩家建模的交互演示' };
 SITE.projects[4].flag = { en: 'Planned study', zh: '研究计划' };

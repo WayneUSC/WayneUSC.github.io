@@ -1,22 +1,12 @@
-# Habitat Studio on Wen Chen's portfolio
+# SNAIL Lab route compatibility
 
-`index.html` is the self-contained public demo adapted from `Habitat_Studio_SNAIL_v1_3_1.html`. It retains the original scene geometry, reference images, provenance, exports, and synthetic replay. No build step or third-party runtime is required.
+The previous standalone Habitat Studio application has been replaced by the native homepage experience at `/#project-habitat`. Existing bookmarks redirect to that project. No homepage control navigates to this directory or loads an iframe.
 
-## Entry links
+The complete pre-integration application, including reference photographs, exports and synthetic replay, is preserved in branch `codex/backup-before-habitat-inline-2026-09-22` (commit `2fb448a6b4482aa976d881cb20109b196d86263b`).
 
-- `./?view=snail` opens the SNAIL Lab workbench.
-- `./?view=snail&mode=walk` opens the room in walking mode, without starting motion or replay.
-- Add `&embed=1` to either link to replace the sidebar with a compact, horizontally scrollable six-page navigation bar inside a portfolio iframe.
-- `#snail` and `#walk` are also accepted. URL values are allowlisted by the app's existing page router.
+Current implementation:
+- `assets/js/habitat-renderer.js`: the original parametric scene, WebGL renderer, CPU fallback, picking and first-person camera, isolated from the source application.
+- `assets/js/habitat.js`: bilingual modal, scoped keyboard/pointer controls, lazy loading and cleanup.
+- `assets/css/habitat.css`: portfolio presentation and responsive viewer.
 
-## Walking
-
-Click the room to give the canvas keyboard focus. Use WASD to move, Space to raise the viewpoint, Shift to lower it, and drag to look around. Alt slows movement. Escape restores the previous orbit view. Touch users can hold the direction and height buttons overlaid on the room; dragging the room changes the viewing direction. The controls also accept keyboard activation in discrete steps. Keyboard and touch holds are tracked separately, so a focus change within the controls does not cancel a held touch.
-
-Movement stops on focus loss, backgrounding, page changes, and modal dialogs. Playback shortcuts do not intercept walking controls or form input. Reduced-motion settings disable automatic playback when synthetic overlays are enabled; visitors can still deliberately start replay.
-
-## Data and boundaries
-
-The room is a photo-assisted, manually parameterized reference model, with uncalibrated dimensions. Built-in signals and anonymous avatar trajectories are synthetic examples, not measurements or experimental results. Walking is a camera navigation mode, without furniture collision physics.
-
-The eight embedded reference photos are retained from the supplied HTML, including its existing screen masks and metadata removal. Local JSON and video imports stay in the browser. The content security policy blocks network connections, and only the interface text-size preference is stored locally. The return link navigates back to the portfolio.
+The model is manually parameterized from reference photographs. Geometry is approximate and uncalibrated; the viewer makes no live-data or calibrated-coverage claim. Walking is a bounded free camera, without furniture collision physics.

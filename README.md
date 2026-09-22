@@ -31,9 +31,12 @@ A second backup preserves the version immediately before this refinement: `codex
 
 - Kaiwu Robotics (北京清工开物科技有限公司) was established on **June 17, 2026**, as confirmed by the owner. Bilingual news, the experience timeline and Organization structured data now include that founding date. The timeline labels it as the company’s establishment date.
 - The homepage signature and its accessible label use **Wen Chen**; Wayne remains the existing personal alias.
-- Smart Habitat has a dedicated interactive feature linking to `habitat-studio/?view=snail` for the SNAIL Lab spatial reconstruction and `habitat-studio/?view=snail&mode=walk` for the first-person walkthrough. The source is the owner-supplied `Habitat_Studio_SNAIL_v1_3_1.html`.
-- Habitat Studio presents synthetic sample replay and a spatial demonstration. Its sample signals are not a live lab data feed or validated benchmark results. Platform descriptions distinguish the research aims from what this public demonstration shows.
-- Homepage styles/scripts and the printable profile’s shared content use the `20260922` cache version.
+- Smart Habitat now uses a native high-DPI Canvas preview and a bilingual in-page 3D dialog. The exact photo-assisted parametric scene is extracted from the owner-supplied `Habitat_Studio_SNAIL_v1_3_1.html`; the full application, reference photos and synthetic replay are not loaded.
+- Visitors can orbit, zoom, select objects, switch to a plan view, or walk with WASD / arrow keys and on-screen direction buttons. Dragging or Q/E turns the camera; R/F looks up/down. The +/− keys also zoom in orbit mode. Escape first exits walking, then closes the dialog. Keyboard movement is restricted to the focused canvas and stops on blur, tab backgrounding or close.
+- Geometry is approximate, not a metrically calibrated reconstruction. The viewer contains no live measurements or sensor-coverage claims. Walking is a bounded free camera without furniture collision physics. The existing platform background remains separate from this public demonstration.
+- No homepage action navigates to a separate Habitat page. Old `habitat-studio/` bookmarks redirect to `/#project-habitat`. The original model geometry is preserved; graphics load near the project and draw on demand (continuous updates only while walking). GPU rendering supports up to DPR 3 with a 6-megapixel budget; a CPU fallback is included.
+- The version before this integration is preserved in `codex/backup-before-habitat-inline-2026-09-22` at `2fb448a6b4482aa976d881cb20109b196d86263b`, plus a complete source ZIP saved outside the checkout.
+- Homepage resources use the `20260922-inline` cache version for this integration.
 
 ## Edit and preview
 
@@ -43,7 +46,8 @@ A second backup preserves the version immediately before this refinement: `codex
 - `index.html`: page shell, canonical URL, existing social preview metadata and structured data.
 - `research-profile.html` and `assets/js/profile.js`: printable research summary using the same content source. This is a research profile, not a replacement for a complete CV.
 - `poirot/`: existing English and Chinese detective-game demos; unchanged by this redesign.
-- `habitat-studio/`: interactive SNAIL Lab spatial demonstration and synthetic multimodal replay, with keyboard walkthrough controls on desktop.
+- `assets/js/habitat.js`, `assets/js/habitat-renderer.js`, `assets/css/habitat.css`: native SNAIL Lab preview and viewer.
+- `habitat-studio/`: compatibility redirect for previous standalone demo links.
 
 Run `python3 -m http.server 8000` in this directory and open http://localhost:8000/. The homepage remembers an explicit language choice and otherwise follows the browser language. The profile accepts `?lang=en` or `?lang=zh`.
 
