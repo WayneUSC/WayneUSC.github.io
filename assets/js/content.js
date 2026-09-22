@@ -79,6 +79,7 @@ window.SITE = {
 
   news: [
     { when: "2026.09", en: "<b>Cultivating Connections</b> published at IEEE CoG 2026 (Madrid).", zh: "<b>Cultivating Connections</b> 发表于 IEEE CoG 2026（马德里）。" },
+    { when: "2026.06.17", en: "<b>Kaiwu Robotics</b> (北京清工开物科技有限公司), which I co-founded, was established.", zh: "我参与联合创办的 <b>北京清工开物科技有限公司（Kaiwu Robotics）</b> 正式成立。" },
     { when: "2026.06", en: "<b>Bio-inspired Full-dimensional Tactile Sensing</b> presented in the finals of the Haptic Technology and Application Competition.", zh: "<b>仿生全维度触觉传感系统</b> 入围并展示于力触觉技术及应用大赛决赛。" },
     { when: "2026.03", en: "<b>POIROT</b> accepted to ACM/IEEE HRI 2026 (Edinburgh).", zh: "<b>POIROT</b> 论文被 ACM/IEEE HRI 2026（爱丁堡）录用。" },
     { when: "2026.03", en: "<b>AIoT Smart Home Automation Architecture</b> published in ACM IUI Companion 2026.", zh: "<b>AIoT 智能家居自动化架构</b> 论文发表于 ACM IUI Companion 2026。" },
@@ -315,14 +316,18 @@ window.SITE = {
     },
     {
       img: "assets/img/proj-habitat-v3.webp?v=20260814-distinct-project-covers",
-      flag: { en: "Platform", zh: "实验平台" },
+      flag: { en: "Interactive research platform", zh: "交互研究平台" },
       title: { en: "Smart Habitat Platform", zh: "人居环境多模态实验平台" },
-      sub: { en: "Multimodal dataset for embodied learning", zh: "面向具身学习的多模态数据库" },
+      sub: { en: "Explore SNAIL Lab, from spatial context to multimodal signals", zh: "走进 SNAIL Lab，连接空间情境与多模态信号" },
       desc: {
-        en: "A benchmark-quality multimodal dataset (depth + audio + mmWave + IMU + tactile + a 60 m² capacitive floor + olfactory sensing) captured in real living scenarios, for privacy-preserving human-activity understanding in smart habitats.",
-        zh: "在真实居住场景中采集的基准级多模态数据库（深度 + 音频 + 毫米波 + IMU + 触觉 + 60㎡ 电容地板 + 嗅觉感知），用于隐私友好的人居环境人体活动理解与具身学习。"
+        en: "A multimodal sensing platform for studying human activity in living spaces, combining depth, audio, mmWave, IMU, tactile and olfactory sensing with a 60 m² capacitive floor. The browser demonstration pairs a spatial reconstruction of SNAIL Lab with synthetic sample replay and a first-person walkthrough, illustrating the platform’s research workflow for privacy-aware activity understanding and embodied learning.",
+        zh: "面向日常居住空间中人体活动研究的多模态传感平台，融合深度、音频、毫米波、IMU、触觉、嗅觉传感及 60㎡ 电容地板。浏览器演示结合 SNAIL Lab 空间重构、合成样本回放与第一人称漫游，呈现面向隐私友好型活动理解与具身学习的平台研究流程。"
       },
-      tech: ["Depth", "mmWave", "Tactile", "Capacitive Floor", "IMU"]
+      tech: ["3D Lab", "Multimodal Sensing", "Sample Replay", "WASD Walkthrough"],
+      links: [
+        { label: { en: "Explore SNAIL Lab", zh: "探索 SNAIL Lab" }, url: "habitat-studio/?view=snail" },
+        { label: { en: "Start a walkthrough", zh: "开启空间漫游" }, url: "habitat-studio/?view=snail&mode=walk" }
+      ]
     },
     {
       img: "assets/img/proj-aiot.jpg?v=20260607-project-covers",
@@ -372,8 +377,8 @@ window.SITE = {
 
   experience: {
     work: [
-      { when: { en: "Present", zh: "现任" }, what: { en: "Co-founder", zh: "联合创始人" },
-        where: { en: "Kaiwu Robotics", zh: "北京清工开物科技有限公司（Kaiwu Robotics）" } },
+      { when: { en: "2026.06 – Present", zh: "2026.06 – 至今" }, what: { en: "Co-founder", zh: "联合创始人" },
+        where: { en: "Kaiwu Robotics<br>Company founded June 17, 2026", zh: "北京清工开物科技有限公司（Kaiwu Robotics）<br>公司成立于 2026 年 6 月 17 日" } },
       { when: "2023 – Present", what: { en: "R&D Engineer", zh: "研发工程师" },
         where: { en: "The Future Laboratory, Tsinghua University", zh: "清华大学 未来实验室" } },
       { when: "2022 – 2023", what: { en: "Researcher", zh: "研究员" },
@@ -444,7 +449,8 @@ SITE.projects[8].summary = { en: 'What can a robot learn by shaking a sealed box
 SITE.projects[3].summary = { en: 'A tactile system developed with Tsinghua Future Laboratory and Kaiwu Robotics, organizing contact events through their representation, temporal process, and interaction context.', zh: '与清华大学未来实验室及 Kaiwu Robotics 共同开发的触觉系统，从表征、时间过程与交互关系组织接触事件。' };
 // Describe aims and planned work without presenting them as validated findings.
 SITE.projects[3].desc = SITE.projects[3].summary;
-SITE.projects[5].desc = { en: 'A multimodal sensing platform for studying human activity in living spaces, combining depth, audio, mmWave, IMU, tactile and olfactory sensing with a 60 m² capacitive floor. The platform supports research toward privacy-aware activity understanding and embodied learning.', zh: '面向日常居住空间中人体活动研究的多模态传感平台，融合深度、音频、毫米波、IMU、触觉、嗅觉传感及 60㎡ 电容地板，支持隐私友好型活动理解与具身学习研究。' };
+SITE.projects[5].summary = { en: 'Step inside SNAIL Lab. Explore its spatial reconstruction, follow synthetic multimodal sample replay, and move through the space in a first-person walkthrough.', zh: '走进 SNAIL Lab，探索实验室空间重构，观察合成多模态样本回放，并以第一人称在空间中自由漫游。' };
+SITE.projects[5].displayFlag = { en: 'SNAIL Lab · Interactive demo', zh: 'SNAIL Lab · 交互演示' };
 SITE.projects[1].sub = { en: 'An interactive player-modeling demonstration', zh: '玩家建模的交互演示' };
 SITE.projects[4].flag = { en: 'Planned study', zh: '研究计划' };
 SITE.publications.forEach(function(p) { p.selected = ['HRI 2026','IEEE CoG 2026','IUI Companion 2026'].indexOf(p.venueShort) !== -1; });

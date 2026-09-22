@@ -4,9 +4,9 @@ Live at https://wayneusc.github.io/. Static HTML, CSS and vanilla JavaScript, se
 
 ## September 2026 redesign
 
-An editorial research portfolio organized around dynamic tactile sensing, embodied human–robot interaction and multimodal systems. The live-text signature uses **Great Vibes**, also used on Xinyi Fu's homepage. A locally hosted subset for “Wayne Chen” avoids a Google Fonts network dependency; its SIL Open Font License is included in `assets/fonts/OFL.txt`.
+An editorial research portfolio organized around dynamic tactile sensing, embodied human–robot interaction and multimodal systems. The live-text signature reads **Wen Chen** in **Great Vibes**, also used on Xinyi Fu's homepage. The existing locally hosted subset includes all required letters and avoids a Google Fonts network dependency; its SIL Open Font License is included in `assets/fonts/OFL.txt`.
 
-The home page features POIROT, ShakeSort and bio-inspired tactile sensing, with all ten projects available in the expandable project archive. Three relevant papers appear initially; all eight original publication records remain available. English and Chinese content, publication selection, citation copying, contact links and the POIROT browser demo are retained or supported. A standalone research profile supports printing or saving as PDF in either language.
+The home page features POIROT, ShakeSort, bio-inspired tactile sensing and an interactive Smart Habitat presentation. All ten project records remain available across featured work and the expandable archive. Three relevant papers appear initially; all eight original publication records remain available. English and Chinese content, publication selection, citation copying, contact links and the POIROT browser demo are retained or supported. A standalone research profile supports printing or saving as PDF in either language.
 
 ## September 12 visual refinement
 
@@ -27,6 +27,14 @@ These values use rem units and follow the browser's text-size preference. Tablet
 
 A second backup preserves the version immediately before this refinement: `codex/backup-before-apple-refinement-2026-09-12` at `f4d65506f5395f531937afa9e203a1d5a3af0076`. The September 8 original backup remains available.
 
+## September 22 content and Habitat update
+
+- Kaiwu Robotics (北京清工开物科技有限公司) was established on **June 17, 2026**, as confirmed by the owner. Bilingual news, the experience timeline and Organization structured data now include that founding date. The timeline labels it as the company’s establishment date.
+- The homepage signature and its accessible label use **Wen Chen**; Wayne remains the existing personal alias.
+- Smart Habitat has a dedicated interactive feature linking to `habitat-studio/?view=snail` for the SNAIL Lab spatial reconstruction and `habitat-studio/?view=snail&mode=walk` for the first-person walkthrough. The source is the owner-supplied `Habitat_Studio_SNAIL_v1_3_1.html`.
+- Habitat Studio presents synthetic sample replay and a spatial demonstration. Its sample signals are not a live lab data feed or validated benchmark results. Platform descriptions distinguish the research aims from what this public demonstration shows.
+- Homepage styles/scripts and the printable profile’s shared content use the `20260922` cache version.
+
 ## Edit and preview
 
 - `assets/js/content.js`: bilingual records and presentation copy (`SITE.design`). Stable project IDs and curated summaries are at the bottom. Display overrides are intentional; edit them when updating the underlying record.
@@ -35,6 +43,7 @@ A second backup preserves the version immediately before this refinement: `codex
 - `index.html`: page shell, canonical URL, existing social preview metadata and structured data.
 - `research-profile.html` and `assets/js/profile.js`: printable research summary using the same content source. This is a research profile, not a replacement for a complete CV.
 - `poirot/`: existing English and Chinese detective-game demos; unchanged by this redesign.
+- `habitat-studio/`: interactive SNAIL Lab spatial demonstration and synthetic multimodal replay, with keyboard walkthrough controls on desktop.
 
 Run `python3 -m http.server 8000` in this directory and open http://localhost:8000/. The homepage remembers an explicit language choice and otherwise follows the browser language. The profile accepts `?lang=en` or `?lang=zh`.
 
