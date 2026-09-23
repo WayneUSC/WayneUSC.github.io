@@ -394,11 +394,11 @@ window.SITE = {
         where: { en: "The Future Laboratory, Tsinghua University", zh: "清华大学 未来实验室" } },
       { when: "2022 – 2023", what: { en: "Researcher", zh: "研究员" },
         where: { en: "New Jersey Institute of Technology", zh: "新泽西理工学院（NJIT）" } },
-      { when: "2019 – 2022", what: { en: "Volunteer Researcher", zh: "志愿研究员" },
+      { when: "2019.10 – 2021.05", what: { en: "Volunteer Researcher", zh: "志愿研究员" },
         where: { en: "USC Interaction Lab", zh: "南加州大学 交互实验室" } }
     ],
     education: [
-      { when: "2018 – 2022", what: { en: "M.S. in Computer Science", zh: "计算机科学 硕士" },
+      { when: "2019.01 – 2021.05", what: { en: "M.S. in Computer Science", zh: "计算机科学 硕士" },
         where: { en: "University of Southern California", zh: "南加州大学（USC）" } },
       { when: "2016 – 2018", what: { en: "M.S. in Chemical Engineering", zh: "化学工程 硕士" },
         where: { en: "University of Southern California", zh: "南加州大学（USC）" } },
