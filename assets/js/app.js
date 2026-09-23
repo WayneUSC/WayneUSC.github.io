@@ -41,7 +41,7 @@
     return '<article class="proj-card' + (featured ? ' featured' : '') + '" id="project-' + p.id + '"><div class="proj-media"><img loading="lazy" src="' + esc(p.img) + '" alt="' + esc(t(p.title)) + '"></div><div class="proj-body"><span class="flag">' + t(p.displayFlag || p.flag) + '</span><h3>' + t(p.title) + '</h3><p class="sub">' + t(p.sub) + '</p><p>' + t(compact && p.summary ? p.summary : p.desc) + '</p>' + (projectLinks ? '<div class="project-links">' + projectLinks + '</div>' : '') + '<div class="tech">' + p.tech.map(function(x) { return '<span>' + esc(x) + '</span>'; }).join('') + '</div></div></article>';
   }
   function renderProjects() {
-    var highlighted = ['poirot', 'shakesort', 'bionic-haptics'];
+    var highlighted = ['poirot', 'shakesort', 'lumie'];
     var first = highlighted.map(function(id, i) { return projectCard(S.projects.find(function(p) { return p.id === id; }), i === 0, true); }).join('');
     var rest = S.projects.filter(function(p) { return highlighted.indexOf(p.id) === -1 && p.id !== 'habitat'; });
     el('projects').innerHTML = sectionHead('02', {en:'Selected work',zh:'代表性研究'}, tr('Systems built. Questions explored.','构建系统，探索问题。')) + '<div class="featured-projects">' + first + '</div>' +

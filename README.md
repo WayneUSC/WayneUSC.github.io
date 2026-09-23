@@ -6,7 +6,13 @@ Live at https://wayneusc.github.io/. Static HTML, CSS and vanilla JavaScript, se
 
 An editorial research portfolio organized around dynamic tactile sensing, embodied human–robot interaction and multimodal systems. The live-text signature reads **Wen Chen** in **Great Vibes**, also used on Xinyi Fu's homepage. The existing locally hosted subset includes all required letters and avoids a Google Fonts network dependency; its SIL Open Font License is included in `assets/fonts/OFL.txt`.
 
-The home page features POIROT, ShakeSort, bio-inspired tactile sensing and an interactive Smart Habitat presentation. All ten project records remain available across featured work and the expandable archive. Three relevant papers appear initially; all eight original publication records remain available. English and Chinese content, publication selection, citation copying, contact links and the POIROT browser demo are retained or supported. A standalone research profile supports printing or saving as PDF in either language.
+The home page features POIROT, ShakeSort, Lumie and an interactive Smart Habitat presentation. All eleven project records remain available across featured work and the expandable archive. Three relevant papers appear initially; all eight original publication records remain available. English and Chinese content, publication selection, citation copying, contact links and the POIROT browser demo are retained or supported. A standalone research profile supports printing or saving as PDF in either language.
+
+## September 23 Lumie update
+
+- Added **Lumie / 灯仔**, a five-degree-of-freedom expressive robotic study lamp, to selected work and the printable bilingual research profile.
+- The project record distinguishes implemented prototype work (incremental voice planning, expressive motion, lighting, vision and a companion SwiftUI dashboard) from longer-term memory-driven personalization goals.
+- The project cover uses the owner-supplied yellow lamp artwork, center-cropped to the site’s 3:2 media ratio and compressed for the web.
 
 ## September 12 visual refinement
 

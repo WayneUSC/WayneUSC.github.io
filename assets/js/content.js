@@ -371,6 +371,18 @@ window.SITE = {
         zh: "由柔性压力传感器阵列与 ESP32 构成的无线坐姿感知系统，运用机器学习识别人员数量、位置与姿态，并配套 Web 与 iOS 端可视化应用，进一步拓展到情感状态推断。"
       },
       tech: ["ESP32", "Pressure Array", "Web", "iOS", "ML"]
+    },
+    {
+      img: "assets/img/proj-lumie.jpg?v=20260923-lumie",
+      flag: { en: "Prototype · Ongoing (2026)", zh: "当前原型 · 持续开发（2026）" },
+      title: { en: "Lumie", zh: "灯仔 Lumie" },
+      sub: { en: "A five-DoF embodied AI desk lamp for predictive multimodal interaction",
+             zh: "面向预测式多模态交互的五自由度桌面具身智能台灯" },
+      desc: {
+        en: "Designed for reading, study, and everyday desktop use, Lumie combines head-mounted vision, adjustable RGB lighting, voice input, a speaker, and Raspberry Pi 4. Its prototype stack uses incremental intent prediction and hierarchical behavior control to coordinate speech, light, and safety-bounded motion. A companion SwiftUI prototype explores study dashboards and AI-assisted family feedback; long-term memory-driven personalization remains in development.",
+        zh: "面向阅读、学习与日常桌面场景，灯仔集成灯头视觉、可调 RGB 照明、语音输入、扬声器与 Raspberry Pi 4。原型软件栈通过增量式意图预测与分层行为控制，协同语音、灯光和安全限位内的机械动作；配套 SwiftUI 原型探索学习仪表盘与 AI 辅助家庭反馈，而长期记忆驱动的个性化仍在持续开发。"
+      },
+      tech: ["Embodied AI", "HRI", "Raspberry Pi 4", "Python", "SwiftUI"]
     }
   ],
 
@@ -429,14 +441,14 @@ SITE.design = {
   lanes: [
     { label: { en: '01 / Sense', zh: '01 / 感知' }, title: { en: 'Read the world through touch', zh: '通过触觉，读取物理世界' }, desc: { en: 'Vibration, force, and contact dynamics as temporal signals for understanding hidden material and object properties.', zh: '将振动、力和接触动态视为时序信号，理解材料与物体中不可见的物理属性。' }, evidence: { en: 'ShakeSort & bio-inspired sensing', zh: 'ShakeSort 与仿生触觉感知' }, target: 'project-shakesort' },
     { label: { en: '02 / Interact', zh: '02 / 交互' }, title: { en: 'Bring robots into social life', zh: '让机器人参与社会交互' }, desc: { en: 'Embodied systems for multi-party interaction, with human studies examining experience, attitudes, and adaptive behavior.', zh: '构建面向多人交互的具身系统，通过人因实验研究交互体验、用户态度与自适应行为。' }, evidence: { en: 'POIROT · HRI 2026', zh: 'POIROT · HRI 2026' }, target: 'project-poirot' },
-    { label: { en: '03 / Integrate', zh: '03 / 融合' }, title: { en: 'Connect signals to systems', zh: '从多模态信号走向完整系统' }, desc: { en: 'Multimodal sensing and learning in everyday spaces, connecting physical prototypes, software, and human-centered evaluation.', zh: '在日常空间中融合多模态传感与学习，将物理原型、软件系统和以人为中心的评估连接起来。' }, evidence: { en: 'AIoT · IUI Companion 2026', zh: 'AIoT · IUI Companion 2026' }, target: 'publications' }
+    { label: { en: '03 / Integrate', zh: '03 / 融合' }, title: { en: 'Connect signals to systems', zh: '从多模态信号走向完整系统' }, desc: { en: 'Multimodal sensing and learning in everyday spaces, connecting physical prototypes, software, and human-centered evaluation.', zh: '在日常空间中融合多模态传感与学习，将物理原型、软件系统和以人为中心的评估连接起来。' }, evidence: { en: 'Lumie · Embodied study companion', zh: '灯仔 Lumie · 具身学习陪伴' }, target: 'project-lumie' }
   ],
   background: { en: 'My training in Chemical Engineering and Computer Science gives me a way to connect materials, sensors, algorithms, and complete robotic systems. I work across hardware prototyping, software development, and human-centered evaluation.', zh: '化学工程与计算机科学的交叉训练，让我能够连接材料、传感器、算法与完整的机器人系统。我的工作横跨硬件原型、软件开发以及以人为中心的评估。' },
   contact: { en: 'Let’s talk about embodied intelligence.', zh: '一起探索具身智能。' },
   contactText: { en: 'I welcome conversations about doctoral research and collaborations in tactile sensing, human–robot interaction, and multimodal embodied intelligence.', zh: '欢迎交流动态触觉感知、人机交互与多模态具身智能方向的博士研究机会和科研合作。' }
 };
 // Stable anchors and topical highlights; original project records remain accessible.
-['poirot','poirot-demo','smart-surface','bionic-haptics','tactile-mapping','habitat','aiot','roboleague','shakesort','sofa'].forEach(function(id, i) { SITE.projects[i].id = id; });
+['poirot','poirot-demo','smart-surface','bionic-haptics','tactile-mapping','habitat','aiot','roboleague','shakesort','sofa','lumie'].forEach(function(id, i) { SITE.projects[i].id = id; });
 SITE.projects[0].links = [
   {label:{en:'Read paper',zh:'阅读论文'},url:'https://doi.org/10.1145/3757279.3788663'},
   {label:{en:'arXiv',zh:'arXiv'},url:'https://arxiv.org/abs/2603.08136'},
@@ -452,6 +464,7 @@ SITE.projects[5].summary = { en: 'Step inside SNAIL Lab: explore the spatial mod
 SITE.projects[5].displayFlag = { en: 'SNAIL Lab · Interactive demo', zh: 'SNAIL Lab · 交互演示' };
 SITE.projects[1].sub = { en: 'An interactive player-modeling demonstration', zh: '玩家建模的交互演示' };
 SITE.projects[4].flag = { en: 'Planned study', zh: '研究计划' };
+SITE.projects[10].summary = { en: 'A five-DoF embodied AI lamp that coordinates head-mounted vision, voice, RGB light, and safety-bounded motion through incremental intent prediction and hierarchical control.', zh: '一款五自由度具身智能台灯，通过增量式意图预测与分层控制，协同灯头视觉、语音、RGB 灯光和安全限位内的机械动作。' };
 SITE.publications.forEach(function(p) { p.selected = ['HRI 2026','IEEE CoG 2026','IUI Companion 2026'].indexOf(p.venueShort) !== -1; });
 SITE.ui.nav = [
   {id:'research',en:'Research',zh:'研究'}, {id:'projects',en:'Selected work',zh:'代表作'},
