@@ -44,6 +44,16 @@ A second backup preserves the version immediately before this refinement: `codex
 - The version before this integration is preserved in `codex/backup-before-habitat-inline-2026-09-22` at `2fb448a6b4482aa976d881cb20109b196d86263b`, plus a complete source ZIP saved outside the checkout.
 - Homepage resources use the `20260922-inline` cache version for this integration.
 
+## September 23 POIROT film and visual refinement
+
+The POIROT project photograph now includes an explicit **Watch the film** control. It opens the owner-supplied HRI 2026 supplementary video in a native dialog, with English/Chinese interface text, original embedded English captions, native playback/fullscreen controls and a direct MP4 download. Closing pauses playback, releases the video source, and restores scroll position and keyboard focus. No video element or video request is created before clicking.
+
+`assets/video/poirot-hri2026.mp4` preserves the original 59.2-second, 1280×720 H.264/AAC streams. Only the MP4 container was remuxed for fast start (metadata before media); there is no lossy re-encode. `assets/img/poirot-film-poster.jpg` is a frame extracted from the supplied film. `assets/js/project-video.js` owns the player lifecycle; `assets/css/project-video.css` supplies its presentation independently of the new visual theme.
+
+The optional screen-only design layer in `assets/css/studio.css` takes cues from the owner's three industrial-design references: silver surfaces, graphite typography, fine rules, restrained corner radii and small yellow-green accents. Original photographs, content order, signature, shared title sizes, project structure and the SNAIL Lab interaction remain. The new Lumie project and the latest confirmed CV dates are preserved. The three reference artworks themselves are not included in the site.
+
+The exact version immediately before this change is backed up in `codex/backup-before-poirot-film-2026-09-23` at `b1ce08818b6045f42de77c03c5c2f761260f2c17`, with a complete source ZIP outside the checkout. The design layer can also be removed independently by removing its stylesheet link; the video player retains its own stylesheet.
+
 ## Edit and preview
 
 - `assets/js/content.js`: bilingual records and presentation copy (`SITE.design`). Stable project IDs and curated summaries are at the bottom. Display overrides are intentional; edit them when updating the underlying record.

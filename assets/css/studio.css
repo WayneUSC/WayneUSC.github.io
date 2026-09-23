@@ -1,0 +1,72 @@
+/* Silver, graphite and a small signal-yellow accent: an editorial research folio.
+   Shared type sizes and the portfolio's content order remain in site.css. */
+@media screen {
+  body.studio-page {
+    --ink:#1d2421; --text:#454e49; --muted:#67736b; --line:#d3dad5;
+    --soft:#eef1ee; --paper:#fafbf9; --brand:#345647; --brand-dark:#203d30;
+    --accent:#daef78; --card-radius:18px;
+  }
+  .studio-page .topbar-wrap { background:rgba(250,251,249,.92); }
+  .studio-page .brand-dot { color:#51624b; }
+  .studio-page .topnav a[aria-current] { color:var(--ink); text-decoration:underline; text-decoration-color:var(--accent); text-decoration-thickness:4px; text-underline-offset:8px; }
+  .studio-page .intro { padding-top:44px; }
+  .studio-page .intro-grid { position:relative; padding:48px; gap:48px; border:1px solid #d8dfd9; border-radius:22px; background:linear-gradient(115deg,#edf0ed 8%,#e1e6e2 100%); }
+  .studio-page .intro-grid::before { content:''; position:absolute; left:24px; top:24px; width:8px; height:8px; border-top:1px solid #859087; border-left:1px solid #859087; }
+  .studio-page .eyebrow { font-size:.75rem; font-weight:500; letter-spacing:.03em; color:#546259; }
+  .studio-page .eyebrow::before { content:''; display:inline-block; width:9px; height:9px; margin-right:10px; background:var(--accent); border:1px solid #bbc95d; }
+  .studio-page .intro .headline em { color:var(--ink); text-decoration:underline; text-decoration-color:#bccbaa; text-decoration-thickness:2px; text-underline-offset:6px; }
+  .studio-page .intro .lead { font-size:1rem; }
+  .studio-page .portrait { position:relative; }
+  .studio-page .portrait img { border-radius:12px; border:1px solid #cbd3cb; box-shadow:0 16px 40px #2735290c; }
+  .studio-page .portrait figcaption { padding-top:14px; font-size:.6875rem; color:#5c6a60; }
+  .studio-page .button { border-radius:8px; }
+  .studio-page .hero-actions .button { font-size:.8125rem; padding:11px 15px; }
+  .studio-page .button.primary { color:#fff; background:#293e32; border-color:#293e32; }
+  .studio-page .button.primary:hover { background:#1d3025; border-color:#1d3025; }
+  .studio-page .research-ribbon { margin-top:32px; padding:25px 0; }
+  .studio-page .section-head .heading { gap:18px; }
+  .studio-page .section-head .idx { display:inline-block; color:#67766b; font:400 .75rem/1.4 ui-monospace,SFMono-Regular,Consolas,monospace; padding-bottom:5px; }
+  .studio-page .pillar, .studio-page .xp-col { border:1px solid #dce2db; }
+  .studio-page .pillar .pn { color:#465e4b; font-size:.75rem; letter-spacing:.025em; }
+  .studio-page .proj-card { border:1px solid #d9e0d9; background:#f1f3ef; }
+  .studio-page .proj-media { background:#e8ede7; }
+  .studio-page .featured .proj-media { margin:24px 0 24px 24px; border-radius:12px; }
+  .studio-page .featured .proj-body { padding:36px; }
+  .studio-page .proj-body .flag { color:#47604d; font-size:.75rem; letter-spacing:.015em; }
+  .studio-page .has-film .flag { padding:5px 9px; border:1px solid #c9d0bf; border-radius:4px; color:#344535; background:#e6ebdf; }
+  .studio-page .tech { gap:6px; }
+  .studio-page .tech span { background:transparent; padding:3px 8px; border:1px solid #d9dfd6; font-size:.75rem; border-radius:4px; }
+  .studio-page .project-links a { text-underline-offset:4px; }
+  .studio-page .habitat-showcase { border-color:#d9e0d9; background:#f9faf7; }
+  .studio-page .habitat-visual, .studio-page .habitat-stage { background:#e9eee8; }
+  .studio-page .habitat-actions .button.primary { background:#293e32; border-color:#293e32; }
+  .studio-page .habitat-play { border-radius:8px; }
+  .studio-page .habitat-visual-bottom p { color:#2c4536; }
+  .studio-page .paper-thumb { border:1px solid #dce2db; border-radius:8px; }
+  .studio-page .author-label { border-radius:4px; }
+  .studio-page .contact { border-top:1px solid #cdd5ce; }
+  @media(max-width:1000px) {
+    .studio-page .intro-grid { padding:36px; gap:30px; }
+    .studio-page .hero-actions { gap:8px; }
+  }
+  @media(max-width:900px) {
+    .studio-page .intro-grid { grid-template-columns:minmax(0,1fr) 230px; }
+    .studio-page .featured .proj-media { margin:0; border-radius:0; }
+    .studio-page .featured .proj-body { padding:32px; }
+  }
+  @media(max-width:650px) {
+    body.studio-page { --card-radius:16px; }
+    .studio-page .intro { padding-top:24px; }
+    .studio-page .intro-grid { padding:28px 22px 22px; border-radius:18px; gap:30px; }
+    .studio-page .intro-grid::before { top:14px; left:12px; width:6px; height:6px; }
+    .studio-page .eyebrow { font-size:.6875rem; letter-spacing:0; margin-bottom:20px; }
+    .studio-page .intro h1 { font-size:var(--type-hero); }
+    .studio-page .intro .lead { font-size:1rem; }
+    .studio-page .hero-actions .button { min-height:44px; padding:11px 12px; }
+    .studio-page .portrait img { border-radius:10px; }
+    .studio-page .portrait figcaption { flex-wrap:wrap; gap:5px 10px; }
+    .studio-page .section-head .heading { gap:12px; }
+    .studio-page .section-head .idx { font-size:.6875rem; }
+    .studio-page .featured .proj-body { padding:28px 24px; }
+  }
+}

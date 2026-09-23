@@ -252,6 +252,12 @@ window.SITE = {
 
   projects: [
     {
+      video: {
+        src: "assets/video/poirot-hri2026.mp4",
+        poster: "assets/img/poirot-film-poster.jpg",
+        duration: "0:59",
+        title: { en: "POIROT — research in motion", zh: "POIROT · 研究现场" }
+      },
       img: "assets/img/proj-poirot.jpg?v=20260606-paper-covers",
       flag: { en: "HRI 2026", zh: "HRI 2026" },
       title: { en: "POIROT", zh: "POIROT 剧本杀主持机器人" },
