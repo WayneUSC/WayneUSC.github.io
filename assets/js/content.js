@@ -477,3 +477,19 @@ SITE.ui.nav = [
   {id:'publications',en:'Publications',zh:'论文'}, {id:'experience',en:'About',zh:'经历'},
   {id:'contact',en:'Contact',zh:'联系'}
 ];
+
+// Earlier methodological work follows the current research projects.
+SITE.projects.push({
+  id: 'tep',
+  monitor: true,
+  img: 'assets/img/proj-tep-ccca.svg?v=20260924-tep',
+  flag: { en: 'Course project · USC, 2017', zh: '课程项目 · USC，2017' },
+  title: { en: 'Quality-aware Process Monitoring', zh: '质量相关过程监测' },
+  sub: { en: 'CCA & concurrent CCA on the Tennessee Eastman benchmark', zh: '田纳西–伊士曼过程中的 CCA 与并发 CCA' },
+  desc: {
+    en: 'With Shanshan Cui, I worked on the CCA and concurrent CCA components of a USC CHE 599 team project, studying how process disturbances relate to product quality. A 2026 interactive retrospective explores the monitoring traces and regularization settings.',
+    zh: '2017 年春季 USC CHE 599 小组课程项目。我与 Shanshan Cui 共同负责 CCA 与并发 CCA 部分，研究过程扰动与产品质量的关联。2026 年交互式回顾可查看监测曲线，并比较不同正则化设定。'
+  },
+  links: [{ label: { en: '2017 course report (PDF)', zh: '2017 课程报告（PDF）' }, url: 'assets/pdf/tep-che599-group7-2017.pdf' }],
+  tech: ['Statistical Learning', 'CCA / CCCA', 'Process Monitoring', 'MATLAB']
+});

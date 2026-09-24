@@ -54,6 +54,14 @@ The optional screen-only design layer in `assets/css/studio.css` takes cues from
 
 The exact version immediately before this change is backed up in `codex/backup-before-poirot-film-2026-09-23` at `b1ce08818b6045f42de77c03c5c2f761260f2c17`, with a complete source ZIP outside the checkout. The design layer can also be removed independently by removing its stylesheet link; the video player retains its own stylesheet.
 
+## September 24 statistical-learning course project
+
+The project archive now includes **Quality-aware Process Monitoring**, Wen Chen's USC CHE 599 Spring 2017 team project with Shanshan Cui on CCA/concurrent CCA. The current research highlights remain unchanged. A new vector cover uses the actual IDV(14), κ=0 monitoring traces from the supplied 2026 retrospective, and the original group report retains all four authors.
+
+The bilingual monitoring dialog opens within the homepage, with fault selection, regularization comparisons and time playback. It loads the precomputed JSON only when opened. Historical coursework, retrospective values and monitoring limitations are distinguished; no claim is made that the website independently reproduces the numerical analysis. See `assets/data/tep-monitor-provenance.md` for source and encoding details.
+
+The complete preceding version is preserved at `codex/backup-before-tep-project-2026-09-24` (`5b565c33343038eeece17632b0b33d8c2b30171a`) and in an external source ZIP. Only the new project and its scoped styles/scripts were added; existing POIROT, Lumie and Habitat behavior is retained.
+
 ## Edit and preview
 
 - `assets/js/content.js`: bilingual records and presentation copy (`SITE.design`). Stable project IDs and curated summaries are at the bottom. Display overrides are intentional; edit them when updating the underlying record.

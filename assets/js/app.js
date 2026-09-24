@@ -38,13 +38,16 @@
   }
   function projectCard(p, featured, compact) {
     var projectLinks = (p.links || []).map(function(l) { var url = l.url; if (p.id === 'poirot' && url === 'poirot/' && lang === 'en') url = 'poirot/en.html'; return link(url, t(l.label) + ' ↗'); }).join('');
+    if (p.monitor) projectLinks = '<button class="project-study-link" data-tep-open aria-haspopup="dialog">' + tr('Open monitoring lab','打开交互监测台') + ' ↗</button>' + projectLinks;
     var media = '<img loading="lazy" src="' + esc(p.img) + '" alt="' + esc(t(p.title)) + '">';
+    if (p.monitor) media = '<button class="project-study-trigger" data-tep-open aria-haspopup="dialog" aria-label="' + tr('Explore the TEP monitoring demo','探索 TEP 交互监测演示') + '">' + media + '</button>';
     if (p.video) media = '<button class="project-film-trigger" data-project-film="' + esc(p.id) + '" aria-haspopup="dialog" aria-label="' + tr('Watch POIROT supplementary video, 59 seconds','观看 POIROT 辅助视频，59 秒') + '">' + media + '<span class="film-label">HRI 2026 / ' + tr('RESEARCH FILM','研究视频') + '</span><span class="film-watch"><span class="film-play-icon" aria-hidden="true">▶</span><span>' + tr('Watch the film','观看研究视频') + '</span><span class="film-duration">0:59</span></span></button>';
     return '<article class="proj-card' + (featured ? ' featured' : '') + (p.video ? ' has-film' : '') + '" id="project-' + p.id + '"><div class="proj-media">' + media + '</div><div class="proj-body"><span class="flag">' + t(p.displayFlag || p.flag) + '</span><h3>' + t(p.title) + '</h3><p class="sub">' + t(p.sub) + '</p><p>' + t(compact && p.summary ? p.summary : p.desc) + '</p>' + (projectLinks ? '<div class="project-links">' + projectLinks + '</div>' : '') + '<div class="tech">' + p.tech.map(function(x) { return '<span>' + esc(x) + '</span>'; }).join('') + '</div></div></article>';
   }
 
   function renderProjects() {
     if (window.ProjectVideo) window.ProjectVideo.close();
+    if (window.TepMonitor) window.TepMonitor.close();
     var highlighted = ['poirot', 'shakesort', 'lumie'];
     var first = highlighted.map(function(id, i) { return projectCard(S.projects.find(function(p) { return p.id === id; }), i === 0, true); }).join('');
     var rest = S.projects.filter(function(p) { return highlighted.indexOf(p.id) === -1 && p.id !== 'habitat'; });
@@ -57,6 +60,12 @@
         var project = S.projects.find(function(p) { return p.id === button.dataset.projectFilm; });
         if (window.ProjectVideo) window.ProjectVideo.open(project.video, lang, button);
         else announce(tr('The video player could not load. Please refresh to try again.','视频播放器未能加载，请刷新后重试。'));
+      });
+    });
+    el('projects').querySelectorAll('[data-tep-open]').forEach(function(button) {
+      button.addEventListener('click', function() {
+        if (window.TepMonitor) window.TepMonitor.open(lang, button);
+        else announce(tr('The monitoring lab could not load. Please refresh to try again.','监测台未能加载，请刷新后重试。'));
       });
     });
     if (habitatController) habitatController.dispose();
