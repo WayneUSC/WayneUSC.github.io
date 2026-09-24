@@ -224,6 +224,12 @@ h1, h2, h3, h4 { margin-top: 0; color: var(--ink); font-family: var(--sans); }
 .contact p { max-width: 58ch; margin: 0; }
 .contact-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; min-width: 0; }
 .contact .text-link { font-weight: 400; overflow-wrap: anywhere; }
+.contact-email { width:100%; min-width:0; padding-top:14px; border-top:1px solid var(--line); }
+.contact-email-label { display:block; color:var(--muted); font-size:var(--type-meta); margin-bottom:4px; }
+.contact-email-line { display:flex; flex-wrap:wrap; gap:4px 12px; align-items:center; justify-content:space-between; }
+.contact-email-line .text-link { min-width:0; max-width:100%; }
+.email-copy { flex-shrink:0; max-width:100%; white-space:normal; text-align:left; min-height:44px; padding:6px 8px; border:0; border-radius:6px; background:transparent; color:var(--brand); font:inherit; font-size:var(--type-meta); cursor:pointer; }
+.email-copy:hover { background:var(--soft); }
 .contact-actions > .button:first-child { background: var(--brand); border-color: var(--brand); color: white; }
 .contact-actions > .button:first-child:hover { background: var(--brand-dark); }
 .footer { border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px; padding: 28px 0; font-size: .8125rem; color: var(--muted); }
@@ -343,7 +349,7 @@ dialog::backdrop { background: rgba(0,0,0,.3); backdrop-filter: blur(4px); }
 @media print {
   :root { --type-hero: 30pt; --type-section: 20pt; --type-project: 15pt; --type-subtitle: 12pt; --type-paper: 11pt; --type-body: 10pt; --type-meta: 9pt; --section-space: 22px; }
   .container { width: 100%; }
-  .topbar-wrap, .back-to-top, .hero-actions, .pub-tabs, .cite-button, .more-projects, dialog, .skip-link, .contact-actions { display: none !important; }
+  .topbar-wrap, .back-to-top, .hero-actions, .pub-tabs, .cite-button, .more-projects, dialog, .skip-link, .contact-actions > .button, .email-copy { display: none !important; }
   .section::before { display: none; }
   .intro { padding: 0; }
   .intro-grid { display: grid; grid-template-columns: 1fr 130px; gap: 24px; }
@@ -359,5 +365,7 @@ dialog::backdrop { background: rgba(0,0,0,.3); backdrop-filter: blur(4px); }
   .proj-body, .featured .proj-body, .pillar, .xp-col { padding: 16px; }
   .pillars { gap: 16px; }
   .contact { display: block; }
+  .contact-actions { display:block; margin-top:14px; }
+  .contact-email { padding-top:8px; border:0; }
   a { color: var(--ink); }
 }

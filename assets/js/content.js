@@ -46,7 +46,8 @@ window.SITE = {
         zh: "清华大学未来实验室<br>北京清工开物科技有限公司"
       },
       location: { en: "Beijing, China", zh: "中国 · 北京" },
-      email: "chenwen_bot@mail.tsinghua.edu.cn"
+      email: "chenwen_bot@mail.tsinghua.edu.cn",
+      companyEmail: "waynebot@kaiwurobotics.com"
     },
     links: [
       { label: { en: "Google Scholar", zh: "谷歌学术" }, url: "https://scholar.google.com/citations?user=8KDUC5oAAAAJ&hl=en" },
@@ -79,7 +80,7 @@ window.SITE = {
 
   news: [
     { when: "2026.09", en: "<b>Cultivating Connections</b> published at IEEE CoG 2026 (Madrid).", zh: "<b>Cultivating Connections</b> 发表于 IEEE CoG 2026（马德里）。" },
-    { when: "2026.06.17", en: "<b>Kaiwu Robotics</b> (北京清工开物科技有限公司), which I co-founded, was established.", zh: "我参与联合创办的 <b>北京清工开物科技有限公司（Kaiwu Robotics）</b> 正式成立。" },
+    { when: "2026.06", en: "<b>Kaiwu Robotics</b>, which I co-founded, was established.", zh: "我参与联合创办的 <b>北京清工开物科技有限公司（Kaiwu Robotics）</b> 正式成立。" },
     { when: "2026.06", en: "<b>Bio-inspired Full-dimensional Tactile Sensing</b> presented in the finals of the Haptic Technology and Application Competition.", zh: "<b>仿生全维度触觉传感系统</b> 入围并展示于力触觉技术及应用大赛决赛。" },
     { when: "2026.03", en: "<b>POIROT</b> accepted to ACM/IEEE HRI 2026 (Edinburgh).", zh: "<b>POIROT</b> 论文被 ACM/IEEE HRI 2026（爱丁堡）录用。" },
     { when: "2026.03", en: "<b>AIoT Smart Home Automation Architecture</b> published in ACM IUI Companion 2026.", zh: "<b>AIoT 智能家居自动化架构</b> 论文发表于 ACM IUI Companion 2026。" },
@@ -482,14 +483,14 @@ SITE.ui.nav = [
 SITE.projects.push({
   id: 'tep',
   monitor: true,
-  img: 'assets/img/proj-tep-ccca.svg?v=20260924-tep',
-  flag: { en: 'Course project · USC, 2017', zh: '课程项目 · USC，2017' },
+  img: 'assets/img/proj-tep-ccca.svg?v=20260925-copy',
+  flag: { en: 'Statistical learning · Process systems', zh: '统计学习 · 过程系统' },
   title: { en: 'Quality-aware Process Monitoring', zh: '质量相关过程监测' },
   sub: { en: 'CCA & concurrent CCA on the Tennessee Eastman benchmark', zh: '田纳西–伊士曼过程中的 CCA 与并发 CCA' },
   desc: {
-    en: 'With Shanshan Cui, I worked on the CCA and concurrent CCA components of a USC CHE 599 team project, studying how process disturbances relate to product quality. A 2026 interactive retrospective explores the monitoring traces and regularization settings.',
-    zh: '2017 年春季 USC CHE 599 小组课程项目。我与 Shanshan Cui 共同负责 CCA 与并发 CCA 部分，研究过程扰动与产品质量的关联。2026 年交互式回顾可查看监测曲线，并比较不同正则化设定。'
+    en: 'Applied CCA and concurrent CCA to the Tennessee Eastman benchmark to examine how process disturbances relate to product quality. Explore monitoring traces and compare regularization settings in an interactive demonstration.',
+    zh: '将 CCA 与并发 CCA 用于田纳西–伊士曼过程基准，分析过程扰动与产品质量的关联。通过交互演示查看监测曲线，比较不同正则化设定下的模型表现。'
   },
-  links: [{ label: { en: '2017 course report (PDF)', zh: '2017 课程报告（PDF）' }, url: 'assets/pdf/tep-che599-group7-2017.pdf' }],
+  links: [{ label: { en: 'Project report (PDF)', zh: '项目报告（PDF）' }, url: 'assets/pdf/tep-che599-group7-2017.pdf' }],
   tech: ['Statistical Learning', 'CCA / CCCA', 'Process Monitoring', 'MATLAB']
 });

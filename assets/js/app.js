@@ -125,8 +125,15 @@
     el('awards').innerHTML = sectionHead('07',S.ui.sec.awards) + '<div class="awards">' + S.awards.map(function(a) { return '<div class="award"><div class="ti">' + t(a.ti) + '</div><div class="de">' + t(a.de) + '</div></div>'; }).join('') + '</div>';
   }
   function renderContact() {
-    el('contact').innerHTML = '<div><h2>' + t(S.design.contact) + '</h2><p>' + t(S.design.contactText) + '</p></div><div class="contact-actions">' + link('mailto:' + S.profile.info.email,tr('Get in touch ↗','邮件联系 ↗'),'button') + '<a class="text-link" href="mailto:' + S.profile.info.email + '">' + S.profile.info.email + '</a><button class="button" id="copyEmail">' + tr('Copy email','复制邮箱') + '</button></div>';
-    el('copyEmail').addEventListener('click',function() { copyText(S.profile.info.email,el('copyEmail')); });
+    var contacts = [
+      { email: S.profile.info.email, label: tr('Academic','学术联系'), copy: tr('Copy academic email','复制学术邮箱') },
+      { email: S.profile.info.companyEmail, label: tr('Kaiwu Robotics','公司联系 · Kaiwu Robotics'), copy: tr('Copy company email','复制公司邮箱') }
+    ];
+    var rows = contacts.map(function(contact) {
+      return '<div class="contact-email"><span class="contact-email-label">' + contact.label + '</span><div class="contact-email-line"><a class="text-link" href="mailto:' + esc(contact.email) + '">' + esc(contact.email) + '</a><button class="email-copy" data-copy-email="' + esc(contact.email) + '" aria-label="' + contact.copy + '">' + tr('Copy','复制') + '</button></div></div>';
+    }).join('');
+    el('contact').innerHTML = '<div><h2>' + t(S.design.contact) + '</h2><p>' + t(S.design.contactText) + '</p></div><div class="contact-actions">' + link('mailto:' + S.profile.info.email,tr('Get in touch ↗','邮件联系 ↗'),'button') + rows + '</div>';
+    el('contact').querySelectorAll('[data-copy-email]').forEach(function(button) { button.addEventListener('click',function() { copyText(button.dataset.copyEmail,button); }); });
   }
   function renderFooter() { el('footer').innerHTML = '<span>© ' + new Date().getFullYear() + ' Wen Chen · 陈稳</span><div class="f-links">' + S.profile.links.map(function(l) { return link(l.url,t(l.label)); }).join('') + '</div><span>' + tr('Beijing, China · English / 中文','中国 · 北京 · English / 中文') + '</span>'; }
   function renderAll() { renderNav();renderIntro();renderResearch();renderProjects();renderPublications();renderExperience();renderNews();renderOutreach();renderAwards();renderContact();renderFooter(); }

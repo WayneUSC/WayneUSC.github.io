@@ -133,7 +133,7 @@
     var shell = node('div', 'tep-shell');
     var header = node('header', 'tep-header');
     var heading = node('div', 'tep-heading');
-    heading.appendChild(node('p', 'tep-kicker', text('RESEARCH ARCHIVE / USC · CHE 599', '研究档案 / USC · CHE 599')));
+    heading.appendChild(node('p', 'tep-kicker', text('STATISTICAL LEARNING / TEP · CCCA', '统计学习 / TEP · CCCA')));
     var title = node('h2', '', text('When a process changes, does quality change too?', '过程变了，质量也一定变了吗？'));
     title.id = 'tepMonitorTitle';
     heading.appendChild(title);
@@ -153,8 +153,8 @@
 
     var body = node('div', 'tep-body');
     var history = node('div', 'tep-history');
-    history.appendChild(node('span', '', text('2017 · USC course project', '2017 · USC 课程项目')));
-    history.appendChild(node('span', '', text('2026 · Interactive retrospective', '2026 · 交互式回顾')));
+    history.appendChild(node('span', '', text('33 process variables', '33 个过程变量')));
+    history.appendChild(node('span', '', text('5 quality variables', '5 个质量变量')));
     body.appendChild(history);
 
     var loading = node('div', 'tep-loading');
