@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="concept-title concept-desc">
+  <title id="concept-title">Physical-property intelligence — a conceptual material study</title>
+  <desc id="concept-desc">An abstract concept illustration of physical properties and machine understanding. Satin metal and translucent glass forms meet a soft, layered silver-green surface. Geometric folds and a small yellow-green contact ripple suggest compliance, texture, and interaction. These are illustrative shapes, not a real device, internal architecture, measurement, or experimental result.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#f4f6f1"/>
+      <stop offset=".56" stop-color="#e9eee7"/>
+      <stop offset="1" stop-color="#dce4da"/>
+    </linearGradient>
+    <radialGradient id="ambient" cx=".39" cy=".24" r=".8">
+      <stop stop-color="#ffffff" stop-opacity=".78"/>
+      <stop offset=".61" stop-color="#ffffff" stop-opacity=".08"/>
+      <stop offset="1" stop-color="#c8d3c4" stop-opacity=".12"/>
+    </radialGradient>
+    <linearGradient id="layer-edge" x1="0" y1="0" x2=".8" y2="1">
+      <stop stop-color="#eff5e9" stop-opacity=".8"/>
+      <stop offset=".46" stop-color="#adbdac" stop-opacity=".67"/>
+      <stop offset="1" stop-color="#8ca38b" stop-opacity=".4"/>
+    </linearGradient>
+    <linearGradient id="sheet" x1=".14" y1=".07" x2=".86" y2=".94">
+      <stop stop-color="#f9fcf6" stop-opacity=".95"/>
+      <stop offset=".28" stop-color="#e0eade" stop-opacity=".89"/>
+      <stop offset=".54" stop-color="#c8d8c5" stop-opacity=".93"/>
+      <stop offset=".75" stop-color="#e3ecdd" stop-opacity=".97"/>
+      <stop offset="1" stop-color="#fafcf3"/>
+    </linearGradient>
+    <radialGradient id="depression" cx=".5" cy=".45" r=".52">
+      <stop stop-color="#365943" stop-opacity=".36"/>
+      <stop offset=".4" stop-color="#6a8868" stop-opacity=".19"/>
+      <stop offset=".76" stop-color="#a9c29b" stop-opacity=".05"/>
+      <stop offset="1" stop-color="#c9ddbc" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="crease" x1="0" y1=".2" x2="1" y2=".7">
+      <stop stop-color="#ffffff" stop-opacity=".05"/>
+      <stop offset=".35" stop-color="#ffffff" stop-opacity=".78"/>
+      <stop offset=".57" stop-color="#f7ffe9" stop-opacity=".85"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="metal" cx=".29" cy=".2" r=".87">
+      <stop stop-color="#f1f5ef"/>
+      <stop offset=".19" stop-color="#dce4dc"/>
+      <stop offset=".41" stop-color="#a7b7ac"/>
+      <stop offset=".63" stop-color="#748c7e"/>
+      <stop offset=".83" stop-color="#375344"/>
+      <stop offset="1" stop-color="#1c382b"/>
+    </radialGradient>
+    <radialGradient id="metal-light" cx=".32" cy=".18" r=".84">
+      <stop stop-color="#ffffff" stop-opacity=".8"/>
+      <stop offset=".37" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset=".76" stop-color="#d8e2d3" stop-opacity="0"/>
+      <stop offset=".93" stop-color="#d8e2d3" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#f7fced" stop-opacity=".38"/>
+    </radialGradient>
+    <linearGradient id="metal-rim" x1=".1" y1=".1" x2=".87" y2=".96">
+      <stop stop-color="#ffffff" stop-opacity=".92"/>
+      <stop offset=".35" stop-color="#ecf5e8" stop-opacity=".25"/>
+      <stop offset=".7" stop-color="#193c29" stop-opacity=".2"/>
+      <stop offset="1" stop-color="#c0d4b4" stop-opacity=".8"/>
+    </linearGradient>
+    <radialGradient id="glass" cx=".28" cy=".24" r=".82">
+      <stop stop-color="#ffffff" stop-opacity=".85"/>
+      <stop offset=".24" stop-color="#fafdf6" stop-opacity=".62"/>
+      <stop offset=".57" stop-color="#d7e3d1" stop-opacity=".3"/>
+      <stop offset=".78" stop-color="#a0b59a" stop-opacity=".5"/>
+      <stop offset=".92" stop-color="#738e70" stop-opacity=".58"/>
+      <stop offset="1" stop-color="#f5ffed" stop-opacity=".93"/>
+    </radialGradient>
+    <radialGradient id="glass-core" cx=".64" cy=".64" r=".65">
+      <stop stop-color="#f7ffe6" stop-opacity=".48"/>
+      <stop offset=".59" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity=".31"/>
+    </radialGradient>
+    <linearGradient id="ripple" x1="0" y1=".4" x2="1" y2=".6">
+      <stop stop-color="#d9eb99" stop-opacity="0"/>
+      <stop offset=".2" stop-color="#d8ee8b" stop-opacity=".53"/>
+      <stop offset=".53" stop-color="#e4f698"/>
+      <stop offset=".82" stop-color="#c5dc78" stop-opacity=".54"/>
+      <stop offset="1" stop-color="#bed57f" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="sample" cx=".3" cy=".17" r=".9">
+      <stop stop-color="#e9f6b6"/>
+      <stop offset=".49" stop-color="#d4e998"/>
+      <stop offset="1" stop-color="#a2bd72"/>
+    </radialGradient>
+    <filter id="large-shadow" x="-50%" y="-150%" width="200%" height="400%">
+      <feGaussianBlur stdDeviation="23"/>
+    </filter>
+    <filter id="contact-shadow" x="-50%" y="-150%" width="200%" height="400%">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+    <filter id="glass-shadow" x="-50%" y="-150%" width="200%" height="400%">
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
+    <clipPath id="sheet-clip">
+      <path d="M167 493C198 468 346 433 472 395C528 378 556 362 609 367C755 380 942 415 1041 449C1099 469 1095 495 1051 521L665 709C630 726 600 730 562 718L184 582C142 567 123 528 167 493Z"/>
+    </clipPath>
+  </defs>
+
+  <rect width="1200" height="800" fill="url(#background)"/>
+  <rect width="1200" height="800" fill="url(#ambient)"/>
+
+  <!-- Grounding shadows and two translucent, softly folded material layers. -->
+  <ellipse cx="642" cy="640" rx="409" ry="70" fill="#657b5f" opacity=".13" filter="url(#large-shadow)"/>
+  <path d="M179 533C344 476 483 432 597 409C708 392 935 455 1049 493C1092 507 1103 533 1056 558L674 739C642 752 612 756 576 744L204 616C164 602 141 553 179 533Z" fill="url(#layer-edge)" opacity=".49" stroke="#d8e3d0" stroke-width="1.5"/>
+  <path d="M171 514C295 468 479 416 600 388C706 370 943 435 1048 471C1095 487 1100 511 1054 538L671 724C637 740 607 743 570 731L194 599C153 585 132 536 171 514Z" fill="url(#layer-edge)" opacity=".7" stroke="#f2f7e9" stroke-width="1.5"/>
+  <path d="M167 493C198 468 346 433 472 395C528 378 556 362 609 367C755 380 942 415 1041 449C1099 469 1095 495 1051 521L665 709C630 726 600 730 562 718L184 582C142 567 123 528 167 493Z" fill="url(#sheet)" stroke="#f9fff2" stroke-width="2"/>
+
+  <g clip-path="url(#sheet-clip)">
+    <ellipse cx="690" cy="470" rx="279" ry="139" fill="url(#depression)"/>
+    <!-- Broad folds and physical contact ripples; no plotted or measured signals. -->
+    <path d="M128 530C292 478 424 429 526 453C589 468 635 518 712 514C822 508 938 422 1107 481" fill="none" stroke="url(#crease)" stroke-width="37" opacity=".37"/>
+    <path d="M157 526C339 473 434 444 526 463C595 478 637 521 716 515C847 505 955 432 1077 477" fill="none" stroke="#f8fff0" stroke-width="2" opacity=".72"/>
+    <path d="M213 581C357 527 463 489 549 506C623 521 656 553 731 539C846 517 966 478 1069 509" fill="none" stroke="#eef6e4" stroke-width="2.3" opacity=".53"/>
+    <path d="M307 629C433 572 516 543 580 545C637 547 674 570 749 557C825 544 890 525 958 536" fill="none" stroke="#96ad8d" stroke-width="1.2" opacity=".27"/>
+    <path d="M481 398C478 431 495 454 537 477C579 500 594 526 571 571C553 606 540 640 559 690" fill="none" stroke="#f7fbed" stroke-width="1.7" opacity=".55"/>
+    <path d="M851 409C832 432 810 455 798 484C789 506 800 535 820 557C838 578 849 605 840 626" fill="none" stroke="#f6ffea" stroke-width="1.7" opacity=".5"/>
+    <ellipse cx="691" cy="467" rx="141" ry="46" fill="none" stroke="#789765" stroke-width="1.1" opacity=".3" transform="rotate(-7 691 467)"/>
+    <ellipse cx="691" cy="468" rx="114" ry="34" fill="none" stroke="url(#ripple)" stroke-width="5" transform="rotate(-7 691 468)"/>
+    <ellipse cx="691" cy="468" rx="91" ry="25" fill="none" stroke="#f1ffd0" stroke-width="1.6" opacity=".8" transform="rotate(-7 691 468)"/>
+  </g>
+
+  <!-- A satin material sphere rests into the compliant surface. -->
+  <ellipse cx="699" cy="467" rx="95" ry="24" fill="#1d3d26" opacity=".3" filter="url(#contact-shadow)"/>
+  <ellipse cx="721" cy="479" rx="145" ry="32" fill="#486342" opacity=".1" filter="url(#contact-shadow)"/>
+  <circle cx="688" cy="301" r="164" fill="url(#metal)" stroke="url(#metal-rim)" stroke-width="2"/>
+  <circle cx="688" cy="301" r="163" fill="url(#metal-light)"/>
+  <path d="M565 220C585 184 624 159 664 154" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity=".48"/>
+  <path d="M781 413C755 440 723 452 690 454" fill="none" stroke="#d3e7b8" stroke-width="2.2" stroke-linecap="round" opacity=".34"/>
+
+  <!-- A translucent companion form suggests a contrasting material response. -->
+  <ellipse cx="330" cy="538" rx="78" ry="18" fill="#6b8760" opacity=".21" filter="url(#contact-shadow)"/>
+  <ellipse cx="335" cy="535" rx="43" ry="10" fill="#ddefbb" opacity=".82" filter="url(#glass-shadow)"/>
+  <circle cx="324" cy="450" r="84" fill="url(#glass)" stroke="#fafff3" stroke-width="1.4"/>
+  <circle cx="324" cy="450" r="82" fill="url(#glass-core)"/>
+  <path d="M263 418C274 393 298 380 323 379" fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" opacity=".78"/>
+  <path d="M266 456C272 488 292 507 322 511" fill="none" stroke="#fbfff0" stroke-width="1.4" opacity=".5"/>
+  <path d="M354 519C368 511 380 499 386 486" fill="none" stroke="#f3ffd8" stroke-width="2.5" stroke-linecap="round" opacity=".75"/>
+
+  <!-- A small, unlabelled material swatch carries the restrained accent color. -->
+  <ellipse cx="954" cy="564" rx="54" ry="15" fill="#547547" opacity=".13" filter="url(#contact-shadow)"/>
+  <path d="M912 542C914 527 932 518 951 522C970 526 986 537 988 548L987 558C984 572 961 578 941 571C922 565 910 555 912 542Z" fill="#94ae6e" opacity=".79"/>
+  <path d="M912 541C914 526 932 517 951 521C970 525 988 536 988 547C986 560 964 567 944 560C924 554 910 550 912 541Z" fill="url(#sample)" stroke="#f1fbd1" stroke-width="1.2"/>
+  <path d="M920 536C927 527 939 525 950 528" fill="none" stroke="#f9ffe4" stroke-width="1.6" stroke-linecap="round" opacity=".7"/>
+</svg>

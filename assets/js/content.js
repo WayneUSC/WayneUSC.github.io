@@ -479,6 +479,22 @@ SITE.ui.nav = [
   {id:'contact',en:'Contact',zh:'联系'}
 ];
 
+// Ongoing exploration is presented separately from completed studies.
+SITE.projects.push({
+  id: 'physical-properties',
+  ongoing: true,
+  img: 'assets/img/proj-physical-properties.svg?v=20260925-research',
+  flag: { en: 'Ongoing research & development', zh: '进行中的研究与开发' },
+  title: { en: 'Physical-property Intelligence', zh: '物性智能探索' },
+  sub: { en: 'From material behavior to machine understanding', zh: '从材料与物体的行为，到机器的理解' },
+  desc: {
+    en: 'I am exploring how machines can understand the physical properties of materials and objects through interaction. Alongside this work, I am developing software tools for embodied systems, connecting my background in chemical engineering, sensing, and robotics.',
+    zh: '我正在探索机器如何通过交互理解材料与物体的物理属性，同时开展面向具身系统的软件工具开发，将化学工程、传感与机器人研究的经验连接起来。'
+  },
+  imageAlt: { en: 'Concept illustration of a metallic sphere, a deformable surface, and concentric contact patterns.', zh: '概念插画：金属球体、可变形表面与同心接触纹理。' },
+  tech: ['Physical Properties', 'Embodied Systems', 'Research Software']
+});
+
 // Earlier methodological work follows the current research projects.
 SITE.projects.push({
   id: 'tep',
