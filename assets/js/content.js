@@ -79,9 +79,11 @@ window.SITE = {
   },
 
   news: [
+    { when: "2026.10", en: "Our <b>Smart Surface</b> paper on a multimodal automotive touchscreen is <b>conditionally accepted</b> for the ICHEC 2026 proceedings and an oral presentation.", zh: "<b>Smart Surface</b> 多模态车载触摸屏论文获 ICHEC 2026 <b>有条件录用</b>，拟收入会议论文集并作口头报告。" },
     { when: "2026.09", en: "<b>Cultivating Connections</b> published at IEEE CoG 2026 (Madrid).", zh: "<b>Cultivating Connections</b> 发表于 IEEE CoG 2026（马德里）。" },
     { when: "2026.06", en: "<b>Kaiwu Robotics</b>, which I co-founded, was established.", zh: "我参与联合创办的 <b>北京清工开物科技有限公司（Kaiwu Robotics）</b> 正式成立。" },
-    { when: "2026.06", en: "<b>Bio-inspired Full-dimensional Tactile Sensing</b> presented in the finals of the Haptic Technology and Application Competition.", zh: "<b>仿生全维度触觉传感系统</b> 入围并展示于力触觉技术及应用大赛决赛。" },
+    { when: "2026.05", en: "<b>Bio-inspired Full-dimensional Tactile Sensing</b> won <b>Third Prize</b> in the finals of the Haptic Technology and Application Competition, Enterprise / Self-Initiated Team category (企业/自创组).", zh: "<b>仿生全维度触觉传感系统</b> 获 2026 年中国（国际）传感器创新创业大赛——力触觉技术及应用大赛决赛<b>企业／自创组三等奖</b>。" },
+    { when: "2026.03", en: "<b>POIROT</b> was presented at ACM/IEEE HRI 2026 in Edinburgh, UK.", zh: "<b>POIROT</b> 在英国爱丁堡举行的 ACM/IEEE HRI 2026 大会上展示。" },
     { when: "2026.03", en: "<b>POIROT</b> accepted to ACM/IEEE HRI 2026 (Edinburgh).", zh: "<b>POIROT</b> 论文被 ACM/IEEE HRI 2026（爱丁堡）录用。" },
     { when: "2026.03", en: "<b>AIoT Smart Home Automation Architecture</b> published in ACM IUI Companion 2026.", zh: "<b>AIoT 智能家居自动化架构</b> 论文发表于 ACM IUI Companion 2026。" },
     { when: "2025.11", en: "“Urban Fire Risk Evaluation” published in <i>Applied Spatial Analysis and Policy</i>.", zh: "《城市火灾风险评估》发表于 <i>Applied Spatial Analysis and Policy</i>。" },
@@ -136,6 +138,22 @@ window.SITE = {
 
   /* most recent first; selected:true → shown in "Selected" tab */
   publications: [
+    {
+      year: "2026", venueShort: "ICHEC 2026", selected: true,
+      img: "assets/img/proj-smart-surface.jpg?v=20260602-cover",
+      tag: { en: "Conditional acceptance", zh: "有条件录用" },
+      title: {
+        en: "A Multimodal Automotive Touchscreen Integrating Electrostatic, Ultrasonic, and Piezoelectric Haptic Feedback for Enhanced In-Vehicle Interaction",
+        zh: "融合静电、超声与压电触觉反馈的多模态车载触摸屏：增强车内交互体验"
+      },
+      authors: "Tiande Mo, Qi Zhang, Kening Zhu, Yang Jiao, Xinyi Fu, Wen Chen, Yong Lyu",
+      venue: { en: "International Conference on Human-Engaged Computing (ICHEC 2026). Conditionally accepted for the conference proceedings and an oral presentation.",
+               zh: "International Conference on Human-Engaged Computing（ICHEC 2026）。有条件录用，拟收入会议论文集并作口头报告。" },
+      links: [
+        { label: { en: "Project", zh: "对应项目" }, url: "#project-smart-surface" },
+        { label: { en: "Conference", zh: "会议主页" }, url: "https://www.ichec2026.com/" }
+      ]
+    },
     {
       year: "2026", venueShort: "IEEE CoG 2026", selected: true,
       img: "assets/img/pub-cog.jpg?v=20260902-cog-paper",
@@ -287,24 +305,25 @@ window.SITE = {
     },
     {
       img: "assets/img/proj-smart-surface.jpg?v=20260602-cover",
-      flag: { en: "Collaborative UX", zh: "合作项目" },
+      flag: { en: "ICHEC 2026 · Conditional acceptance", zh: "ICHEC 2026 · 有条件录用" },
       title: { en: "Smart Surface", zh: "车载智能表面系统" },
       sub: { en: "In-vehicle multimodal haptic interaction", zh: "面向智能座舱的多模态触觉交互" },
       desc: {
-        en: "A collaborative project among Tsinghua Future Laboratory, CityU, and HKPC, developing and evaluating an in-vehicle smart-surface interaction system with visual, audio, surface-haptic, mid-air haptic, and gesture modalities. I contributed to evaluation planning, user-study design, and data analysis; professional-operation tests met the 75% technical requirement with 81.1% adjusted accuracy.",
-        zh: "清华大学未来实验室、香港城市大学与香港生产力促进局（HKPC）的合作项目，围绕智能座舱中的视觉、音频、表面触觉、空中触觉与手势等多模态交互进行系统搭建与评估。我参与评估方案、用户实验设计与数据分析；专业操作测试达到 81.1% 调整准确率，满足 75% 技术指标要求。"
+        en: "A collaborative project among Tsinghua Future Laboratory, CityU, and HKPC, developing and evaluating an in-vehicle smart-surface interaction system with visual, audio, surface-haptic, mid-air haptic, and gesture modalities. I contributed to evaluation planning, user-study design, and data analysis; professional-operation tests met the 75% technical requirement with 81.1% adjusted accuracy. The associated paper on a touchscreen integrating electrostatic, ultrasonic, and piezoelectric haptic feedback is conditionally accepted for the ICHEC 2026 proceedings and an oral presentation.",
+        zh: "清华大学未来实验室、香港城市大学与香港生产力促进局（HKPC）的合作项目，围绕智能座舱中的视觉、音频、表面触觉、空中触觉与手势等多模态交互进行系统搭建与评估。我参与评估方案、用户实验设计与数据分析；专业操作测试达到 81.1% 调整准确率，满足 75% 技术指标要求。对应论文研究融合静电、超声与压电触觉反馈的车载触摸屏，获 ICHEC 2026 有条件录用，拟收入会议论文集并作口头报告。"
       },
+      links: [{ label: { en: "ICHEC 2026", zh: "ICHEC 2026 会议主页" }, url: "https://www.ichec2026.com/" }],
       tech: ["Haptic UX", "User Study", "Data Analysis", "Python", "Smart Cockpit"]
     },
     {
       img: "assets/img/proj-bionic-haptics.jpg?v=20260606-bionic-haptics-en",
-      flag: { en: "Competition Finalist", zh: "大赛决赛项目" },
+      flag: { en: "Third Prize · Haptic Competition 2026", zh: "力触觉大赛 · 三等奖（2026）" },
       title: { en: "Bio-inspired Full-dimensional Tactile Sensing", zh: "仿生全维度触觉传感系统" },
       sub: { en: "Mechanism-bionic tactile sensing for interpretable contact events",
              zh: "面向可解释接触事件的机制仿生触觉系统" },
       desc: {
-        en: "A finalist project in the Haptic Technology and Application Competition, developed with Tsinghua Future Laboratory and Kaiwu Robotics. The system reframes tactile sensing from low-dimensional readings into full-dimensional contact events, integrating representation, contact process, and interaction relations for interpretable, invertible, controllable, and generalizable tactile perception.",
-        zh: "力触觉技术及应用大赛决赛项目，由清华大学未来实验室与北京清工开物科技有限公司（Kaiwu Robotics）共同完成。系统将触觉从低维读数重新展开为「表征 × 过程 × 交互」的全维度接触事件，面向可解释、可反演、可控制、可泛化的触觉感知。"
+        en: "A tactile-sensing system developed with Tsinghua Future Laboratory and Kaiwu Robotics. Awarded Third Prize in May 2026 in the finals of the Haptic Technology and Application Competition, part of the China (International) Sensor Innovation and Entrepreneurship Competition, Enterprise / Self-Initiated Team category (企业/自创组). The system organizes contact events through their representation, temporal process, and interaction context.",
+        zh: "与清华大学未来实验室及 Kaiwu Robotics 共同开发的触觉传感系统，于 2026 年 5 月获中国（国际）传感器创新创业大赛——力触觉技术及应用大赛决赛企业／自创组三等奖。系统从表征、时间过程与交互关系组织接触事件。"
       },
       tech: ["Tactile Sensing", "Bio-inspired Design", "Calibration", "Intelligent Computing", "Rapid Prototyping"],
       links: [{ label: { en: "Poster", zh: "决赛壁报" }, url: "assets/pdf/haptic-competition-poster.pdf" }]
@@ -327,10 +346,10 @@ window.SITE = {
       title: { en: "Smart Habitat Platform", zh: "人居环境多模态实验平台" },
       sub: { en: "A living lab for multimodal human-activity research", zh: "面向人体活动研究的多模态人居实验空间" },
       desc: {
-        en: "A multimodal sensing platform for studying human activity in living spaces, combining depth, audio, mmWave, IMU, tactile and olfactory sensing with a 60 m² capacitive floor. Explore a photo-assisted model of SNAIL Lab, inspect its objects, and move through the room in a first-person walkthrough. This spatial demonstration uses approximate geometry and contains no live sensor measurements.",
-        zh: "面向日常居住空间中人体活动研究的多模态传感平台，融合深度、音频、毫米波、IMU、触觉、嗅觉传感及 60㎡ 电容地板。通过照片辅助构建的 SNAIL Lab 模型，探索空间布局、查看物件，并以第一人称在室内漫游。本空间演示采用近似几何，不含实时传感测量。"
+        en: "A multimodal sensing platform for studying human activity in living spaces, combining depth, audio, mmWave, IMU, tactile and olfactory sensing with a 60 m² capacitive floor. The Habitat Studio 2.0 public explorer adds procedural PBR materials, synthetic Gaussian and point-cloud views, six camera presets and first-person navigation. Geometry is approximate; surface samples are generated from the model, with no live measurements or reference photographs included.",
+        zh: "面向日常居住空间中人体活动研究的多模态传感平台，融合深度、音频、毫米波、IMU、触觉、嗅觉传感及 60㎡ 电容地板。Habitat Studio 2.0 公开演示加入程序化 PBR 材质、合成高斯与点云视图、六个预设视角及第一人称漫游。几何尺寸为近似值，表面采样由模型生成，不含实时测量或参考照片。"
       },
-      tech: ["Spatial Modeling", "Multimodal Research", "Interactive 3D", "WASD Walkthrough"],
+      tech: ["Spatial Modeling", "PBR Materials", "Synthetic Gaussians", "Interactive 3D", "WASD Walkthrough"],
       links: [
         { label: { en: "Explore SNAIL Lab", zh: "探索 SNAIL Lab" }, url: "#project-habitat" }
       ]
@@ -430,8 +449,8 @@ window.SITE = {
   },
 
   awards: [
-    { ic: "🏅", ti: { en: "Finalist — Haptic Technology and Application Competition", zh: "力触觉技术及应用大赛 决赛入围" },
-      de: { en: "Bio-inspired full-dimensional tactile sensing system.", zh: "仿生全维度触觉传感系统。" } },
+    { ic: "🏅", ti: { en: "Third Prize — Haptic Technology and Application Competition", zh: "力触觉技术及应用大赛 决赛三等奖" },
+      de: { en: "May 2026 · Finals, Enterprise / Self-Initiated Team category (企业/自创组), China (International) Sensor Innovation and Entrepreneurship Competition. Awarded to Tsinghua University for the Bio-inspired Full-dimensional Tactile Sensing System.", zh: "2026 年 5 月 · 中国（国际）传感器创新创业大赛——力触觉技术及应用大赛决赛，企业／自创组。获奖单位：清华大学；项目：仿生全维度触觉传感系统。" } },
     { ic: "🏆", ti: { en: "1st Place — Machine Learning Project Competition", zh: "机器学习项目竞赛 一等奖" },
       de: { en: "", zh: "" } },
     { ic: "🎤", ti: { en: "Invited Talk", zh: "受邀演讲" },
@@ -464,15 +483,13 @@ SITE.projects[0].links = [
 SITE.projects[0].summary = { en: 'An embodied robot game master for multi-party narrative games. Our study compares tangible clue delivery with digitally mediated interaction and examines how prior attitudes toward robots moderate the experience.', zh: '面向多人叙事游戏的具身机器人主持人。研究比较实体线索分发与数字媒介交互，并考察用户既有机器人态度对交互体验的调节作用。' };
 SITE.projects[0].displayFlag = { en: 'First-author paper · HRI 2026', zh: '第一作者论文 · HRI 2026' };
 SITE.projects[8].summary = { en: 'What can a robot learn by shaking a sealed box? Active shaking and high-bandwidth vibration sensing help identify hidden contents on OpenArm and UR5 platforms.', zh: '摇晃一个密封盒子，机器人能感知到什么？通过主动摇晃与高带宽振动传感，在 OpenArm 和 UR5 平台上识别盒中隐藏的物体。' };
-SITE.projects[3].summary = { en: 'A tactile system developed with Tsinghua Future Laboratory and Kaiwu Robotics, organizing contact events through their representation, temporal process, and interaction context.', zh: '与清华大学未来实验室及 Kaiwu Robotics 共同开发的触觉系统，从表征、时间过程与交互关系组织接触事件。' };
-// Describe aims and planned work without presenting them as validated findings.
-SITE.projects[3].desc = SITE.projects[3].summary;
-SITE.projects[5].summary = { en: 'Step inside SNAIL Lab: explore the spatial model and discover the setting behind multimodal habitat research.', zh: '走进 SNAIL Lab：探索空间模型，了解多模态人居研究背后的实验场景。' };
-SITE.projects[5].displayFlag = { en: 'SNAIL Lab · Interactive demo', zh: 'SNAIL Lab · 交互演示' };
+SITE.projects[3].summary = { en: 'A tactile system developed with Tsinghua Future Laboratory and Kaiwu Robotics, organizing contact events through their representation, temporal process, and interaction context. Third Prize, 2026 Haptic Technology and Application Competition finals, Enterprise / Self-Initiated Team category (企业/自创组).', zh: '与清华大学未来实验室及 Kaiwu Robotics 共同开发的触觉系统，从表征、时间过程与交互关系组织接触事件。获 2026 年力触觉技术及应用大赛决赛企业／自创组三等奖。' };
+SITE.projects[5].summary = { en: 'Step inside SNAIL Lab with Habitat Studio 2.0: explore procedural materials, synthetic surface representations and a first-person walkthrough of the living lab.', zh: '通过 Habitat Studio 2.0 走进 SNAIL Lab：探索程序化材质、合成表面表示，并在实验室空间中自由漫游。' };
+SITE.projects[5].displayFlag = { en: 'SNAIL Lab · Habitat Studio 2.0', zh: 'SNAIL Lab · Habitat Studio 2.0' };
 SITE.projects[1].sub = { en: 'An interactive player-modeling demonstration', zh: '玩家建模的交互演示' };
 SITE.projects[4].flag = { en: 'Planned study', zh: '研究计划' };
 SITE.projects[10].summary = { en: 'A five-DoF embodied AI lamp that coordinates head-mounted vision, voice, RGB light, and safety-bounded motion through incremental intent prediction and hierarchical control.', zh: '一款五自由度具身智能台灯，通过增量式意图预测与分层控制，协同灯头视觉、语音、RGB 灯光和安全限位内的机械动作。' };
-SITE.publications.forEach(function(p) { p.selected = ['HRI 2026','IEEE CoG 2026','IUI Companion 2026'].indexOf(p.venueShort) !== -1; });
+SITE.publications.forEach(function(p) { p.selected = ['ICHEC 2026','HRI 2026','IEEE CoG 2026','IUI Companion 2026'].indexOf(p.venueShort) !== -1; });
 SITE.ui.nav = [
   {id:'research',en:'Research',zh:'研究'}, {id:'projects',en:'Selected work',zh:'代表作'},
   {id:'publications',en:'Publications',zh:'论文'}, {id:'experience',en:'About',zh:'经历'},

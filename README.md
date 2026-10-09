@@ -62,6 +62,19 @@ The bilingual monitoring dialog opens within the homepage, with fault selection,
 
 The complete preceding version is preserved at `codex/backup-before-tep-project-2026-09-24` (`5b565c33343038eeece17632b0b33d8c2b30171a`) and in an external source ZIP. Only the new project and its scoped styles/scripts were added; existing POIROT, Lumie and Habitat behavior is retained.
 
+## October 9 research updates and Habitat Studio 2.0
+
+- Smart Surface's ICHEC 2026 paper is listed with the complete author order and explicitly marked **conditionally accepted for the proceedings and an oral presentation**. It is not described as published. The project and verified public conference site are linked; no private submission-system URLs, acceptance emails, or unavailable paper downloads are published.
+- News includes POIROT's March 2026 presentation at HRI in Edinburgh, UK, separately from its acceptance.
+- The tactile-sensing award is **Third Prize, finals, Enterprise / Self-Initiated Team category (企业/自创组)**, dated May 2026, per the owner's certificate. News, project copy, the award entry and the printable profile are consistent. The English category wording is descriptive; the original Chinese is retained.
+- The native SNAIL Lab explorer now uses a public, scoped adaptation of the supplied Habitat Studio 2.0. It provides procedural PBR materials, soft shadows, mesh / synthetic Gaussian / point-cloud views, material / clay / activity-zone modes, six viewpoints, a ceiling toggle, object inspection and the existing keyboard/touch walkthrough. No navigation away from the homepage is required.
+
+`assets/js/habitat-v2-renderer.js` adapts the supplied material, geometry and Gaussian rendering code behind the existing viewer API. `habitat-v2-kit.js` contains scoped helpers; `assets/vendor/three/` contains the locally bundled three.js r160 runtime and MIT license. There is no CDN dependency. The source SNAIL model is structurally identical to the existing public `SNAIL_MODEL`, so geometry is not duplicated. `habitat-renderer.js` remains the WebGL1 / CPU fallback when WebGL2 is unavailable.
+
+This is a **SNAIL-only public adaptation**, not a copy of the full internal application. No residential geometry, reference photographs, photo galleries, sensor streams, fusion workspace, or private source paths are included. Gaussian/point-cloud samples come from parameterized surfaces, not a photographic reconstruction or measurements. PBR textures are generated locally and are illustrative, not measured materials. These limitations are stated in both languages in the viewer.
+
+The model loads near the exhibit; surface samples are generated only when requested. The host owns frame scheduling, input, visibility and resizing; each viewer disposes its textures, materials, worker and GPU resources on language changes. The preview uses a reduced pixel budget without shadows. Tests cover bilingual content, model representations and controls, mobile overflow, focus restoration, existing POIROT/TEP demos, and renderer disposal.
+
 ## Edit and preview
 
 - `assets/js/content.js`: bilingual records and presentation copy (`SITE.design`). Stable project IDs and curated summaries are at the bottom. Display overrides are intentional; edit them when updating the underlying record.
@@ -70,7 +83,7 @@ The complete preceding version is preserved at `codex/backup-before-tep-project-
 - `index.html`: page shell, canonical URL, existing social preview metadata and structured data.
 - `research-profile.html` and `assets/js/profile.js`: printable research summary using the same content source. This is a research profile, not a replacement for a complete CV.
 - `poirot/`: existing English and Chinese detective-game demos; unchanged by this redesign.
-- `assets/js/habitat.js`, `assets/js/habitat-renderer.js`, `assets/css/habitat.css`: native SNAIL Lab preview and viewer.
+- `assets/js/habitat.js`, `assets/js/habitat-v2-renderer.js`, `assets/js/habitat-v2-kit.js`, `assets/css/habitat.css`: native SNAIL Lab preview and viewer; `habitat-renderer.js` supplies the shared model and compatibility renderer.
 - `habitat-studio/`: compatibility redirect for previous standalone demo links.
 
 Run `python3 -m http.server 8000` in this directory and open http://localhost:8000/. The homepage remembers an explicit language choice and otherwise follows the browser language. The profile accepts `?lang=en` or `?lang=zh`.
@@ -91,7 +104,7 @@ For a complete return to the original site without rewriting Git history, make a
 ## Content maintenance notes
 
 - Add an approved CV file and a real link if a full CV is available. No missing CV download is advertised.
-- The owner confirmed on September 8, 2026 that the 2014 RSC Advances paper is his work. It remains in the full publication list as part of his materials research background; the topical selection focuses on HRI, CoG, and IUI Companion.
+- The owner confirmed on September 8, 2026 that the 2014 RSC Advances paper is his work. It remains in the full publication list as part of his materials research background; the topical selection focuses on HRI, CoG, IUI Companion, and the conditionally accepted ICHEC paper.
 - Planned tactile-mapping research stays labeled as planned. Platform and bio-inspired sensing descriptions express research scope rather than unverified benchmark results.
 - Outreach counts from the previous content are retained in the data but omitted from the redesigned presentation because their measurement date was not supplied.
 - Future news, positions, paper status, and project results should be updated from verified sources. No PhD intake year or availability window is assumed.

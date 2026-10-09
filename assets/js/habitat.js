@@ -1,4 +1,5 @@
-/* Native SNAIL experience. No iframe, third-party runtime, sensor simulation or navigation. */
+/* Native bilingual SNAIL experience, adapted from Habitat Studio 2.0.
+ * Public scope: parameterized lab geometry only; no reference photos or residential data. */
 const objectLabels = {
   envelope: ['Room envelope', '房间边界'], bed: ['Rest area', '休息区'], bedside: ['Bedside storage', '床边收纳'],
   bamboo: ['Bamboo shelving', '竹木置物架'], acrylic: ['Display shelving', '透明展示架'], workdesk: ['Workstation', '工作台'],
@@ -24,7 +25,7 @@ export function mountHabitat(root, lang) {
   const preview = root.querySelector('canvas'), note = root.querySelector('.habitat-load-note');
   let dead = false, previewRenderer, renderer, observer, resizeObserver, dialog, frame = 0, last = 0, opener;
   let modulePromise, drag = null, visible = false, previousOverflow = '', hold = null, opened = 0;
-  const load = () => modulePromise ||= import('./habitat-renderer.js?v=20260922-inline').catch(error => { modulePromise = null; throw error; });
+  const load = () => modulePromise ||= import('./habitat-v2-renderer.js?v=20261009').catch(() => import('./habitat-renderer.js?v=20260922-inline')).catch(error => { modulePromise = null; throw error; });
   const label = id => objectLabels[id] ? local(objectLabels[id]) : text('Spatial model', '空间模型');
   const stop = () => { renderer?.clearKeys(); hold = null; drag = null; cancelAnimationFrame(frame); frame = 0; last = 0; };
   function animate(time) {
@@ -33,7 +34,7 @@ export function mountHabitat(root, lang) {
     renderer?.step(last ? Math.min((time - last) / 1000, .05) : 0);
     last = time;
     if (renderer?.dirty) renderer.draw();
-    if (renderer?.fp) frame = requestAnimationFrame(animate);
+    if (renderer?.fp || renderer?.animating) frame = requestAnimationFrame(animate);
   }
   function draw() { if (!frame && dialog?.open && !document.hidden) frame = requestAnimationFrame(animate); }
   function select(id) {
@@ -41,7 +42,7 @@ export function mountHabitat(root, lang) {
     const name = dialog.querySelector('[data-object-name]'), description = dialog.querySelector('[data-object-description]');
     name.textContent = label(id);
     description.textContent = details[id] ? local(details[id]) : text('A simplified, photo-assisted object. Dimensions are approximate; equipment functions are not inferred from appearance.', '依据照片构建的简化物件，尺寸为近似值，不根据外观推断设备功能。');
-    dialog.querySelector('select').value = objectLabels[id] ? id : '';
+    dialog.querySelector('#habitatObjects').value = objectLabels[id] ? id : '';
     draw();
   }
   function syncMode() {
@@ -54,19 +55,45 @@ export function mountHabitat(root, lang) {
       ? text('WASD / arrows: move · Q/E: turn · R/F: look up/down · Drag: look · Esc: exit walk', 'WASD / 方向键：移动 · Q/E：转向 · R/F：抬头/低头 · 拖动：环顾 · Esc：退出漫游')
       : text('Drag or Q/E to orbit · Scroll or +/− to zoom · Click to inspect', '拖动或 Q/E 旋转 · 滚轮或 +/− 缩放 · 点击物件查看');
     dialog.querySelectorAll('[data-view]').forEach(button => button.setAttribute('aria-pressed', String(!walking && button.dataset.view === 'overview')));
+    syncAppearance();
     draw();
   }
+  function syncAppearance() {
+    if (!renderer || !dialog) return;
+    const enhanced = !!renderer.enhanced, representation = renderer.representation || 'mesh';
+    dialog.querySelectorAll('[data-representation]').forEach(button => {
+      button.disabled = !enhanced && button.dataset.representation !== 'mesh';
+      button.setAttribute('aria-pressed', String(button.dataset.representation === representation));
+    });
+    dialog.querySelector('[data-material]').value = renderer.mode || 'material';
+    dialog.querySelector('[data-material]').disabled = representation !== 'mesh';
+    dialog.querySelector('[data-ceiling]').setAttribute('aria-pressed', String(!!renderer.roof));
+    dialog.querySelector('[data-render-note]').textContent = !enhanced
+      ? text('Compatibility renderer · PBR and Gaussian modes are unavailable on this device.', '兼容渲染模式 · 此设备暂不支持 PBR 与高斯模式。')
+      : representation === 'mesh'
+        ? text('Habitat Studio 2.0 · Procedural PBR materials and soft shadows', 'Habitat Studio 2.0 · 程序化 PBR 材质与柔和阴影')
+        : text('Synthetic surface samples · Not a photo-reconstructed Gaussian scene or live sensor data', '参数化表面合成采样 · 非照片重建高斯场景，亦非实时传感数据');
+    dialog.querySelector('.habitat-stage-label').textContent = representation === 'mesh'
+      ? text('PHOTO-ASSISTED SPATIAL MODEL', '照片辅助空间模型')
+      : representation === 'splats' ? text('SYNTHETIC GAUSSIAN SURFACES', '合成高斯表面') : text('SYNTHETIC SURFACE POINT CLOUD', '合成表面点云');
+  }
   function setWalk(walk) {
-    renderer.setWalk(walk); syncMode();
+    renderer.setWalk(walk); dialog.querySelector('[data-interior]').value = ''; syncMode();
     dialog.querySelector('canvas').focus({preventScroll: true});
   }
   function buildDialog() {
     dialog = document.createElement('dialog');
     dialog.className = 'habitat-dialog'; dialog.setAttribute('aria-labelledby', 'habitatDialogTitle');
-    dialog.innerHTML = `<div class="habitat-dialog-head"><div><span class="habitat-eyebrow">${text('SMART HABITAT PLATFORM', '人居环境多模态实验平台')}</span><h2 id="habitatDialogTitle">SNAIL Lab</h2></div><button class="habitat-close" aria-label="${text('Close 3D explorer', '关闭三维探索')}" autofocus>×</button></div>
+    dialog.innerHTML = `<div class="habitat-dialog-head"><div><span class="habitat-eyebrow">${text('HABITAT STUDIO 2.0 / PUBLIC LAB EXPLORER', 'HABITAT STUDIO 2.0 / 实验室公开演示')}</span><h2 id="habitatDialogTitle">SNAIL Lab</h2></div><button class="habitat-close" aria-label="${text('Close 3D explorer', '关闭三维探索')}" autofocus>×</button></div>
       <div class="habitat-toolbar" role="group" aria-label="${text('Camera controls', '视角控制')}">
         <div class="habitat-view-tabs"><button data-view="overview" aria-pressed="true">${text('Overview', '全景')}</button><button data-view="plan" aria-pressed="false">${text('Top view', '俯视')}</button></div>
+        <select data-interior aria-label="${text('Interior viewpoints', '室内视角')}"><option value="">${text('Interior views', '室内视角')}</option><option value="entry">${text('Entry', '入口')}</option><option value="living">${text('Living area', '会客区')}</option><option value="rest">${text('Rest area', '休息区')}</option><option value="discussion">${text('Discussion area', '研讨区')}</option></select>
         <button data-walk aria-pressed="false">${text('Walk inside', '进入漫游')}</button><button data-reset>${text('Reset view', '重置视角')}</button>
+      </div>
+      <div class="habitat-appearance">
+        <div class="habitat-representations" role="group" aria-label="${text('Scene representation', '场景表示')}"><button data-representation="mesh" aria-pressed="true">${text('Mesh', '网格')}</button><button data-representation="splats" aria-pressed="false">${text('Gaussian', '高斯')}</button><button data-representation="points" aria-pressed="false">${text('Point cloud', '点云')}</button></div>
+        <label>${text('Surface', '表面')} <select data-material><option value="material">${text('PBR materials', 'PBR 材质')}</option><option value="structure">${text('Clay model', '白模')}</option><option value="zones">${text('Activity zones', '活动分区')}</option></select></label>
+        <button data-ceiling aria-pressed="false">${text('Ceiling', '吊顶')}</button>
       </div>
       <div class="habitat-stage"><canvas tabindex="0" aria-label="${text('Interactive SNAIL Lab model', 'SNAIL Lab 交互模型')}" aria-describedby="habitatHint"></canvas>
         <span class="habitat-stage-label">${text('PHOTO-ASSISTED 3D MODEL', '照片辅助三维模型')}</span>
@@ -76,7 +103,8 @@ export function mountHabitat(root, lang) {
       </div>
       <div class="habitat-viewer-bottom"><p data-hint id="habitatHint">${text('Drag or Q/E to orbit · Scroll or +/− to zoom · Click to inspect', '拖动或 Q/E 旋转 · 滚轮或 +/− 缩放 · 点击物件查看')}</p>
         <div class="habitat-inspector"><div><label for="habitatObjects">${text('Explore the space', '探索空间')}</label><select id="habitatObjects"><option value="">${text('Choose an object', '选择空间物件')}</option>${Object.entries(objectLabels).map(([id, names]) => `<option value="${id}">${local(names)}</option>`).join('')}</select></div><div aria-live="polite"><h3 data-object-name>${text('Sensing and AI-engaged Living Lab', 'Sensing and AI-engaged Living Lab')}</h3><p data-object-description>${text('Explore the model from above, or walk through its living, rest and discussion areas.', '从上方查看整体布局，或进入会客、休息与研讨区域漫游。')}</p></div></div>
-        <p class="habitat-provenance">${text('Manually parameterized from photographs. Approximate dimensions; no calibrated sensor coverage or live measurements. Walking is free-camera navigation.', '依据照片手工参数化建模。尺寸为近似值，不展示已标定的传感覆盖或实时测量。漫游采用自由视角。')}</p>
+        <p class="habitat-render-note" data-render-note role="status"></p>
+        <p class="habitat-provenance">${text('Manually parameterized from photographs; dimensions are approximate. Gaussian and point-cloud views are generated from modeled surfaces, not photogrammetry. No reference photographs, residential scenes or live measurements are included. Walking is free-camera navigation.', '依据照片手工参数化建模，尺寸为近似值。高斯与点云视图由模型表面合成，并非摄影测量重建。本演示不含参考照片、住宅场景或实时测量。漫游采用自由视角。')}</p>
       </div>`;
     document.body.append(dialog);
     const canvas = dialog.querySelector('canvas');
@@ -85,13 +113,43 @@ export function mountHabitat(root, lang) {
     listen(dialog, 'cancel', event => { if(renderer?.fp) { event.preventDefault(); setWalk(false); } });
     listen(dialog, 'close', () => { opened++; stop(); document.body.style.overflow = previousOverflow; opener?.focus({preventScroll:true}); });
     listen(dialog.querySelector('[data-walk]'), 'click', () => { if(renderer) setWalk(!renderer.fp); });
-    listen(dialog.querySelector('[data-reset]'), 'click', () => { if(renderer) { renderer.setView('overview'); syncMode(); } });
+    listen(dialog.querySelector('[data-reset]'), 'click', () => { if(renderer) { renderer.setView('overview'); dialog.querySelector('[data-interior]').value = ''; syncMode(); } });
     dialog.querySelectorAll('[data-view]').forEach(button => listen(button, 'click', () => {
-      if (!renderer) return; renderer.setView(button.dataset.view); syncMode();
+      if (!renderer) return; renderer.setView(button.dataset.view); dialog.querySelector('[data-interior]').value = ''; syncMode();
       dialog.querySelectorAll('[data-view]').forEach(b => b.setAttribute('aria-pressed', String(b === button))); draw();
     }));
+    listen(dialog.querySelector('[data-interior]'), 'change', event => {
+      if (!renderer || !event.target.value) return;
+      renderer.setView(event.target.value); syncMode();
+      dialog.querySelectorAll('[data-view]').forEach(button => button.setAttribute('aria-pressed', 'false'));
+      draw();
+    });
+    dialog.querySelectorAll('[data-representation]').forEach(button => listen(button, 'click', async () => {
+      if (!renderer?.setRepresentation) return;
+      dialog.querySelectorAll('[data-representation]').forEach(control => control.disabled = true);
+      dialog.querySelector('.habitat-stage-status').textContent = text('Preparing the view…', '正在准备视图…');
+      try {
+        await renderer.setRepresentation(button.dataset.representation);
+        if (!dead) dialog.querySelector('.habitat-stage-status').textContent = '';
+      } catch (error) {
+        if (!dead) dialog.querySelector('.habitat-stage-status').textContent = text('This view is unavailable. Please use Mesh mode.', '当前视图暂不可用，请使用网格模式。');
+      }
+      if (!dead) { syncAppearance(); draw(); }
+    }));
+    listen(dialog.querySelector('[data-material]'), 'change', event => {
+      if (!renderer) return;
+      if (renderer.setMaterialMode) renderer.setMaterialMode(event.target.value);
+      else { renderer.mode = event.target.value; renderer.dirty = true; }
+      syncAppearance(); draw();
+    });
+    listen(dialog.querySelector('[data-ceiling]'), 'click', () => {
+      if (!renderer) return;
+      if (renderer.setCeiling) renderer.setCeiling(!renderer.roof);
+      else { renderer.roof = !renderer.roof; renderer.dirty = true; }
+      syncAppearance(); draw();
+    });
     dialog.querySelectorAll('[data-zoom]').forEach(button => listen(button, 'click', () => { renderer?.zoomBy(Number(button.dataset.zoom)); draw(); }));
-    listen(dialog.querySelector('select'), 'change', event => {
+    listen(dialog.querySelector('#habitatObjects'), 'change', event => {
       if (!renderer || !event.target.value) return;
       renderer.selected = event.target.value; renderer.dirty = true; select(event.target.value);
     });
@@ -138,8 +196,9 @@ export function mountHabitat(root, lang) {
     try {
       const {HabitatRenderer} = await load();
       if (dead || !dialog.open || request !== opened) return;
-      if (!renderer) renderer = new HabitatRenderer(dialog.querySelector('canvas'), select);
+      if (!renderer) renderer = new HabitatRenderer(dialog.querySelector('canvas'), select, draw);
       renderer.setView('overview'); if(mode === 'walk') renderer.setWalk(true);
+      dialog.querySelector('[data-interior]').value = '';
       renderer.resize(); syncMode();
       dialog.querySelector('.habitat-stage-status').textContent='';
       dialog.querySelector('canvas').focus({preventScroll:true}); draw();
@@ -151,7 +210,7 @@ export function mountHabitat(root, lang) {
     try {
       const {HabitatRenderer} = await load();
       if(dead || previewRenderer) return;
-      previewRenderer = new HabitatRenderer(preview, () => {});
+      previewRenderer = new HabitatRenderer(preview, () => {}, () => { if (!dead && visible) previewRenderer?.draw(); }, {preview: true});
       previewRenderer.setView('overview'); previewRenderer.resize(); previewRenderer.draw(); note.textContent='';
     } catch(error) { if(!dead) note.textContent=text('Use “Explore in 3D” to load the spatial model.','点击「探索三维空间」加载空间模型。'); }
   }

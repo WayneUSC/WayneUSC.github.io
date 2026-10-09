@@ -70,7 +70,7 @@
     });
     if (habitatController) habitatController.dispose();
     var mount = ++habitatMount, root = el('project-habitat'), locale = lang;
-    import('./habitat.js?v=20260922-inline').then(function(module) {
+    import('./habitat.js?v=20261009-v2').then(function(module) {
       if (mount === habitatMount && root.isConnected) habitatController = module.mountHabitat(root, locale);
     }).catch(function() {
       if (root.isConnected) root.querySelector('.habitat-load-note').textContent = tr('The 3D viewer could not load. Please refresh to try again.','3D 浏览器未能加载，请刷新重试。');
@@ -80,11 +80,11 @@
     var p = S.projects.find(function(p) { return p.id === 'habitat'; });
     return '<article class="habitat-showcase" id="project-habitat" aria-labelledby="habitatTitle">' +
       '<div class="habitat-visual"><canvas class="habitat-preview-canvas" role="img" aria-label="' + tr('Photo-assisted 3D model of SNAIL Lab, showing the living, rest, work and discussion areas.','SNAIL Lab 照片辅助三维模型，展示会客、休息、工作与研讨区域。') + '"></canvas>' +
-      '<div class="habitat-visual-top"><span>SNAIL LAB</span><span>' + tr('An interactive spatial model','可交互空间模型') + '</span></div>' +
+      '<div class="habitat-visual-top"><span>SNAIL LAB / HABITAT STUDIO 2.0</span><span>' + tr('A space to explore','走进研究现场') + '</span></div>' +
       '<div class="habitat-visual-bottom"><p>' + tr('A living lab.<br>A closer look.','走进实验室。<br>看见空间里的研究。') + '</p><button class="habitat-play" data-habitat-open="orbit" aria-haspopup="dialog">' + tr('Explore in 3D','探索三维空间') + ' <span aria-hidden="true">↗</span></button></div>' +
       '<p class="habitat-load-note" role="status">' + tr('Preparing the spatial model…','正在准备空间模型…') + '</p></div>' +
       '<div class="habitat-copy proj-body"><div class="habitat-intro"><div><span class="flag">' + tr('Research platform · The Future Laboratory, Tsinghua University','研究平台 · 清华大学未来实验室') + '</span><h3 id="habitatTitle">' + t(p.title) + '</h3></div><p>' + tr('How can a living space help us understand human activity? Explore the spatial context behind a multimodal sensing platform, from everyday living to collaborative research.','居住空间如何帮助我们理解人的活动？从日常起居到协作研究，探索多模态传感平台背后的空间情境。') + '</p></div>' +
-      '<div class="habitat-features"><div><span>01</span><h4>' + tr('Spatial context','空间情境') + '</h4><p>' + tr('A photo-assisted model of SNAIL Lab, with distinct living, rest and discussion areas.','照片辅助构建 SNAIL Lab 模型，呈现会客、休息与研讨区域。') + '</p></div><div><span>02</span><h4>' + tr('Explore at your pace','自由探索') + '</h4><p>' + tr('Orbit, inspect objects or walk through the room with WASD and touch controls.','旋转空间、查看物件，或通过 WASD 与触控按钮在室内漫游。') + '</p></div><div><span>03</span><h4>' + tr('Multimodal research','多模态研究') + '</h4><p>' + tr('The platform combines depth, audio, mmWave, IMU, tactile and olfactory sensing with a capacitive floor.','平台融合深度、音频、毫米波、IMU、触觉、嗅觉传感与电容地板。') + '</p></div></div>' +
+      '<div class="habitat-features"><div><span>01</span><h4>' + tr('Material & atmosphere','材质与空间') + '</h4><p>' + tr('Explore a photo-assisted lab model with procedural PBR materials, soft shadows and activity-zone views.','以照片辅助空间模型为基础，通过程序化 PBR 材质、柔和阴影与活动分区呈现实验室。') + '</p></div><div><span>02</span><h4>' + tr('Three ways of seeing','三种空间表示') + '</h4><p>' + tr('Switch between mesh, synthetic Gaussian surfaces and point clouds to inspect the same spatial model.','在网格、合成高斯表面与点云之间切换，从不同表示方式观察同一空间模型。') + '</p></div><div><span>03</span><h4>' + tr('Explore at your pace','自由探索') + '</h4><p>' + tr('Choose from six viewpoints, inspect objects or walk inside with WASD and touch controls.','切换六个预设视角、查看空间物件，或通过 WASD 与触控按钮进入室内漫游。') + '</p></div></div>' +
       '<div class="habitat-actions"><button class="button primary" data-habitat-open="orbit" aria-haspopup="dialog">' + tr('Explore SNAIL Lab','探索 SNAIL Lab') + '</button><button class="button" data-habitat-open="walk" aria-haspopup="dialog">' + tr('Take a walkthrough','开启空间漫游') + '</button><p>' + tr('Photo-assisted model · Approximate geometry<br>No live sensor data in this demonstration','照片辅助模型 · 几何尺寸为近似值<br>本演示不包含实时传感数据') + '</p></div></div></article>';
   }
   function renderPublications(focusTab) {
