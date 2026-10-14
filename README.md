@@ -84,7 +84,7 @@ The model loads near the exhibit; surface samples are generated only when reques
 - The full interactive exhibit is served unchanged at `clsl/` (see `clsl/README.md` for the source hash and deep links). Homepage exhibit links set `clsl.lang`, so it opens in the homepage's current language.
 - Status is stated as it is: simulated observer, no human-subject data yet; the Study 1 face instrument is built and its pilot is pending. The simulation finding is worded per the exhibit's corrected reading: beyond δ* ≈ 0.16 the always-on display is more accurate, while the closed loop still spends less.
 - The printable research profile lists CLSL after POIROT. The live preview is hidden in print.
-- The version immediately before this change is preserved in branch `codex/backup-before-clsl-2026-10-14` and tag `backup-before-clsl-2026-10-14` at `dd45fa7635330f8312c25fcfa038f4e2c83d8157`, plus a source ZIP and a full Git bundle saved outside the checkout.
+- The version immediately before this change is preserved in branch `codex/backup-before-clsl-2026-10-14` at `dd45fa7635330f8312c25fcfa038f4e2c83d8157`, plus a source ZIP and a full Git bundle saved outside the checkout.
 
 ## Edit and preview
 
