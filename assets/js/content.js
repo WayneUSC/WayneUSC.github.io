@@ -512,52 +512,6 @@ SITE.projects.push({
   tech: ['Physical Properties', 'Embodied Systems', 'Research Software']
 });
 
-// Doctoral research direction, shown as a live exhibit after POIROT. The full interactive exhibit is hosted at clsl/.
-// Status is stated as it is: simulation and a built Study 1 instrument; no human-subject data yet.
-SITE.projects.push({
-  id: 'clsl',
-  flag: { en: 'Doctoral research direction · In progress', zh: '博士研究方向 · 进行中' },
-  displayFlag: { en: 'Doctoral research direction · Interactive exhibit', zh: '博士研究方向 · 交互展示' },
-  title: { en: 'Closed-Loop State Legibility', zh: '闭环状态可读性' },
-  sub: { en: 'Robots that keep track of whether they are read correctly', zh: '让机器人持续知道自己是否被读懂' },
-  desc: {
-    en: 'A robot should not only express its internal state; it should keep track of whether people read that state correctly. CLSL models the observer’s current belief about the robot and chooses facial behavior that keeps this shared understanding calibrated. An interactive exhibit presents the framework, a simulated closed loop, its failure boundary, the Study 1 face instrument, a 37-paper lineage and a staged study plan.',
-    zh: '机器人不只要把自己的内部状态表达出来，还要持续知道人是否读懂了它。CLSL 建模观察者此刻对机器人状态的信念，并选择面部行为，使双方的共同理解保持校准。交互展示包含研究框架、闭环仿真、失效边界、Study 1 面部仪器、37 项文献谱系与分阶段研究计划。'
-  },
-  summary: {
-    en: 'A robot that models how people read its internal state, and uses facial behavior to keep that understanding calibrated. Simulation and a Study 1 face instrument are built; human studies are planned.',
-    zh: '让机器人建模人如何读取它的内部状态，并通过面部行为使这份理解保持校准。仿真与 Study 1 面部仪器已建成，人因实验在计划中。'
-  },
-  links: [{ label: { en: 'Interactive exhibit', zh: '交互展示' }, url: 'clsl/' }],
-  tech: ['Second-order Belief', 'Machine Theory of Mind', 'Legibility', 'Facial Action Units', 'Bayesian Filtering'],
-  exhibit: {
-    headline: { en: 'A robot that models<br>how you model it.', zh: '机器人在估计：<br>人类如何估计我。' },
-    formulaNote: { en: 'The robot’s belief about your belief about its state.', zh: '二阶信念：机器人对「人对机器人状态的信念」所持的信念。' },
-    acts: [
-      { en: 'The truth', zh: '真实状态' },
-      { en: 'The misreading', zh: '误读' },
-      { en: 'The expression', zh: '表达' },
-      { en: 'The repair', zh: '纠偏' }
-    ],
-    source: { en: 'Computed with the exhibit’s model; the observer’s reaction is scripted.', zh: '数值由展示所用模型实时算出；观察者的反应为示意脚本。' },
-    question: {
-      en: 'Can a robot maintain an online model of what a person currently believes about its internal state, and choose its facial behavior to keep that shared understanding calibrated, especially when its own state changes or the person’s reading starts to drift?',
-      zh: '机器人能否在线维护「人此刻以为我处于什么状态」的模型，并把面部行为当作沟通动作来选择，使双方的共同理解保持校准，尤其是在它自身状态变化、或人的理解开始漂移的时候？'
-    },
-    loop: [
-      { title: { en: 'Estimate', zh: '估计' }, desc: { en: 'Keep a second-order belief: not only its own state, but what you currently think its state is.', zh: '维护二阶信念：不只知道自己的状态，也估计你此刻以为它处于什么状态。' } },
-      { title: { en: 'Decide', zh: '决定' }, desc: { en: 'Express only when the estimated misreading crosses a threshold, choosing the least costly expression that repairs it.', zh: '只有估计误读超过阈值时才表达，并在表达预算内选择代价最小、足以纠偏的面部行为。' } },
-      { title: { en: 'Correct', zh: '校正' }, desc: { en: 'Read your reaction, update its estimate of how you see it, then step back to neutral.', zh: '从你的反应中修正「你如何看我」的估计，然后退回中性。' } }
-    ],
-    finding: {
-      en: 'In simulation, the closed loop is about as accurate as an always-on display while spending roughly a third of the expressive budget, but only while its model of the observer is accurate. Beyond a model error of δ* ≈ 0.16, the always-on display is more accurate.',
-      zh: '仿真中，闭环的准确度与始终显示状态的开环相近，表达预算约为其三分之一；但前提是它对观察者的模型足够准确。模型误差超过 δ* ≈ 0.16 后，始终显示状态的开环反而更准。'
-    },
-    lineage: { en: 'POIROT models what each player believes about the case. CLSL models what you believe about the robot itself.', zh: 'POIROT 建模玩家对案情的信念；CLSL 建模你对机器人自身的信念。' },
-    status: { en: 'Simulated observer · no human-subject data yet<br>Study 1 face instrument built, pilot pending', zh: '仿真观察者 · 尚无真人实验数据<br>Study 1 面部仪器已建成，待试点' }
-  }
-});
-
 // Earlier methodological work follows the current research projects.
 SITE.projects.push({
   id: 'tep',

@@ -3,7 +3,7 @@
   'use strict';
   var S = window.SITE;
   if (!S) return;
-  var habitatController = null, habitatMount = 0, clslController = null, clslMount = 0;
+  var habitatController = null, habitatMount = 0;
   var lang = 'en', pubTab = 'selected', projectsOpen = false, newsOpen = false, currentSection = '';
   try { var saved = localStorage.getItem('wc-lang'); if (saved === 'en' || saved === 'zh') lang = saved; else if (/^zh/i.test(navigator.language || '')) lang = 'zh'; } catch (e) {}
   function el(id) { return document.getElementById(id); }
@@ -49,8 +49,8 @@
     if (window.ProjectVideo) window.ProjectVideo.close();
     if (window.TepMonitor) window.TepMonitor.close();
     var highlighted = ['poirot', 'shakesort', 'lumie', 'physical-properties'];
-    var first = highlighted.map(function(id, i) { var project = S.projects.find(function(p) { return p.id === id; }); return projectCard(project, i === 0 || project.ongoing, true) + (id === 'poirot' ? clslShowcase() : ''); }).join('');
-    var rest = S.projects.filter(function(p) { return highlighted.indexOf(p.id) === -1 && p.id !== 'habitat' && p.id !== 'clsl'; });
+    var first = highlighted.map(function(id, i) { var project = S.projects.find(function(p) { return p.id === id; }); return projectCard(project, i === 0 || project.ongoing, true); }).join('');
+    var rest = S.projects.filter(function(p) { return highlighted.indexOf(p.id) === -1 && p.id !== 'habitat'; });
     el('projects').innerHTML = sectionHead('02', {en:'Selected work',zh:'代表性研究'}, tr('Systems built. Questions explored.','构建系统，探索问题。')) + '<div class="featured-projects">' + first + '</div>' +
       habitatShowcase() +
       '<details class="more-projects"' + (projectsOpen ? ' open' : '') + '><summary>' + tr('More projects & interactive demos', '更多项目与交互演示') + ' <span aria-hidden="true">(' + rest.length + ')</span></summary><div class="proj-grid">' + rest.map(function(p) { return projectCard(p, false, false); }).join('') + '</div></details>';
@@ -68,17 +68,6 @@
         else announce(tr('The monitoring lab could not load. Please refresh to try again.','监测台未能加载，请刷新后重试。'));
       });
     });
-    el('projects').querySelectorAll('[data-clsl-link]').forEach(function(a) {
-      // The exhibit is same-origin and keeps its own language preference; open it in the homepage's language.
-      a.addEventListener('click', function() { try { localStorage.setItem('clsl.lang', lang); } catch (e) {} });
-    });
-    if (clslController) { clslController.dispose(); clslController = null; }
-    var clslRun = ++clslMount, clslRoot = el('project-clsl'), clslLocale = lang;
-    import('./clsl.js?v=20261014-clsl').then(function(module) {
-      if (clslRun === clslMount && clslRoot.isConnected) clslController = module.mountClsl(clslRoot, clslLocale);
-    }).catch(function() {
-      if (clslRoot.isConnected) clslRoot.querySelector('[data-clsl-caption]').textContent = tr('The live preview could not load. The full exhibit is still available below.','实时预览未能加载，仍可通过下方按钮打开完整展示。');
-    });
     if (habitatController) habitatController.dispose();
     var mount = ++habitatMount, root = el('project-habitat'), locale = lang;
     import('./habitat.js?v=20261009-v2').then(function(module) {
@@ -86,35 +75,6 @@
     }).catch(function() {
       if (root.isConnected) root.querySelector('.habitat-load-note').textContent = tr('The 3D viewer could not load. Please refresh to try again.','3D 浏览器未能加载，请刷新重试。');
     });
-  }
-  // CLSL: a screen-and-bezel exhibit (after the Study 1 robot face) that plays one turn of the closed loop; clsl.js animates it.
-  function clslShowcase() {
-    var p = S.projects.find(function(p) { return p.id === 'clsl'; });
-    if (!p) return '';
-    var d = p.exhibit;
-    var acts = d.acts.map(function(a, i) { return '<li><button type="button" data-clsl-act="' + i + '" aria-current="' + (i === 0 ? 'step' : 'false') + '"><span class="clsl-act-n">' + (i + 1) + '</span><span>' + t(a) + '</span></button></li>'; }).join('');
-    var steps = d.loop.map(function(s, i) { return '<div><span>' + (i + 1) + '</span><h4>' + t(s.title) + '</h4><p>' + t(s.desc) + '</p></div>'; }).join('');
-    return '<article class="clsl-showcase" id="project-clsl" aria-labelledby="clslTitle">' +
-      '<div class="clsl-bezel"><div class="clsl-screen">' +
-        '<div class="clsl-top"><span><b>CLSL</b>' + tr('One turn of the closed loop','一次闭环') + '</span><span>' + tr('Simulated observer, not experimental data','仿真观察者，非实验数据') + '</span></div>' +
-        '<div class="clsl-stage">' +
-          '<div class="clsl-lede"><p class="clsl-headline">' + t(d.headline) + '</p>' +
-            '<p class="clsl-formula"><span class="sr-only">' + tr('Formula: b sub t, R to H, equals P sub R of P sub H of x sub t given the human’s observations, given the robot’s observations.','公式：机器人在自身观测下，对「人在其观测下对 x_t 的信念」所持的信念。') + '</span><span aria-hidden="true"><i>b</i><span class="clsl-ss"><sup>R→H</sup><sub>t</sub></span> = <i>P</i><sub>R</sub>( <i>P</i><sub>H</sub>( <i>x</i><sub>t</sub> | <i>o</i><span class="clsl-ss"><sup>H</sup><sub>0:t</sub></span> ) | <i>o</i><span class="clsl-ss"><sup>R</sup><sub>0:t</sub></span> )</span></p>' +
-            '<p class="clsl-formula-note">' + t(d.formulaNote) + '</p></div>' +
-          '<div class="clsl-rose-wrap"><svg class="clsl-rose" viewBox="-84 -10 768 620" role="img" aria-label="' + tr('Belief rose: the robot’s own state, the observer’s belief and the robot’s estimate of that belief, over five task states, around the Study 1 robot face.','信念玫瑰：五种任务状态上的机器人实际状态、观察者信念，以及机器人对该信念的估计，中心为 Study 1 机器人面孔。') + '"></svg></div>' +
-          '<div class="clsl-readout" data-clsl-readout aria-hidden="true"></div>' +
-        '</div>' +
-        '<div class="clsl-story"><ol class="clsl-acts" aria-label="' + tr('Story acts','故事分幕') + '">' + acts + '</ol>' +
-          '<button type="button" class="clsl-play" data-clsl-play aria-pressed="false"><span class="clsl-play-icon" aria-hidden="true"></span><span data-clsl-play-label>' + tr('Play','播放') + '</span></button>' +
-          '<p class="clsl-caption" data-clsl-caption aria-live="polite"><b>' + t(d.acts[0]) + tr('.','：') + '</b>' + tr(' Loading the live preview…','正在载入实时预览…') + '</p>' +
-          '<p class="clsl-source">' + t(d.source) + '</p></div>' +
-      '</div></div>' +
-      '<div class="clsl-copy proj-body"><div class="clsl-intro"><div><span class="flag">' + t(p.flag) + '</span><h3 id="clslTitle">' + t(p.title) + '</h3><p class="sub">' + t(p.sub) + '</p></div><p>' + t(d.question) + '</p></div>' +
-        '<div class="clsl-loop" aria-label="' + tr('The loop, in three steps','闭环的三个步骤') + '">' + steps + '</div>' +
-        '<p class="clsl-finding">' + t(d.finding) + '</p>' +
-        '<p class="clsl-lineage">' + t(d.lineage) + ' ' + link('#project-poirot', tr('See POIROT','查看 POIROT'), 'text-link') + '</p>' +
-        '<div class="clsl-actions"><a class="button primary" href="clsl/" data-clsl-link>' + tr('Open the interactive exhibit','打开交互展示') + '</a><a class="button" href="clsl/#loop" data-clsl-link>' + tr('Compare two robots','对比两种机器人') + '</a><p>' + t(d.status) + '</p></div>' +
-      '</div></article>';
   }
   function habitatShowcase() {
     var p = S.projects.find(function(p) { return p.id === 'habitat'; });
