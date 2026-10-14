@@ -75,6 +75,17 @@ This is a **SNAIL-only public adaptation**, not a copy of the full internal appl
 
 The model loads near the exhibit; surface samples are generated only when requested. The host owns frame scheduling, input, visibility and resizing; each viewer disposes its textures, materials, worker and GPU resources on language changes. The preview uses a reduced pixel budget without shadows. Tests cover bilingual content, model representations and controls, mobile overflow, focus restoration, existing POIROT/TEP demos, and renderer disposal.
 
+## October 14 CLSL research exhibit
+
+- **Closed-Loop State Legibility (闭环状态可读性, CLSL)**, the owner's doctoral research direction, appears in Selected work directly after POIROT, as POIROT's second-order continuation. It is labeled *Doctoral research direction · In progress*; no existing project, section, title size or layout rule was changed.
+- The exhibit's visual area is built from the Study 1 robot face itself: a brushed-silver shell around a dark screen. Inside, the belief rose shows three distributions over five task states: the robot's own state pᴿ (cyan), the observer's belief q (violet) and the robot's estimate q̂ (amber, always dashed), using the exhibit's own validated agent colours. The Study 1 screen face sits at the centre with identical geometry and AU presets.
+- Four acts (the truth, the misreading, the expression, the repair) replay the exhibit's overture example (framework note §9). `assets/js/clsl.js` computes every value live with the exhibit's model equations and defaults; only the observer's reaction is scripted, and the stage says so. Readouts give the agents' most likely states, the estimated misreading ê against θ, and the chosen expression with its cost against the budget β.
+- Motion runs only while the exhibit is visible and the tab is active. Selecting an act pauses autoplay; reduced-motion visitors see still frames and a Play control. Copy is bilingual and the narrow-screen layout reframes the rose so labels stay inside the screen.
+- The full interactive exhibit is served unchanged at `clsl/` (see `clsl/README.md` for the source hash and deep links). Homepage exhibit links set `clsl.lang`, so it opens in the homepage's current language.
+- Status is stated as it is: simulated observer, no human-subject data yet; the Study 1 face instrument is built and its pilot is pending. The simulation finding is worded per the exhibit's corrected reading: beyond δ* ≈ 0.16 the always-on display is more accurate, while the closed loop still spends less.
+- The printable research profile lists CLSL after POIROT. The live preview is hidden in print.
+- The version immediately before this change is preserved in branch `codex/backup-before-clsl-2026-10-14` and tag `backup-before-clsl-2026-10-14` at `dd45fa7635330f8312c25fcfa038f4e2c83d8157`, plus a source ZIP and a full Git bundle saved outside the checkout.
+
 ## Edit and preview
 
 - `assets/js/content.js`: bilingual records and presentation copy (`SITE.design`). Stable project IDs and curated summaries are at the bottom. Display overrides are intentional; edit them when updating the underlying record.
@@ -85,6 +96,7 @@ The model loads near the exhibit; surface samples are generated only when reques
 - `poirot/`: existing English and Chinese detective-game demos; unchanged by this redesign.
 - `assets/js/habitat.js`, `assets/js/habitat-v2-renderer.js`, `assets/js/habitat-v2-kit.js`, `assets/css/habitat.css`: native SNAIL Lab preview and viewer; `habitat-renderer.js` supplies the shared model and compatibility renderer.
 - `habitat-studio/`: compatibility redirect for previous standalone demo links.
+- `assets/js/clsl.js`, `assets/css/clsl.css`: CLSL exhibit preview (scoped). `clsl/`: the full CLSL interactive exhibit, served unchanged.
 
 Run `python3 -m http.server 8000` in this directory and open http://localhost:8000/. The homepage remembers an explicit language choice and otherwise follows the browser language. The profile accepts `?lang=en` or `?lang=zh`.
 
