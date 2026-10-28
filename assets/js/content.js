@@ -512,6 +512,24 @@ SITE.projects.push({
   tech: ['Physical Properties', 'Embodied Systems', 'Research Software']
 });
 
+// A high-level public preview; detailed research materials are not distributed here.
+SITE.projects.push({
+  id: 'clsl',
+  ongoing: true,
+  img: 'assets/img/proj-clsl-concept.jpg?v=20261028',
+  flag: { en: 'Ongoing research', zh: '进行中的研究' },
+  title: { en: 'Closed-Loop State Legibility (CLSL)', zh: '闭环状态可读性（CLSL）' },
+  sub: { en: 'Making robot state understandable in interaction', zh: '让交互中的机器人状态更易理解' },
+  desc: {
+    en: 'I am exploring how people understand a robot’s state during interaction, and how robot behavior can make that state easier to interpret. This ongoing project connects human–robot interaction with expressive interface design, with an emphasis on clarity and appropriate trust.',
+    zh: '我正在探索人在交互中如何理解机器人的状态，以及机器人如何通过自身行为让这些状态更易被理解。这项持续研究连接人机交互与表达性交互设计，关注清晰沟通与恰当信任。'
+  },
+  imageAlt: { en: 'AI-generated conceptual artwork: a ceramic robotic face and its reflection in translucent glass, connected by a fine metal arc. Not a research prototype.', zh: 'AI 生成的概念视觉：陶瓷机器人面孔与半透明玻璃中的映像，由细金属弧线相连；非研究原型实拍。' },
+  imageNote: { en: 'AI concept artwork · Not a prototype', zh: 'AI 概念视觉 · 非原型实拍' },
+  tech: ['Human–Robot Interaction', 'State Legibility', 'Expressive Interfaces']
+});
+SITE.projects.find(function(p) { return p.id === 'clsl'; }).summary = SITE.projects.find(function(p) { return p.id === 'clsl'; }).desc;
+
 // Earlier methodological work follows the current research projects.
 SITE.projects.push({
   id: 'tep',

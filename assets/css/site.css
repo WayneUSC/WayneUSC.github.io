@@ -159,7 +159,8 @@ h1, h2, h3, h4 { margin-top: 0; color: var(--ink); font-family: var(--sans); }
 .featured-projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
 .proj-card { min-width: 0; display: flex; flex-direction: column; overflow: hidden; background: var(--soft); border-radius: var(--card-radius); }
 .proj-card.featured { grid-column: 1/-1; display: grid; grid-template-columns: 1fr 1fr; align-items: center; }
-.proj-media { overflow: hidden; background: #ededf0; aspect-ratio: 3/2; }
+.proj-media { position: relative; overflow: hidden; background: #ededf0; aspect-ratio: 3/2; }
+.project-image-note { position: absolute; right: 12px; bottom: 12px; max-width: calc(100% - 24px); padding: 5px 9px; border: 1px solid #ffffff80; border-radius: 5px; background: #fffffff0; color: #4b4f4b; font-size: .625rem; line-height: 1.4; pointer-events: none; }
 .proj-media img { width: 100%; height: 100%; object-fit: contain; }
 .featured .proj-media { margin: 28px 0 28px 28px; border-radius: 16px; }
 .proj-body { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; padding: 32px; flex: 1; min-width: 0; }

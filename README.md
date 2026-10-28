@@ -75,6 +75,12 @@ This is a **SNAIL-only public adaptation**, not a copy of the full internal appl
 
 The model loads near the exhibit; surface samples are generated only when requested. The host owns frame scheduling, input, visibility and resizing; each viewer disposes its textures, materials, worker and GPU resources on language changes. The preview uses a reduced pixel budget without shadows. Tests cover bilingual content, model representations and controls, mobile overflow, focus restoration, existing POIROT/TEP demos, and renderer disposal.
 
+## October 28 CLSL project preview
+
+Closed-Loop State Legibility (CLSL) is shown after POIROT as ongoing research, with a short bilingual introduction. The same high-level summary appears in the printable profile. This entry is a conceptual preview, not a publication, completed study, or public research demo.
+
+`assets/img/proj-clsl-concept.jpg` is an independently AI-generated editorial illustration, labeled as concept artwork rather than a prototype photograph. No research documents, experimental assets, implementation files, or detailed demo were added with this update. Existing project demos and publication records are unchanged.
+
 ## Edit and preview
 
 - `assets/js/content.js`: bilingual records and presentation copy (`SITE.design`). Stable project IDs and curated summaries are at the bottom. Display overrides are intentional; edit them when updating the underlying record.
