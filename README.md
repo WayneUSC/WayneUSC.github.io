@@ -81,6 +81,12 @@ Closed-Loop State Legibility (CLSL) is shown after POIROT as ongoing research, w
 
 `assets/img/proj-clsl-concept.jpg` is an independently AI-generated editorial illustration, labeled as concept artwork rather than a prototype photograph. No research documents, experimental assets, implementation files, or detailed demo were added with this update. Existing project demos and publication records are unchanged.
 
+## November 11 HostOS project preview
+
+HostOS follows POIROT in selected work as an ongoing software research prototype for interactive narrative agents. Its bilingual summary distinguishes scripted-agent simulation from human evaluation and physical deployment. The printable research profile uses the same summary; no publication record is added.
+
+`assets/img/proj-hostos-concept.jpg` is independently AI-generated concept artwork, visibly labeled as not depicting a deployed system. This update adds only the public introduction and cover: no research source, manuscript, raw results, character data or playable demo is published.
+
 ## Edit and preview
 
 - `assets/js/content.js`: bilingual records and presentation copy (`SITE.design`). Stable project IDs and curated summaries are at the bottom. Display overrides are intentional; edit them when updating the underlying record.

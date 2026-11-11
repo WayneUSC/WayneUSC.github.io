@@ -49,7 +49,7 @@
   function renderProjects() {
     if (window.ProjectVideo) window.ProjectVideo.close();
     if (window.TepMonitor) window.TepMonitor.close();
-    var highlighted = ['poirot', 'clsl', 'shakesort', 'lumie', 'physical-properties'];
+    var highlighted = ['poirot', 'hostos', 'clsl', 'shakesort', 'lumie', 'physical-properties'];
     var first = highlighted.map(function(id, i) { var project = S.projects.find(function(p) { return p.id === id; }); return projectCard(project, i === 0 || project.ongoing, true); }).join('');
     var rest = S.projects.filter(function(p) { return highlighted.indexOf(p.id) === -1 && p.id !== 'habitat'; });
     el('projects').innerHTML = sectionHead('02', {en:'Selected work',zh:'代表性研究'}, tr('Systems built. Questions explored.','构建系统，探索问题。')) + '<div class="featured-projects">' + first + '</div>' +

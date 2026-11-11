@@ -530,6 +530,24 @@ SITE.projects.push({
 });
 SITE.projects.find(function(p) { return p.id === 'clsl'; }).summary = SITE.projects.find(function(p) { return p.id === 'clsl'; }).desc;
 
+// Software research prototype; simulation evidence is distinct from human evaluation.
+SITE.projects.push({
+  id: 'hostos',
+  ongoing: true,
+  img: 'assets/img/proj-hostos-concept.jpg?v=20261111',
+  flag: { en: 'Software prototype · Ongoing research', zh: '软件原型 · 进行中的研究' },
+  title: { en: 'HostOS: Interactive Narrative Agents', zh: 'HostOS：交互叙事智能体' },
+  sub: { en: 'Narrative direction, memory & interaction boundaries', zh: '叙事调度、角色记忆与交互边界' },
+  desc: {
+    en: 'A software research prototype for AI characters in interactive drama, combining narrative direction, guest-scoped memory and action review. I explore how authored stories can respond to guest choices while respecting privacy and interaction boundaries. Current evaluation uses scripted-agent simulations; human experience and physical deployment remain unvalidated.',
+    zh: '面向交互戏剧中 AI 角色的软件研究原型，整合叙事调度、按访客隔离的记忆与动作审查。我探索预设故事如何响应访客选择，同时兼顾隐私与交互边界。目前的评估基于脚本智能体仿真，尚未验证真人体验或实体部署效果。'
+  },
+  imageAlt: { en: 'AI-generated conceptual theater maquette with abstract performers, curved partitions and branching story paths; not a deployed system.', zh: 'AI 生成的概念舞台模型：抽象角色、曲面隔断与分岔叙事路径；非已部署系统。' },
+  imageNote: { en: 'AI concept artwork · Not a deployed system', zh: 'AI 概念视觉 · 非部署实景' },
+  tech: ['Interactive Narrative', 'AI Agents', 'Simulation', 'Python']
+});
+SITE.projects.find(function(p) { return p.id === 'hostos'; }).summary = SITE.projects.find(function(p) { return p.id === 'hostos'; }).desc;
+
 // Earlier methodological work follows the current research projects.
 SITE.projects.push({
   id: 'tep',
