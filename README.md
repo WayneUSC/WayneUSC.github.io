@@ -79,13 +79,13 @@ The model loads near the exhibit; surface samples are generated only when reques
 
 Closed-Loop State Legibility (CLSL) is shown after POIROT as ongoing research, with a short bilingual introduction. The same high-level summary appears in the printable profile. This entry is a conceptual preview, not a publication, completed study, or public research demo.
 
-`assets/img/proj-clsl-concept.jpg` is an independently AI-generated editorial illustration, labeled as concept artwork rather than a prototype photograph. No research documents, experimental assets, implementation files, or detailed demo were added with this update. Existing project demos and publication records are unchanged.
+`assets/img/proj-clsl-concept.jpg` is an independently AI-generated editorial illustration, identified as concept artwork rather than a prototype photograph in its image alternative text. No research documents, experimental assets, implementation files, or detailed demo were added with this update. Existing project demos and publication records are unchanged.
 
 ## November 11 HostOS project preview
 
 HostOS follows POIROT in selected work as an ongoing software research prototype for interactive narrative agents. Its bilingual summary distinguishes scripted-agent simulation from human evaluation and physical deployment. The printable research profile uses the same summary; no publication record is added.
 
-`assets/img/proj-hostos-concept.jpg` is independently AI-generated concept artwork, visibly labeled as not depicting a deployed system. This update adds only the public introduction and cover: no research source, manuscript, raw results, character data or playable demo is published.
+`assets/img/proj-hostos-concept.jpg` is independently AI-generated concept artwork, identified as not depicting a deployed system in its image alternative text. At the owner's request, both the HostOS and CLSL covers have no visible caption overlays. This update adds only the public introduction and cover: no research source, manuscript, raw results, character data or playable demo is published.
 
 ## Edit and preview
 

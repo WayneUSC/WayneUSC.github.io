@@ -525,7 +525,6 @@ SITE.projects.push({
     zh: '我正在探索人在交互中如何理解机器人的状态，以及机器人如何通过自身行为让这些状态更易被理解。这项持续研究连接人机交互与表达性交互设计，关注清晰沟通与恰当信任。'
   },
   imageAlt: { en: 'AI-generated conceptual artwork: a ceramic robotic face and its reflection in translucent glass, connected by a fine metal arc. Not a research prototype.', zh: 'AI 生成的概念视觉：陶瓷机器人面孔与半透明玻璃中的映像，由细金属弧线相连；非研究原型实拍。' },
-  imageNote: { en: 'AI concept artwork · Not a prototype', zh: 'AI 概念视觉 · 非原型实拍' },
   tech: ['Human–Robot Interaction', 'State Legibility', 'Expressive Interfaces']
 });
 SITE.projects.find(function(p) { return p.id === 'clsl'; }).summary = SITE.projects.find(function(p) { return p.id === 'clsl'; }).desc;
@@ -543,7 +542,6 @@ SITE.projects.push({
     zh: '面向交互戏剧中 AI 角色的软件研究原型，整合叙事调度、按访客隔离的记忆与动作审查。我探索预设故事如何响应访客选择，同时兼顾隐私与交互边界。目前的评估基于脚本智能体仿真，尚未验证真人体验或实体部署效果。'
   },
   imageAlt: { en: 'AI-generated conceptual theater maquette with abstract performers, curved partitions and branching story paths; not a deployed system.', zh: 'AI 生成的概念舞台模型：抽象角色、曲面隔断与分岔叙事路径；非已部署系统。' },
-  imageNote: { en: 'AI concept artwork · Not a deployed system', zh: 'AI 概念视觉 · 非部署实景' },
   tech: ['Interactive Narrative', 'AI Agents', 'Simulation', 'Python']
 });
 SITE.projects.find(function(p) { return p.id === 'hostos'; }).summary = SITE.projects.find(function(p) { return p.id === 'hostos'; }).desc;
