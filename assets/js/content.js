@@ -448,7 +448,17 @@ window.SITE = {
   },
 
   outreach: {
-    img: "assets/img/outreach.jpg",
+    img: "assets/img/phoenician-channel-poster.jpg?v=20261115-channel-film",
+    video: {
+      src: "assets/video/phoenician-channel-film.mp4",
+      poster: "assets/img/phoenician-channel-poster.jpg?v=20261115-channel-film",
+      duration: "0:32",
+      title: { en: "A harbor for ideas", zh: "让思想在此相遇" },
+      label: { en: "PHOENICIAN 23 / CHANNEL FILM", zh: "腓尼基城邦 23 号 / 频道短片" },
+      kicker: { en: "Phoenician City-State No. 23 / Channel introduction", zh: "腓尼基城邦 23 号 / 频道介绍" },
+      summary: { en: "A short introduction to my bilingual channel: listening to, selecting and translating ideas across technology, finance and culture. Illustrated with AI-generated scenes, synthetic English narration and an original instrumental score.", zh: "一段关于聆听、精选与转译的频道介绍，让科技、金融与文化中的思想跨越语言相遇。短片采用 AI 生成场景、英文合成旁白与原创器乐配乐。" },
+      captionNote: { en: "English narration · Chinese captions · Bilingual graphics", zh: "英文旁白 · 中文字幕 · 双语视觉编排" }
+    },
     kicker: { en: "Bilingual Knowledge Channel · Bilibili", zh: "中英双语知识频道 · 哔哩哔哩" },
     title: { en: "Phoenician City-State No. 23", zh: "腓尼基城邦 23 号" },
     tagline: { en: "Making global ideas accessible across language and culture.",

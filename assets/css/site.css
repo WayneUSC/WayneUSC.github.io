@@ -211,11 +211,15 @@ h1, h2, h3, h4 { margin-top: 0; color: var(--ink); font-family: var(--sans); }
 .news-item .when { color: var(--muted); font-size: var(--type-meta); font-variant-numeric: tabular-nums; }
 .news-item .what { font-size: var(--type-body); }
 .news-archive { margin-top: 20px; }
-.outreach { display: grid; grid-template-columns: 1.2fr 1fr; gap: 56px; align-items: center; }
+.outreach { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.15fr); gap: 48px; align-items: center; }
 .ot-body h3 { margin: 12px 0 20px; }
 .ot-kicker { color: var(--muted); font-size: var(--type-meta); }
 .topics, .tagline { font-size: var(--type-body); }
 .ot-media img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: var(--card-radius); }
+.ot-media { min-width:0; }
+.ot-media .project-film-trigger { height:auto; aspect-ratio:16/9; overflow:hidden; border-radius:var(--card-radius); }
+.ot-media .project-film-trigger img { aspect-ratio:16/9; border-radius:0; }
+.outreach-link { margin-top:8px; }
 .awards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
 .award .ic { display: none; }
 .award .ti { margin-bottom: 14px; }

@@ -119,8 +119,16 @@
     el('news').querySelector('details').addEventListener('toggle',function(e) { newsOpen = e.target.open; });
   }
   function renderOutreach() {
+    if (window.ProjectVideo) window.ProjectVideo.close();
     var o = S.outreach;
-    el('outreach').innerHTML = sectionHead('06', {en:'Beyond the lab',zh:'实验室之外'}) + '<div class="outreach"><div class="ot-body"><p class="ot-kicker">' + t(o.kicker) + '</p><h3>' + t(o.title) + '</h3><p class="tagline">' + t(o.tagline) + '</p><p class="topics">' + t(o.topics) + '</p>' + link(S.profile.links[3].url,tr('Explore the channel ↗','访问我的频道 ↗'),'text-link') + '</div><div class="ot-media"><img loading="lazy" src="' + o.img + '" alt="' + esc(t(o.title)) + '"></div></div>';
+    var media = '<img loading="lazy" src="' + esc(o.img) + '" alt="' + esc(t(o.title)) + '">';
+    if (o.video) media = '<button type="button" class="project-film-trigger" data-outreach-film aria-haspopup="dialog" aria-label="' + tr('Watch the channel introduction, 32 seconds','观看频道介绍，32 秒') + '">' + media + '<span class="film-label">' + esc(t(o.video.label)) + '</span><span class="film-watch"><span class="film-play-icon" aria-hidden="true">▶</span><span>' + tr('Watch the introduction','观看频道短片') + '</span><span class="film-duration">' + esc(o.video.duration) + '</span></span></button>';
+    el('outreach').innerHTML = sectionHead('06', {en:'Beyond the lab',zh:'实验室之外'}) + '<div class="outreach"><div class="ot-body"><p class="ot-kicker">' + t(o.kicker) + '</p><h3>' + t(o.title) + '</h3><p class="tagline">' + t(o.tagline) + '</p><p class="topics">' + t(o.topics) + '</p>' + link(S.profile.links[3].url,tr('Explore the channel on Bilibili ↗','访问 B 站频道 ↗'),'button outreach-link') + '</div><div class="ot-media">' + media + '</div></div>';
+    var trigger = el('outreach').querySelector('[data-outreach-film]');
+    if (trigger) trigger.addEventListener('click',function() {
+      if (window.ProjectVideo) window.ProjectVideo.open(o.video,lang,trigger);
+      else announce(tr('The video player could not load. Please refresh to try again.','视频播放器未能加载，请刷新后重试。'));
+    });
   }
   function renderAwards() {
     el('awards').innerHTML = sectionHead('07',S.ui.sec.awards) + '<div class="awards">' + S.awards.map(function(a) { return '<div class="award"><div class="ti">' + t(a.ti) + '</div><div class="de">' + t(a.de) + '</div></div>'; }).join('') + '</div>';
