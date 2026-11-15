@@ -79,8 +79,8 @@
     close(false);
     var chinese = lang === 'zh';
     var text = function (en, zh) { return chinese ? zh : en; };
-    var title = typeof video.title === 'string' ? video.title : video.title && (video.title[chinese ? 'zh' : 'en'] || video.title.en);
-    title = title || text('POIROT supplementary video', 'POIROT 补充视频');
+    var localized = function (value) { return typeof value === 'string' ? value : value && (value[chinese ? 'zh' : 'en'] || value.en) || ''; };
+    var title = localized(video.title) || text('Project video', '项目视频');
 
     var dialog = node('dialog', 'project-video-dialog');
     dialog.lang = chinese ? 'zh' : 'en';
@@ -89,7 +89,7 @@
 
     var header = node('div', 'film-header');
     var heading = node('div');
-    heading.appendChild(node('p', 'film-kicker', text('HRI 2026 / Supplementary video', 'HRI 2026 / 补充视频')));
+    heading.appendChild(node('p', 'film-kicker', localized(video.kicker) || text('Project video', '项目视频')));
     var titleElement = node('h2', '', title);
     titleElement.id = 'projectVideoTitle';
     heading.appendChild(titleElement);
@@ -113,13 +113,10 @@
     media.appendChild(fallback);
 
     var footer = node('div', 'film-footer');
-    var summary = node('p', 'film-summary', text(
-      'A short look at POIROT’s multi-party game setting, physical clue delivery and tablet interface.',
-      '简要展示 POIROT 的多人游戏场景、实体线索分发与平板交互界面。'
-    ));
+    var summary = node('p', 'film-summary', localized(video.summary));
     summary.id = 'projectVideoDescription';
-    var duration = typeof video.duration === 'string' ? video.duration : '0:59';
-    var metadata = node('p', 'film-meta film-caption-note', duration + text(' · Embedded English captions', ' · 内嵌英文字幕'));
+    var metadataText = [video.duration, localized(video.captionNote)].filter(Boolean).join(' · ');
+    var metadata = node('p', 'film-meta film-caption-note', metadataText);
     var note = node('p', 'film-playback-note');
     note.setAttribute('role', 'status');
     note.setAttribute('aria-live', 'polite');

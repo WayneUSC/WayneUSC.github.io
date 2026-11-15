@@ -275,6 +275,10 @@ window.SITE = {
         src: "assets/video/poirot-hri2026.mp4",
         poster: "assets/img/poirot-film-poster.jpg",
         duration: "0:59",
+        label: { en: "HRI 2026 / RESEARCH FILM", zh: "HRI 2026 / 研究视频" },
+        kicker: { en: "HRI 2026 / Supplementary video", zh: "HRI 2026 / 补充视频" },
+        summary: { en: "A short look at POIROT’s multi-party game setting, physical clue delivery and tablet interface.", zh: "简要展示 POIROT 的多人游戏场景、实体线索分发与平板交互界面。" },
+        captionNote: { en: "Embedded English captions", zh: "内嵌英文字幕" },
         title: { en: "POIROT — research in motion", zh: "POIROT · 研究现场" }
       },
       img: "assets/img/proj-poirot.jpg?v=20260606-paper-covers",
@@ -515,6 +519,16 @@ SITE.projects.push({
 // A high-level public preview; detailed research materials are not distributed here.
 SITE.projects.push({
   id: 'clsl',
+  video: {
+    src: 'assets/video/clsl-concept-film-en.mp4',
+    poster: 'assets/img/clsl-film-poster.jpg',
+    duration: '0:33',
+    title: { en: 'CLSL — closed-loop state legibility', zh: 'CLSL · 闭环状态可读性' },
+    label: { en: 'CLSL / CONCEPT FILM', zh: 'CLSL / 概念短片' },
+    kicker: { en: 'CLSL / Concept film', zh: 'CLSL / 概念短片' },
+    summary: { en: 'A conceptual introduction to making robot state easier to understand during interaction. AI-generated visualization and synthetic narration illustrate this ongoing research direction; not footage of a tested robot or a human study.', zh: '以概念影像介绍如何让交互中的机器人状态更易理解。AI 生成的画面与合成旁白用于呈现这一在研方向，非机器人测试或真人实验的实拍记录。' },
+    captionNote: { en: 'English narration & embedded English captions', zh: '英文旁白 · 内嵌英文字幕' }
+  },
   ongoing: true,
   img: 'assets/img/proj-clsl-concept.jpg?v=20261028',
   flag: { en: 'Ongoing research', zh: '进行中的研究' },
@@ -532,6 +546,16 @@ SITE.projects.find(function(p) { return p.id === 'clsl'; }).summary = SITE.proje
 // Software research prototype; simulation evidence is distinct from human evaluation.
 SITE.projects.push({
   id: 'hostos',
+  video: {
+    src: 'assets/video/hostos-concept-film-en.mp4',
+    poster: 'assets/img/hostos-film-poster.jpg',
+    duration: '0:31',
+    title: { en: 'HostOS — interactive narrative agents', zh: 'HostOS · 交互叙事智能体' },
+    label: { en: 'HostOS / CONCEPT FILM', zh: 'HostOS / 概念短片' },
+    kicker: { en: 'HostOS / Concept film', zh: 'HostOS / 概念短片' },
+    summary: { en: 'An illustrated introduction to narrative direction, guest-scoped memory and human control in HostOS. AI-generated concept footage and synthetic narration; not footage of a deployed system or a human study.', zh: '以概念影像介绍 HostOS 的叙事调度、访客独立记忆与人为控制。画面由 AI 生成并配以合成旁白，非已部署系统或真人实验的实拍记录。' },
+    captionNote: { en: 'English narration & embedded English captions', zh: '英文旁白 · 内嵌英文字幕' }
+  },
   ongoing: true,
   img: 'assets/img/proj-hostos-concept.jpg?v=20261111',
   flag: { en: 'Software prototype · Ongoing research', zh: '软件原型 · 进行中的研究' },
