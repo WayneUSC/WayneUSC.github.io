@@ -403,6 +403,16 @@ window.SITE = {
       tech: ["ESP32", "Pressure Array", "Web", "iOS", "ML"]
     },
     {
+      video: {
+        src: "assets/video/lumie-prototype-film-en.mp4",
+        poster: "assets/img/lumie-film-poster.jpg",
+        duration: "0:57",
+        title: { en: "Lumie — an expressive desk-lamp robot", zh: "灯仔 Lumie · 表达性交互台灯机器人" },
+        label: { en: "Lumie / PROTOTYPE DEMO", zh: "Lumie / 原型演示" },
+        kicker: { en: "Lumie / Prototype demonstration", zh: "Lumie / 原型演示" },
+        summary: { en: "A closer look at Lumie, a five-degree-of-freedom embodied AI desk-lamp prototype. Real prototype footage with synthetic English narration.", zh: "近距离了解五自由度具身智能台灯「灯仔 Lumie」。视频采用真实原型实拍画面，配以英文合成旁白。" },
+        captionNote: { en: "English narration & embedded English captions", zh: "英文旁白 · 内嵌英文字幕" }
+      },
       img: "assets/img/proj-lumie.jpg?v=20260923-lumie",
       flag: { en: "Prototype · Ongoing (2026)", zh: "当前原型 · 持续开发（2026）" },
       title: { en: "Lumie", zh: "灯仔 Lumie" },
